@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "353322641814",
+    "firebase_url": "https://healthyrecord-cf27b.firebaseio.com",
+    "project_id": "healthyrecord-cf27b",
+    "storage_bucket": "healthyrecord-cf27b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353322641814:android:87639281e2d13a7b",
+        "android_client_info": {
+          "package_name": "com.example.zen.healthyrecord"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353322641814-o6c3uimil1p9q2jjflm74k6d3d06u2id.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_f3_y3PdYbrdVsZJQWRVgd5ShBQSv7Sc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
