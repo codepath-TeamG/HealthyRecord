@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.widget.ListView;
 
 import com.example.zen.healthyrecord.models.Exercise;
+import com.example.zen.healthyrecord.models.Food;
 
 /**
  * Created by joanniehuang on 2017/3/19.

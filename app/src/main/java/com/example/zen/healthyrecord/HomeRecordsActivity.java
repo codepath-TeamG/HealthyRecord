@@ -30,13 +30,13 @@ public class HomeRecordsActivity extends AppCompatActivity {
         tabStrip.setViewPager(vpPager);
 
 
+
     }
 
     //setup the tabs showing on the record page
     public class RecordsPageAdapter extends FragmentPagerAdapter{
         final int PAGE_COUNT = 2;
         private String tabTitle[] = {"Foods", "Exercise"};
-
 
         public RecordsPageAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
