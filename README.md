@@ -32,7 +32,7 @@ Here's a walkthrough of implemented user stories:
 
 Here's the function of add new record and take photo:
 
-<img src='http://imgur.com/26xOxKf.gif' title='Video Walkthrough' width='500' alt='Video Walkthrough' />
+<img src='http://imgur.com/JlY83Ak.gif' title='Video Walkthrough' width='500' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
