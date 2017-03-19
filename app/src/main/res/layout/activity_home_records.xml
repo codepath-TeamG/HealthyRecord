@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.example.zen.healthyrecord.HomeRecordsActivity">
 
+    <include layout="@layout/content_home_records" />
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +21,5 @@
             app:popupTheme="@style/PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_home_records" />
 
 </android.support.design.widget.CoordinatorLayout>

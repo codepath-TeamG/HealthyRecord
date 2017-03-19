@@ -1,7 +1,6 @@
 package com.example.zen.healthyrecord.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.widget.ListView;
 
 import com.example.zen.healthyrecord.models.Food;
@@ -14,7 +13,7 @@ public class FoodFragment extends ItemFragment {
     private ListView listView;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         listView = super.getListView();
         populateRecords();

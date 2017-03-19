@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.example.zen.healthyrecord.fragments.ExcerciseFragment;
+import com.example.zen.healthyrecord.fragments.ExerciseFragment;
 import com.example.zen.healthyrecord.fragments.FoodFragment;
 
 
@@ -35,7 +35,6 @@ public class HomeRecordsActivity extends AppCompatActivity {
 
     //setup the tabs showing on the record page
     public class RecordsPageAdapter extends FragmentPagerAdapter{
-        final int PAGE_COUNT = 2;
         private String tabTitle[] = {"Foods", "Exercise"};
 
         public RecordsPageAdapter(FragmentManager fragmentManager) {
@@ -45,9 +44,11 @@ public class HomeRecordsActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             if(position == 0){
-                return new FoodFragment();
+                FoodFragment foodFragment = new FoodFragment();
+                return foodFragment;
             }else{
-                return new ExcerciseFragment();
+                ExerciseFragment exerciseFragment = new ExerciseFragment();
+                return exerciseFragment;
             }
         }
 

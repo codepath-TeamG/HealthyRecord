@@ -11,7 +11,7 @@ import com.example.zen.healthyrecord.models.Food;
  * Created by joanniehuang on 2017/3/19.
  */
 
-public class ExcerciseFragment extends ItemFragment{
+public class ExerciseFragment extends ItemFragment{
     private ListView listView;
 
     @Override
