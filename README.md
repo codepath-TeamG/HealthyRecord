@@ -28,11 +28,13 @@ Here's a walkthrough of implemented user stories:
 
 <img src='https://cloud.githubusercontent.com/assets/5563183/23853587/36a771f6-0828-11e7-99be-f0c3f8662036.png' title='Video Walkthrough' width='800' alt='Video Walkthrough' />
 
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
 
 Here's the function of add new record and take photo:
 
-<img src='http://imgur.com/hHe9J0O.gif' title='Video Walkthrough' width='500' alt='Video Walkthrough' />
+<img src='http://imgur.com/26xOxKf.gif' title='Video Walkthrough' width='500' alt='Video Walkthrough' />
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
