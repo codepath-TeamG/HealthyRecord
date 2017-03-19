@@ -30,6 +30,10 @@ Here's a walkthrough of implemented user stories:
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
+Here's the function of add new record and take photo:
+
+<img src='http://imgur.com/hHe9J0O.gif' title='Video Walkthrough' width='500' alt='Video Walkthrough' />
+
 ## Notes
 
 Describe any challenges encountered while building the app.
