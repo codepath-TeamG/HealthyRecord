@@ -19,9 +19,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.zen.healthyrecord.Fragment.DatePickerFragment;
-import com.example.zen.healthyrecord.Fragment.TimePickerFragment;
-import com.example.zen.healthyrecord.Fragment.addItemPage;
+import com.example.zen.healthyrecord.fragments.DatePickerFragment;
+import com.example.zen.healthyrecord.fragments.TimePickerFragment;
+import com.example.zen.healthyrecord.fragments.addItemPage;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

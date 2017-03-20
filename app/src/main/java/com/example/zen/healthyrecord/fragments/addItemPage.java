@@ -1,4 +1,4 @@
-package com.example.zen.healthyrecord.Fragment;
+package com.example.zen.healthyrecord.fragments;
 
 import android.content.Context;
 import android.net.Uri;

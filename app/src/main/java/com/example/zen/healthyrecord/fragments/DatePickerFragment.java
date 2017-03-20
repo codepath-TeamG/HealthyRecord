@@ -1,4 +1,4 @@
-package com.example.zen.healthyrecord.Fragment;
+package com.example.zen.healthyrecord.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
