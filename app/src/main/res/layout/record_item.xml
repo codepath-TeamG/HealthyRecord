@@ -43,8 +43,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/ic_launcher"
+        android:layout_marginTop="18dp"
+        android:id="@+id/ivDietPhoto"
         android:layout_below="@+id/tvDietContent"
-        android:layout_alignStart="@+id/tvDietContent"
-        android:layout_marginTop="20dp"
-        android:id="@+id/ivDietPhoto" />
+        android:layout_alignStart="@+id/tvDietContent" />
 </RelativeLayout>
