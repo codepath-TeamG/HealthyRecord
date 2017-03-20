@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:background="@color/lightblue"
     android:layout_height="match_parent"
-    tools:context="com.codepath.myproject.Fragment.addItemPage">
+    tools:context="com.example.zen.healthyrecord.LoginActivity">
 
     <include
         layout="@layout/toolbar_main"
