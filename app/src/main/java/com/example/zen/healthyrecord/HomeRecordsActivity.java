@@ -15,8 +15,6 @@ import com.example.zen.healthyrecord.fragments.FoodFragment;
 
 public class HomeRecordsActivity extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +26,6 @@ public class HomeRecordsActivity extends AppCompatActivity {
         vpPager.setAdapter(new RecordsPageAdapter(getSupportFragmentManager()));
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabStrip.setViewPager(vpPager);
-
-
 
     }
 

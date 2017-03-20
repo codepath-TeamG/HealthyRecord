@@ -2,11 +2,10 @@ package com.example.zen.healthyrecord;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -21,47 +20,30 @@ import java.util.Calendar;
  * Created by joanniehuang on 2017/3/17.
  */
 
-public class RecordsAdapter extends BaseAdapter {
+public class RecordsAdapter extends ArrayAdapter<Records> {
 
     ArrayList<Records> records;
-    Records record;
     Context context;
     String databasekey;
 
     public RecordsAdapter(Context context, ArrayList<Records> records)
     {
+        super(context,R.layout.list_item_records,records);
         this.context = context;
         this.records = records;
-
-        for(int i=1; i< records.size(); i++){
-            record = records.get(i);
-        }
 
     }
 
     @Override
     public int getCount() {
-        if(record != null){
-            return records.size();
-        }else{
-            return 0;
-        }
+        return records.size();
     }
 
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
 
     //set the getView to populate the data from database
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
 
         Records record = records.get(position);
 

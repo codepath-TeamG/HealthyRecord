@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import com.example.zen.healthyrecord.R;
 import com.example.zen.healthyrecord.RecordsAdapter;
-import com.example.zen.healthyrecord.models.Food;
 import com.example.zen.healthyrecord.models.Records;
 
 import java.util.ArrayList;
@@ -32,11 +31,7 @@ public class ItemFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         records = new ArrayList<>();
-        records.add(new Food("Lunch", "The Diner", "1"
-                , "the food was pretty great with my families", (float)4.5, 2504));
-
         adapter = new RecordsAdapter(getActivity(), records);
     }
 
