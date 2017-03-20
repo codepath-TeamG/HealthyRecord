@@ -29,6 +29,8 @@ public class HomeRecordsActivity extends AppCompatActivity {
 
     }
 
+    
+
     //setup the tabs showing on the record page
     public class RecordsPageAdapter extends FragmentPagerAdapter{
         private String tabTitle[] = {"Foods", "Exercise"};
