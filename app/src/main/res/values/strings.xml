@@ -9,5 +9,9 @@
     <string name="toolbartxt">New Activity</string>
     <string name="food">FOOD</string>
     <string name="sport">Exercise</string>
+    <string name="overview">Overview</string>
+    <string name="summary">Summary</string>
+    <string name="friend">Friends</string>
+    <string name="share">Share</string>
 
 </resources>
