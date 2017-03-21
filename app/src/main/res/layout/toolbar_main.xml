@@ -18,16 +18,16 @@
         android:layout_gravity="left"
         />
 
-    <ImageView
-        android:id="@+id/toolbar_camera"
-        app:srcCompat="@mipmap/camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="camera"
-        android:textColor="@android:color/white"
-        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu"
-        android:layout_gravity="right"
-        />
+    <!--<ImageView-->
+        <!--android:id="@+id/toolbar_camera"-->
+        <!--app:srcCompat="@mipmap/camera"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:onClick="camera"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--style="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu"-->
+        <!--android:layout_gravity="right"-->
+        <!--/>-->
 
 
 
