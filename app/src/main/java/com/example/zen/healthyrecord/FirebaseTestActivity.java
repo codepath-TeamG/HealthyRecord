@@ -15,7 +15,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class FirebaseTestActivity extends AppCompatActivity {
     ListView lvRecords;
@@ -97,35 +96,35 @@ public class FirebaseTestActivity extends AppCompatActivity {
         });
 
 
-        writeNewPost("1", "Bob", "2017/3/24","Steak", "www.yahoo.com","lunch");
+//        writeNewPost("1", "Bob", "2017/3/24","Steak", "www.yahoo.com","lunch");
 //        updatePost("-KfeHo1Vz9KxeMbF_8E1","1", "Bob", "2017/3/29","Steak", "www.yahoo.com","lunch");
 
     }
 
 
-    private void writeNewPost(String userId, String username, String date,String content, String url,String time) {
-        // Create new post at /user-posts/$userid/$postid and at
-        // /posts/$postid simultaneously
-        String key = mDatabase.child("DietRecoreds").push().getKey();
-        DietRecord post = new DietRecord(userId, username, date, content, url, time);
-        Map<String, Object> postValues = post.toMap();
-        mDatabase.child("DietRecoreds").child(key).setValue(postValues);
-//        Map<String, Object> childUpdates = new HashMap<>();
-//        childUpdates.put("/DietRecoreds/" + key, postValues);
-//        childUpdates.put("/user-DietRecords/" + userId + "/" + key, postValues);
-
-//        mDatabase.updateChildren(childUpdates);
-//        records.add(post);
-    }
-
-    private void updatePost(String key,String userId, String username, String date,String content, String url,String time){
-        DietRecord post = new DietRecord(userId, username, date, content, url, time);
-        Map<String, Object> postValues = post.toMap();
-
-//        Map<String, Object> childUpdates = new HashMap<>();
-//        childUpdates.put("/DietRecoreds/" + key, postValues);
-//        childUpdates.put("/user-DietRecords/" + userId + "/" + key, postValues);
-
-        mDatabase.child("DietRecoreds").child(key).setValue(postValues);
-    }
+//    private void writeNewPost(String userId, String username, String date,String content, String url,String time) {
+//        // Create new post at /user-posts/$userid/$postid and at
+//        // /posts/$postid simultaneously
+//        String key = mDatabase.child("DietRecoreds").push().getKey();
+//        DietRecord post = new DietRecord(userId, username, date, content, url, time);
+//        Map<String, Object> postValues = post.toMap();
+//        mDatabase.child("DietRecoreds").child(key).setValue(postValues);
+////        Map<String, Object> childUpdates = new HashMap<>();
+////        childUpdates.put("/DietRecoreds/" + key, postValues);
+////        childUpdates.put("/user-DietRecords/" + userId + "/" + key, postValues);
+//
+////        mDatabase.updateChildren(childUpdates);
+////        records.add(post);
+//    }
+//
+//    private void updatePost(String key,String userId, String username, String date,String content, String url,String time){
+//        DietRecord post = new DietRecord(userId, username, date, content, url, time);
+//        Map<String, Object> postValues = post.toMap();
+//
+////        Map<String, Object> childUpdates = new HashMap<>();
+////        childUpdates.put("/DietRecoreds/" + key, postValues);
+////        childUpdates.put("/user-DietRecords/" + userId + "/" + key, postValues);
+//
+//        mDatabase.child("DietRecoreds").child(key).setValue(postValues);
+//    }
 }

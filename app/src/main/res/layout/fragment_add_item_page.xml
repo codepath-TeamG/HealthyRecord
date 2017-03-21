@@ -37,7 +37,7 @@
             android:text="@string/status" />
 
         <RatingBar
-            android:id="@+id/ratingStatus"
+            android:id="@+id/rtbStatus"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -65,7 +65,7 @@
             android:text="@string/memo" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/etMemo"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -93,7 +93,7 @@
             android:text="@string/food"/>
 
         <Spinner
-            android:id="@+id/spinner"
+            android:id="@+id/spnFood"
             android:entries="@array/food_array"
             android:layout_width="250dp"
             android:textAlignment="center"
@@ -113,18 +113,24 @@
         android:layout_alignParentStart="true">
 
         <TextView
-            android:id="@+id/txtQuan"
+            android:id="@+id/txtCal"
             android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_weight="0.01"
             android:gravity="center"
-            android:text="@string/quant" />
+            android:text="@string/cal" />
 
-        <NumberPicker
-            android:id="@+id/numberPicker2"
+        <!--<NumberPicker-->
+            <!--android:id="@+id/npQuantity"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1" />-->
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/etCal" />
 
     </LinearLayout>
 
@@ -182,5 +188,7 @@
             android:onClick="showTimePickerDialog" />
 
     </LinearLayout>
+
+
 
 </RelativeLayout>

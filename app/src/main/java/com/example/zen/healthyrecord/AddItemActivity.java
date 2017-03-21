@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.zen.healthyrecord.fragments.DatePickerFragment;
 import com.example.zen.healthyrecord.fragments.TimePickerFragment;
 import com.example.zen.healthyrecord.fragments.addItemPage;
+import com.google.firebase.database.DatabaseReference;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,6 +36,9 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
 
     Button btnSport;
     Button btnFood;
+    private DatabaseReference mDatabase;
+    private addItemPage addItemPageFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +77,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragAddItem, new addItemPage());
+        ft.replace(R.id.fragAddItem, new addItemPage(),"FOOD");
         ft.commit();
     }
 
@@ -120,4 +124,16 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         TextView txtTimePicker = (TextView) findViewById(R.id.txtTimePicker);
         txtTimePicker.setText(formattedTime);
     }
+
+    public void onSaveAction(View v){
+        Toast.makeText(getApplicationContext(),"hi",Toast.LENGTH_LONG).show();
+
+        addItemPageFragment = (addItemPage)
+                getSupportFragmentManager().findFragmentByTag("FOOD");
+        addItemPageFragment.getValue();
+
+
+    }
+
+
 }

@@ -28,6 +28,13 @@
         style="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu"
         android:layout_gravity="right"
         />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btSave"
+        android:text="save"
+        android:onClick="onSaveAction"
+        />
 
 
 

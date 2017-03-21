@@ -7,13 +7,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RatingBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
-
 import com.example.zen.healthyrecord.R;
+import com.example.zen.healthyrecord.model.DietRecord;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,8 +34,14 @@ public class addItemPage extends Fragment{
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    TextView txtDatePicker;
-    TextView txtTimePicker;
+    public TextView txtDatePicker;
+    public TextView txtTimePicker;
+    public Spinner spnFood;
+    public EditText etCal;
+    public EditText etMemo;
+    public RatingBar rtbStatus;
+    private DatabaseReference mDatabase;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -85,6 +97,11 @@ public class addItemPage extends Fragment{
 
         txtDatePicker = (TextView)v.findViewById(R.id.txtDatePicker);
         txtTimePicker = (TextView)v.findViewById(R.id.txtTimePicker);
+        spnFood = (Spinner) v.findViewById(R.id.spnFood);
+        etCal = (EditText) v.findViewById(R.id.etCal);
+        etMemo = (EditText) v.findViewById(R.id.etMemo);
+        rtbStatus = (RatingBar) v.findViewById(R.id.rtbStatus);
+
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
@@ -95,6 +112,7 @@ public class addItemPage extends Fragment{
 
         txtDatePicker.setText(formattedDate);
         txtTimePicker.setText(formattedTime);
+
 
         return v;
 
@@ -141,6 +159,39 @@ public class addItemPage extends Fragment{
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+
+
+    private void writeNewDietPost(String userId, String username, String date, String time,
+                                  String content,String url,String calories,String memo,Float status) {
+        // Create new post at /user-posts/$userid/$postid and at
+        // /posts/$postid simultaneously
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        String key = mDatabase.child("DietRecoreds").push().getKey();
+        DietRecord post = new DietRecord(userId, username, date, time, content, url, calories,memo,status);
+        Map<String, Object> postValues = post.toMap();
+        mDatabase.child("DietRecoreds").child(key).setValue(postValues);
+//        Map<String, Object> childUpdates = new HashMap<>();
+//        childUpdates.put("/DietRecoreds/" + key, postValues);
+//        childUpdates.put("/user-DietRecords/" + userId + "/" + key, postValues);
+
+//        mDatabase.updateChildren(childUpdates);
+//        records.add(post);
+    }
+
+    public void getValue(){
+        String date = txtDatePicker.getText().toString();
+        String time = txtTimePicker.getText().toString();
+        String food = spnFood.getSelectedItem().toString();
+        String calories = etCal.getText().toString();
+        String memo = etMemo.getText().toString();
+        Float status = rtbStatus.getRating();
+
+        writeNewDietPost("1", "Bob", date,time,food, "www.yahoo.com",calories,memo,status);
+
+    }
+
 
 
 }
