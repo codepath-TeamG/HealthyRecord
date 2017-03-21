@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.zen.healthyrecord.LoginActivity">
+    tools:context="com.example.zen.healthyrecord.LoginActivity"
+    android:background="@android:color/white">
 
     <Button
         android:id="@+id/btnSport"
@@ -25,10 +26,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
         android:text="@string/food"
-        tools:layout_editor_absoluteX="132dp"
-        tools:layout_editor_absoluteY="173dp" />
+        />
 
     <FrameLayout
+        android:elevation="12dp"
         android:id="@+id/fragAddItem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,4 +38,5 @@
         android:layout_alignParentTop="true">
 
     </FrameLayout>
+
 </RelativeLayout>

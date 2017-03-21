@@ -4,7 +4,7 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="com.example.zen.healthyrecord.HomeRecordsActivity">
     <item
-        android:id="@+id/action_profile"
+        android:id="@+id/action_newpost"
         app:showAsAction="ifRoom"
         android:icon="@drawable/newpost"
         android:title="Profile"></item>
