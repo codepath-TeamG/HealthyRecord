@@ -38,20 +38,21 @@ public class HomeRecordsActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_newpost:
-                onAddItem(item);
-                break;
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.action_newpost:
+//                onAddItem(item);
+//                break;
+//
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void onAddItem(MenuItem item) {
+    public void onAddItem(MenuItem item) {
         Intent i = new Intent(this, AddItemActivity.class);
         startActivity(i);
+        finish();
     }
 
 
