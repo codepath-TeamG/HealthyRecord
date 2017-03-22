@@ -7,5 +7,6 @@
         android:id="@+id/action_newpost"
         app:showAsAction="ifRoom"
         android:icon="@drawable/newpost"
-        android:title="Profile"></item>
+        android:title="Profile"
+        android:onClick="onAddItem"></item>
 </menu>

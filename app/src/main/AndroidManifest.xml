@@ -12,10 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--<activity android:name=".AddItemActivity"-->
-            <!--android:theme="@style/Theme.AppCompat.NoActionBar">-->
-        <!--</activity>-->
-        <activity android:name=".AddItemActivity">
+        <activity android:name=".AddItemActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
