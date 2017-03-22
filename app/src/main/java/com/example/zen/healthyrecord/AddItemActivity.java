@@ -14,14 +14,12 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,7 +27,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.zen.healthyrecord.fragments.DatePickerFragment;
-import com.example.zen.healthyrecord.fragments.ExerciseFragment;
 import com.example.zen.healthyrecord.fragments.FoodFragment;
 import com.example.zen.healthyrecord.fragments.TimePickerFragment;
 import com.example.zen.healthyrecord.fragments.addButtonFragment;
@@ -50,7 +47,7 @@ public class AddItemActivity extends AppCompatActivity implements addItemPage.On
     private DrawerLayout mDrawer;
     private NavigationView nvDrawer;
     private Toolbar toolbar;
-
+    private ImageView photoView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +73,7 @@ public class AddItemActivity extends AppCompatActivity implements addItemPage.On
         drawerToggle = setupDrawerToggle();
         mDrawer.addDrawerListener(drawerToggle);
 
-
-
+        photoView=(ImageView) findViewById(R.id.photoView);
     }
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -170,6 +166,8 @@ public class AddItemActivity extends AppCompatActivity implements addItemPage.On
         if (resultCode == Activity.RESULT_OK && requestCode == 100) {
             Bundle extras = data.getExtras();
             Bitmap bmp = (Bitmap) extras.get("data");
+            photoView = (ImageView)findViewById(R.id.photoView);
+            photoView.setImageBitmap(bmp);
             Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
 
         } else {
