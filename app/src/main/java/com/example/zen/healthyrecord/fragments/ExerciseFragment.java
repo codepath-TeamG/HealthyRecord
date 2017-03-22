@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.widget.ListView;
 
 import com.example.zen.healthyrecord.models.Exercise;
-import com.example.zen.healthyrecord.models.Food;
 
 /**
  * Created by joanniehuang on 2017/3/19.
@@ -18,7 +17,7 @@ public class ExerciseFragment extends ItemFragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         listView = super.getListView();
-        populateRecords();
+//        populateRecords();
     }
 
     private void populateRecords(){
