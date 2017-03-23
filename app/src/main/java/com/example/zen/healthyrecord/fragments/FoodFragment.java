@@ -17,6 +17,8 @@ public class FoodFragment extends ItemFragment {
         super.onCreate(savedInstanceState);
         listView = super.getListView();
         populateRecords();
+
+
     }
 
     private void populateRecords(){
