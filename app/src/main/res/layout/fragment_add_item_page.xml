@@ -46,6 +46,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.01"
                 android:gravity="center"
+                android:textColor="@color/colorTextSecondary"
                 android:text="@string/status" />
 
             <RatingBar
@@ -54,7 +55,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:padding="15dp" />
+                android:padding="15dp"
+                android:isIndicator="false" />
 
         </LinearLayout>
 
@@ -74,6 +76,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.02"
                 android:gravity="center"
+                android:textColor="@color/colorTextSecondary"
                 android:text="@string/memo"/>
 
             <EditText
@@ -82,6 +85,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
+                android:textColor="@color/colorTextSecondary"
                 android:inputType="textMultiLine"/>
 
         </LinearLayout>
@@ -102,6 +106,7 @@
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="@color/colorTextSecondary"
                 android:text="@string/food"
                 />
 
@@ -111,7 +116,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.66"
                 android:entries="@array/food_array"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                />
 
         </LinearLayout>
 
@@ -131,12 +137,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.01"
                 android:gravity="center"
+                android:textColor="@color/colorTextSecondary"
                 android:text="@string/quant"/>
 
             <NumberPicker
                 android:id="@+id/numberPicker2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorTextSecondary"
                 android:layout_weight="1"/>
 
         </LinearLayout>
@@ -156,6 +164,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/date"
+                android:textColor="@color/colorTextSecondary"
                 android:layout_weight="0.01"/>
 
             <TextView
@@ -164,6 +173,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:textColor="@color/colorTextSecondary"
                 android:onClick="showDatePickerDialog"/>
 
         </LinearLayout>
@@ -184,6 +194,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.01"
                 android:gravity="center"
+                android:textColor="@color/colorTextSecondary"
                 android:text="@string/time"/>
 
             <TextView
@@ -192,20 +203,23 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1.01"
                 android:gravity="center"
+                android:textColor="@color/colorTextSecondary"
                 android:onClick="showTimePickerDialog"/>
 
         </LinearLayout>
 
         <ImageView
             android:id="@+id/photoView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="400dp"
+            android:layout_height="300dp"
             app:srcCompat="@drawable/top_photo_healthy"
             android:layout_alignParentStart="true"
-            android:layout_above="@+id/LayoutDate"/>
+            android:layout_above="@+id/LayoutDate"
+            android:layout_below="@+id/include"/>
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/open_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
