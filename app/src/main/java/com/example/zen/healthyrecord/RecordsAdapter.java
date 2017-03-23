@@ -22,9 +22,9 @@ import java.util.Calendar;
 
 public class RecordsAdapter extends ArrayAdapter<Records> {
 
-    ArrayList<Records> records;
-    Context context;
-    String databasekey;
+    private ArrayList<Records> records;
+    private Context context;
+    private String databasekey;
 
     public RecordsAdapter(Context context, ArrayList<Records> records)
     {
@@ -37,6 +37,14 @@ public class RecordsAdapter extends ArrayAdapter<Records> {
     @Override
     public int getCount() {
         return records.size();
+    }
+
+    public Records getItem(int position){
+        if(records.get(position).getType() == "Food"){
+            return records.get(position);
+        }
+
+        return records.get(position);
     }
 
 
@@ -72,6 +80,7 @@ public class RecordsAdapter extends ArrayAdapter<Records> {
 
         return convertView;
     }
+
 
 
 }

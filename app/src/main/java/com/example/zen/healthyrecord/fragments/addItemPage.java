@@ -3,15 +3,20 @@ package com.example.zen.healthyrecord.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.zen.healthyrecord.AddItemActivity;
 import com.example.zen.healthyrecord.R;
 import com.example.zen.healthyrecord.model.DietRecord;
 import com.google.firebase.database.DatabaseReference;
@@ -43,13 +48,12 @@ public class addItemPage extends Fragment{
     private DatabaseReference mDatabase;
 
 
+    private FloatingActionButton btnOpenCamera;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    public TextView getTxtDatePicker() {
-        return txtDatePicker;
-    }
 
     String dateStr = "04/05/2010";
 
@@ -86,7 +90,6 @@ public class addItemPage extends Fragment{
         }
 
 
-
     }
 
     @Override
@@ -110,6 +113,19 @@ public class addItemPage extends Fragment{
         String formattedTime = tf.format(c.getTime());
 
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(),R.layout.spinner_item){
+            @NonNull
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v = LayoutInflater.from(getContext()).inflate(R.layout.spinner_item,parent,false);
+                ((TextView)v.findViewById(android.R.id.text1)).setText(getItem(position));
+                return v;
+            }
+        };
+
+        adapter.add("Fruit");
+        adapter.add("Softdrink");
+        spnFood.setAdapter(adapter);
         txtDatePicker.setText(formattedDate);
         txtTimePicker.setText(formattedTime);
 
@@ -117,6 +133,18 @@ public class addItemPage extends Fragment{
         return v;
 
 
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        btnOpenCamera = (FloatingActionButton) view.findViewById(R.id.open_camera);
+        btnOpenCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((AddItemActivity) getActivity()).camera(view);
+            }
+        });
     }
 
     // TODO: Rename method, update argument and hook method into UI event

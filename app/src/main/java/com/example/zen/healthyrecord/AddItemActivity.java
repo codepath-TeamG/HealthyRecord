@@ -4,23 +4,33 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.zen.healthyrecord.fragments.DatePickerFragment;
+import com.example.zen.healthyrecord.fragments.FoodFragment;
 import com.example.zen.healthyrecord.fragments.TimePickerFragment;
+import com.example.zen.healthyrecord.fragments.addButtonFragment;
 import com.example.zen.healthyrecord.fragments.addItemPage;
 import com.google.firebase.database.DatabaseReference;
 
@@ -31,27 +41,128 @@ import java.util.Calendar;
  * Created by sharonyu on 2017/3/19.
  */
 
-public class AddItemActivity extends AppCompatActivity implements View.OnClickListener, addItemPage.OnFragmentInteractionListener,
+public class AddItemActivity extends AppCompatActivity implements addItemPage.OnFragmentInteractionListener,
         DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
+
+
+    private DatabaseReference mDatabase;
+    private addItemPage addItemPageFragment;
 
     Button btnSport;
     Button btnFood;
-    private DatabaseReference mDatabase;
-    private addItemPage addItemPageFragment;
+
+
+    private ActionBarDrawerToggle drawerToggle;
+    private DrawerLayout mDrawer;
+    private NavigationView nvDrawer;
+    private Toolbar toolbar;
+    private ImageView photoView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_item_layout);
-        btnFood = (Button) findViewById(R.id.btnDiet);
-        btnSport = (Button) findViewById(R.id.btnSport);
-        btnFood.setOnClickListener(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        if (savedInstanceState == null) {
+            setContentView(R.layout.add_item_layout);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragAddItem, new addButtonFragment(), "SOMETAG").commit();
+        }
+
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        View headerLayout = nvDrawer.getHeaderView(0);
+
+        setupDrawerContent(nvDrawer);
+
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerToggle = setupDrawerToggle();
+        mDrawer.addDrawerListener(drawerToggle);
+
+        photoView=(ImageView) findViewById(R.id.photoView);
     }
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggles
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    private ActionBarDrawerToggle setupDrawerToggle() {
+
+        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
+
+    }
+
+        private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });
+    }
+
+    public void selectDrawerItem(MenuItem menuItem) {
+        // Create a new fragment and specify the fragment to show based on nav item clicked
+        Fragment fragment = null;
+        Class fragmentClass;
+        switch(menuItem.getItemId()) {
+            case R.id.nav_first_fragment:
+                fragmentClass = addItemPage.class;
+                break;
+            case R.id.nav_second_fragment:
+                fragmentClass = FoodFragment.class;
+                break;
+            case R.id.nav_third_fragment:
+                fragmentClass = addButtonFragment.class;
+                break;
+            default:
+                fragmentClass = addItemPage.class;
+        }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragAddItem, fragment).commit();
+
+        // Highlight the selected item has been done by NavigationView
+        menuItem.setChecked(true);
+        // Set action bar title
+        setTitle(menuItem.getTitle());
+        // Close the navigation drawer
+        mDrawer.closeDrawers();
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
+    }
+
 
 
     public void camera(View v) {
@@ -65,6 +176,8 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         if (resultCode == Activity.RESULT_OK && requestCode == 100) {
             Bundle extras = data.getExtras();
             Bitmap bmp = (Bitmap) extras.get("data");
+            photoView = (ImageView)findViewById(R.id.photoView);
+            photoView.setImageBitmap(bmp);
             Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
 
         } else {
@@ -73,8 +186,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
-    @Override
-    public void onClick(View v) {
+    public void changeFragment() {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragAddItem, new addItemPage(),"FOOD");
@@ -126,12 +238,13 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void onSaveAction(View v){
-        Toast.makeText(getApplicationContext(),"hi",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Success Save",Toast.LENGTH_LONG).show();
 
         addItemPageFragment = (addItemPage)
                 getSupportFragmentManager().findFragmentByTag("FOOD");
         addItemPageFragment.getValue();
-
+        Intent i = new Intent(AddItemActivity.this, HomeRecordsActivity.class);
+        startActivity(i);
 
     }
 
