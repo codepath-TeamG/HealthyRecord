@@ -1,12 +1,15 @@
 package com.example.zen.healthyrecord.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.zen.healthyrecord.DetailsRecordActivity;
 import com.example.zen.healthyrecord.R;
 import com.example.zen.healthyrecord.RecordsAdapter;
 import com.example.zen.healthyrecord.models.Records;
@@ -25,6 +28,21 @@ public class ItemFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_item_list, parent, false);
         listView = (ListView) view.findViewById(R.id.rcListView);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent,View view,int position,long id) {
+                Intent i = new Intent(getActivity(), DetailsRecordActivity.class);
+                i.putExtra("Time", getAdapter().getItem(position).getTime());
+                i.putExtra("Memo", getAdapter().getItem(position).getMemo());
+                i.putExtra("rating", getAdapter().getItem(position).getStatusRating());
+                i.putExtra("calories", getAdapter().getItem(position).getCalories());
+                i.putExtra("quantity", getAdapter().getItem(position).getQuantity());
+
+                getActivity().startActivity(i);
+            }
+        });
+
         return view;
     }
 

@@ -1,5 +1,7 @@
 package com.example.zen.healthyrecord.models;
 
+import android.widget.DatePicker;
+
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -13,7 +15,7 @@ import java.util.Locale;
  */
 
 public abstract class Records {
-    private Calendar calendar;
+    private DatePicker datePicker;
     private String time;
     private String type;
     private String quantity;
@@ -45,8 +47,8 @@ public abstract class Records {
     }
 
 
-    public Calendar getCalendar() {
-        return calendar;
+    public DatePicker getDate() {
+        return datePicker;
     }
 
     public String getTime() {
