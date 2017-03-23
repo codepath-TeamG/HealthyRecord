@@ -32,6 +32,7 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit);
         String date = getIntent().getStringExtra("dietRecord");
         Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
+
     }
 
     public void onLaunchCamera(View view) {
