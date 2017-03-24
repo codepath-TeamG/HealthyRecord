@@ -79,9 +79,16 @@ public class addButtonFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                ((AddItemActivity)getActivity()).changeFragment();
+                ((AddItemActivity)getActivity()).changeFragmentFood();
             }
         } );
+        btnSport.setOnClickListener( new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                ((AddItemActivity)getActivity()).changeFragmentSport();
+            }
+        });
         return v;
     }
 
