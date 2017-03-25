@@ -1,7 +1,10 @@
 package com.example.zen.healthyrecord.fragments;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -53,9 +57,21 @@ public class ItemFragment extends Fragment {
                 tvDate.setText(dietRecord.date);
                 tvCalories.setText(dietRecord.calories);
                 status.setRating(dietRecord.status);
-//                Picasso.with(context).load(databasekey).into(imageView);
+
+                try {
+                    Bitmap imageBitmap = decodeFromFirebaseBase64(dietRecord.url);
+                    imageView.setImageBitmap(imageBitmap);
+
+                    } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+//                Picasso.with(getContext()).load(dietRecord.url).resize(75,75).into(imageView);
+
             }
         };
+
+
         listView.setAdapter(adapter);
 
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -74,6 +90,12 @@ public class ItemFragment extends Fragment {
 
         return view;
     }
+
+    public static Bitmap decodeFromFirebaseBase64(String image) throws IOException {
+        byte[] decodedByteArray = android.util.Base64.decode(image, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

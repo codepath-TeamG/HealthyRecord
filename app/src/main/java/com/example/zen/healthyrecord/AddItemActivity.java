@@ -186,6 +186,7 @@ public class AddItemActivity extends AppCompatActivity implements addItemPage.On
     }
 
 
+
     public void changeFragment() {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

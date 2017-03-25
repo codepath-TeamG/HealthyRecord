@@ -1,17 +1,20 @@
 package com.example.zen.healthyrecord.fragments;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,6 +25,7 @@ import com.example.zen.healthyrecord.model.DietRecord;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Map;
@@ -45,6 +49,7 @@ public class addItemPage extends Fragment{
     public EditText etCal;
     public EditText etMemo;
     public RatingBar rtbStatus;
+    public ImageView photoView;
     private DatabaseReference mDatabase;
 
 
@@ -104,6 +109,8 @@ public class addItemPage extends Fragment{
         etCal = (EditText) v.findViewById(R.id.etCal);
         etMemo = (EditText) v.findViewById(R.id.etMemo);
         rtbStatus = (RatingBar) v.findViewById(R.id.rtbStatus);
+        photoView = (ImageView) v.findViewById(R.id.photoView);
+
 
 
         Calendar c = Calendar.getInstance();
@@ -216,10 +223,20 @@ public class addItemPage extends Fragment{
         String memo = etMemo.getText().toString();
         Float status = rtbStatus.getRating();
 
-        writeNewDietPost("1", "Bob", date,time,food, "www.yahoo.com",calories,memo,status);
+        photoView.buildDrawingCache();
+        Bitmap bmp= photoView.getDrawingCache();
+
+        String imgUrl = encodeBitmap(bmp);
+        writeNewDietPost("1", "Bob", date,time,food, imgUrl,calories,memo,status);
 
     }
 
+    public String encodeBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
+        return imageEncoded;
+    }
 
 
 }
