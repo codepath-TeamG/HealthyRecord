@@ -6,11 +6,14 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -19,6 +22,7 @@ import android.widget.Toast;
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.zen.healthyrecord.fragments.ExerciseFragment;
 import com.example.zen.healthyrecord.fragments.FoodFragment;
+import com.example.zen.healthyrecord.fragments.FragmentAddItemPage;
 
 /*
 * This activity is the record page that shows the food and exercise lists
@@ -31,6 +35,8 @@ public class HomeRecordsActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     private Toolbar toolbar;
     private ImageView drawerIcon;
+    RecordsPageAdapter rAdapter;
+    ViewPager vpPager;
 
 
     @Override
@@ -50,7 +56,7 @@ public class HomeRecordsActivity extends AppCompatActivity {
 
         setupDrawerContent(nvDrawer);
 
-        ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
+        vpPager = (ViewPager) findViewById(R.id.viewpager);
         vpPager.setAdapter(new RecordsPageAdapter(getSupportFragmentManager()));
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabStrip.setViewPager(vpPager);
@@ -122,9 +128,11 @@ public class HomeRecordsActivity extends AppCompatActivity {
     }
 
     public void onAddItem(MenuItem item) {
+        int pos = vpPager.getCurrentItem();
         Intent i = new Intent(this, AddItemActivity.class);
+        i.putExtra("POS_ID", pos);
         startActivity(i);
-        finish();
+
     }
 
 

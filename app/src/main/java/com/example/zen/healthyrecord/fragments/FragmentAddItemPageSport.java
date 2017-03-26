@@ -78,7 +78,7 @@ public class FragmentAddItemPageSport extends Fragment{
         txtFood.setText("EXERCISE");
         txtQuan.setText("DURATION");
         photoView = (ImageView)v.findViewById(R.id.photoView);
-        photoView.setImageResource(R.drawable.food1);
+        photoView.setImageResource(R.drawable.top_photo_healthy);
 
 
 
