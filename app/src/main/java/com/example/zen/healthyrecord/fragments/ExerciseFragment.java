@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.widget.ListView;
 
 import com.example.zen.healthyrecord.models.Exercise;
-import com.example.zen.healthyrecord.models.Food;
 
 /**
  * Created by joanniehuang on 2017/3/19.
@@ -22,7 +21,7 @@ public class ExerciseFragment extends ItemFragment{
     }
 
     private void populateRecords(){
-        Exercise exercise =  new Exercise("Sport", "Running", "1"
+        Exercise exercise =  new Exercise("2017/3/26", "Sport", "Running", "1"
                 , "Running along the riverside", (float)3.0, 2000);
         super.getmRecords().add(exercise);
     }

@@ -1,7 +1,5 @@
 package com.example.zen.healthyrecord.models;
 
-import android.widget.DatePicker;
-
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -15,24 +13,27 @@ import java.util.Locale;
  */
 
 public abstract class Records {
-    private DatePicker datePicker;
+    private String date;
     private String time;
     private String type;
     private String quantity;
     private String memo;
     private float statusRating;
     private int calories;
+    private String imageURL;
 
-    public Records(String time,String type,String quantity,String memo,float statusRating,int calories) {
+    public Records(String date, String time, String type, String quantity, String memo, float statusRating, int calories, String imageURL) {
+        this.date = date;
         this.time = time;
         this.type = type;
         this.quantity = quantity;
         this.memo = memo;
         this.statusRating = statusRating;
         this.calories = calories;
+        this.imageURL = imageURL;
     }
 
-    public String getCalFormat(int caloriesInt){
+    public String getCaloriesFormat(int caloriesInt){
         DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
         DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
         symbols.setGroupingSeparator(',');
@@ -47,8 +48,8 @@ public abstract class Records {
     }
 
 
-    public DatePicker getDate() {
-        return datePicker;
+    public String getDate() {
+        return date;
     }
 
     public String getTime() {
@@ -77,5 +78,9 @@ public abstract class Records {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getImageURL() {
+        return imageURL;
     }
 }

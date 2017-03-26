@@ -6,8 +6,8 @@ package com.example.zen.healthyrecord.models;
 
 public class Food extends Records{
 
-    public Food(String time,String type,String quantity,String memo,float statusRating,int calories) {
-        super(time,type,quantity,memo,statusRating,calories);
+    public Food(String date, String time,String type,String quantity,String memo,float statusRating,int calories) {
+        super(date, time,type,quantity,memo,statusRating,calories, null);
         setType("Food");
     }
 
