@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -36,6 +37,8 @@ import com.example.zen.healthyrecord.fragments.addButtonFragment;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import static com.example.zen.healthyrecord.R.string.food;
+
 /**
  * Created by sharonyu on 2017/3/19.
  */
@@ -49,6 +52,7 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
     private NavigationView nvDrawer;
     private Toolbar toolbar;
     private ImageView photoView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,7 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
         mDrawer.addDrawerListener(drawerToggle);
 
         photoView=(ImageView) findViewById(R.id.photoView);
+
     }
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -185,10 +190,11 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
     }
 
     public void changeFragmentSport() {
-
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragAddItem, new FragmentAddItemPageSport());
+
         ft.commit();
+
     }
 
     @Override

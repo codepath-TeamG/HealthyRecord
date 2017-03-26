@@ -1,6 +1,7 @@
 package com.example.zen.healthyrecord.fragments;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -20,6 +22,7 @@ import com.example.zen.healthyrecord.R;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import static com.example.zen.healthyrecord.R.id.photoView;
 import static com.example.zen.healthyrecord.R.id.txtFood;
 
 /**
@@ -34,6 +37,12 @@ public class FragmentAddItemPageSport extends Fragment{
     TextView txtTimePicker;
     TextView txtFood;
     TextView txtQuan;
+    ImageView photoView;
+
+
+
+
+
 
     private FloatingActionButton btnOpenCamera;
 
@@ -68,6 +77,9 @@ public class FragmentAddItemPageSport extends Fragment{
         txtQuan = (TextView)v.findViewById(R.id.txtQuan);
         txtFood.setText("EXERCISE");
         txtQuan.setText("DURATION");
+        photoView = (ImageView)v.findViewById(R.id.photoView);
+        photoView.setImageResource(R.drawable.food1);
+
 
 
         Calendar c = Calendar.getInstance();
