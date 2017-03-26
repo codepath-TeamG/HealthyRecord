@@ -3,6 +3,7 @@ package com.example.zen.healthyrecord.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,17 +28,24 @@ public class ItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent,  Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_list, parent, false);
         listView = (ListView) view.findViewById(R.id.rcListView);
+        adapter = getAdapter();
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent,View view,int position,long id) {
                 Intent i = new Intent(getActivity(), DetailsRecordActivity.class);
-                i.putExtra("Time", getAdapter().getItem(position).getTime());
-                i.putExtra("Memo", getAdapter().getItem(position).getMemo());
-                i.putExtra("rating", getAdapter().getItem(position).getStatusRating());
-                i.putExtra("calories", getAdapter().getItem(position).getCalories());
-                i.putExtra("quantity", getAdapter().getItem(position).getQuantity());
+                i.putExtra("date", adapter.getItem(position).getDate());
+                i.putExtra("time", adapter.getItem(position).getTime());
+                i.putExtra("type", adapter.getItem(position).getType());
+                i.putExtra("memo", adapter.getItem(position).getMemo());
+                i.putExtra("rating", adapter.getItem(position).getStatusRating());
+                i.putExtra("calories", adapter.getItem(position)
+                        .getCaloriesFormat(adapter.getItem(position).getCalories()));
+                i.putExtra("quantity", adapter.getItem(position).getQuantity());
+                i.putExtra("imageURL", adapter.getItem(position).getImageURL());
+
+                Log.d("D", Float.toString(adapter.getItem(position).getStatusRating()));
 
                 getActivity().startActivity(i);
             }
