@@ -20,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import java.io.IOException;
-import com.example.zen.healthyrecord.models.Food;
 
 /**
  * Created by joanniehuang on 2017/3/19.
@@ -32,7 +31,7 @@ public class ExerciseFragment extends ItemFragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listView = super.getListView();
+//        listView = super.getListView();
 //        populateRecords();
     }
 

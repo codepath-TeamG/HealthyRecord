@@ -34,7 +34,7 @@ public class FoodFragment extends ItemFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listView = getListView();
+//        listView = getListView();
 
 //        populateRecords();
 
