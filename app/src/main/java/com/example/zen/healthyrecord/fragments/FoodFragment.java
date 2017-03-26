@@ -1,14 +1,17 @@
 package com.example.zen.healthyrecord.fragments;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.zen.healthyrecord.DetailsRecordActivity;
 import com.example.zen.healthyrecord.R;
 import com.example.zen.healthyrecord.model.DietRecord;
 import com.example.zen.healthyrecord.models.Food;
@@ -77,10 +80,29 @@ public class FoodFragment extends ItemFragment {
         };
 
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent,View view,int position,long id) {
+                Intent i = new Intent(getActivity(), DetailsRecordActivity.class);
+                i.putExtra("date", adapter.getItem(position).date);
+                i.putExtra("time", adapter.getItem(position).time);
+                i.putExtra("type", adapter.getItem(position).content);
+                i.putExtra("memo", adapter.getItem(position).memo);
+                i.putExtra("rating", adapter.getItem(position).status);
+                i.putExtra("calories", adapter.getItem(position)
+                        .calories);
+                i.putExtra("quantity", adapter.getItem(position).calories);
+                i.putExtra("imageURL", adapter.getItem(position).url);
+
+
+                getActivity().startActivity(i);
+            }
+        });
     }
 
     private void populateRecords(){
-        Food food =  new Food("Lunch", "The Diner", "1"
+        Food food =  new Food("2017/3/26", "Lunch", "The Diner", "1"
                 , "the food was pretty great with my families", (float)4.5, 2504);
         super.getmRecords().add(food);
     }

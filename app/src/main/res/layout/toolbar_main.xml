@@ -9,13 +9,6 @@
     app:titleTextColor="@android:color/white"
     android:background="@color/colorPrimary" >
 
-    <!--<ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:id="@+id/draweIcon"
-        android:src="@drawable/ic_drawer"
-        android:adjustViewBounds="true"/>-->
 
     <TextView
         android:id="@+id/toolbar_title"
@@ -34,10 +27,6 @@
         android:onClick="onSaveAction"
         android:layout_gravity="right"
         />
-
-
-
-
 
 </android.support.v7.widget.Toolbar>
 

@@ -1,6 +1,11 @@
 package com.example.zen.healthyrecord.fragments;
 
 import android.graphics.Bitmap;
+import android.content.Context;
+
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,9 +16,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -26,7 +34,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 import java.util.Map;
+
+
+import static com.example.zen.healthyrecord.R.id.photoView;
+import static com.example.zen.healthyrecord.R.id.txtFood;
 
 /**
  * Created by sharonyu on 2017/3/24.
@@ -45,6 +58,8 @@ public class FragmentAddItemPageSport extends Fragment{
     public RatingBar rtbStatus;
     public ImageView photoView;
     private DatabaseReference mDatabase;
+
+
 
     private FloatingActionButton btnOpenCamera;
 
@@ -82,6 +97,7 @@ public class FragmentAddItemPageSport extends Fragment{
         etMemo = (EditText) v.findViewById(R.id.etMemo);
         rtbStatus = (RatingBar) v.findViewById(R.id.rtbStatus);
         photoView = (ImageView) v.findViewById(R.id.photoView);
+        photoView.setImageResource(R.drawable.top_photo_healthy);
 
 
         Calendar c = Calendar.getInstance();

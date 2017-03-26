@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -18,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +42,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import retrofit2.http.HEAD;
+
+import static com.example.zen.healthyrecord.R.string.food;
 
 /**
  * Created by sharonyu on 2017/3/19.
@@ -65,14 +69,24 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
     public int mState;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int pos= getIntent().getExtras().getInt("POS_ID");
+        Log.d("d", String.valueOf(pos));
 
 
         if (savedInstanceState == null) {
-            setContentView(R.layout.add_item_layout);
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragAddItem, new addButtonFragment(), "SOMETAG").commit();
+            if(pos==0){
+                setContentView(R.layout.add_item_layout);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragAddItem, new FragmentAddItemPage(), "FOOD").commit();
+            }else{
+                setContentView(R.layout.add_item_layout);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragAddItem, new FragmentAddItemPageSport(), "SPORT").commit();
+
+            }
+
         }
 
 
@@ -89,7 +103,7 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
         drawerToggle = setupDrawerToggle();
         mDrawer.addDrawerListener(drawerToggle);
 
-        photoView=(ImageView) findViewById(R.id.photoView);
+
     }
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -201,10 +215,10 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
     }
 
     public void changeFragmentSport() {
-
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragAddItem, new FragmentAddItemPageSport(),"SPORT");
         ft.commit();
+
     }
 
     @Override

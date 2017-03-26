@@ -6,11 +6,14 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -20,6 +23,7 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.example.zen.healthyrecord.fragments.ExerciseFragment;
 import com.example.zen.healthyrecord.fragments.FoodFragment;
 import com.google.firebase.database.FirebaseDatabase;
+
 
 /*
 * This activity is the record page that shows the food and exercise lists
@@ -32,42 +36,43 @@ public class HomeRecordsActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     private Toolbar toolbar;
     private ImageView drawerIcon;
+    RecordsPageAdapter rAdapter;
+    ViewPager vpPager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_records);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_homescreen);
         setSupportActionBar(toolbar);
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        setupDrawerContent(nvDrawer);
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         //Setup the drawer view
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
-        //drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                //R.string.drawer_open, R.string.drawer_close);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.drawer_open, R.string.drawer_close);
 
-        //drawerLayout.addDrawerListener(drawerToggle);
+        drawerLayout.addDrawerListener(drawerToggle);
 
-        setupDrawerContent(nvDrawer);
-
-        ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
+        vpPager = (ViewPager) findViewById(R.id.viewpager);
         vpPager.setAdapter(new RecordsPageAdapter(getSupportFragmentManager()));
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabStrip.setViewPager(vpPager);
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+
     }
 
-    /*
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         drawerToggle.syncState();
-    }*/
+    }
 
     //setting the drawer content on navigation view
     private void setupDrawerContent(NavigationView nvDrawer) {
@@ -110,11 +115,11 @@ public class HomeRecordsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /*
+
         //handle the Item selected in drawerToggle
         if(drawerToggle.onOptionsItemSelected(item)){
             return true;
-        }*/
+        }
 
         switch (item.getItemId()) {
             case R.id.action_newpost:
@@ -125,9 +130,11 @@ public class HomeRecordsActivity extends AppCompatActivity {
     }
 
     public void onAddItem(MenuItem item) {
+        int pos = vpPager.getCurrentItem();
         Intent i = new Intent(this, AddItemActivity.class);
+        i.putExtra("POS_ID", pos);
         startActivity(i);
-        finish();
+
     }
 
 

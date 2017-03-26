@@ -51,7 +51,7 @@
         <activity
             android:name=".DetailsRecordActivity"
             android:label="@string/title_activity_details_record"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

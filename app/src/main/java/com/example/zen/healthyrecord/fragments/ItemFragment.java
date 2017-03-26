@@ -34,25 +34,8 @@ public class ItemFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_item_list, parent, false);
         listView = (ListView) view.findViewById(R.id.rcListView);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-
-
         listView.setAdapter(adapter);
 
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent,View view,int position,long id) {
-//                Intent i = new Intent(getActivity(), DetailsRecordActivity.class);
-//                i.putExtra("Time", getAdapter().getItem(position).getTime());
-//                i.putExtra("Memo", getAdapter().getItem(position).getMemo());
-//                i.putExtra("rating", getAdapter().getItem(position).getStatusRating());
-//                i.putExtra("calories", getAdapter().getItem(position).getCalories());
-//                i.putExtra("quantity", getAdapter().getItem(position).getQuantity());
-//
-//                getActivity().startActivity(i);
-//            }
-//        });
 
         return view;
     }

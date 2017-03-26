@@ -3,18 +3,13 @@ package com.example.zen.healthyrecord;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-
-import android.view.View;
-import android.widget.TextView;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-
 import com.crashlytics.android.Crashlytics;
-
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import io.fabric.sdk.android.Fabric;
 
@@ -30,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Fabric.with(this, new Crashlytics());
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         Button button = (Button) findViewById(R.id.btnLogin);
         etUsername = (EditText) findViewById(R.id.etUsername);
