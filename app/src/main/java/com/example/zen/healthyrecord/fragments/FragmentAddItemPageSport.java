@@ -1,8 +1,6 @@
 package com.example.zen.healthyrecord.fragments;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,20 +29,16 @@ import java.util.Calendar;
 import java.util.Map;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link addItemPage.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link addItemPage#newInstance} factory method to
- * create an instance of this fragment.
+ * Created by sharonyu on 2017/3/24.
  */
-public class addItemPage extends Fragment{
+
+public class FragmentAddItemPageSport extends Fragment{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    public TextView txtDatePicker;
-    public TextView txtTimePicker;
+
+    TextView txtDatePicker;
+    TextView txtTimePicker;
+    TextView txtFood;
     public Spinner spnFood;
     public EditText etCal;
     public EditText etMemo;
@@ -52,49 +46,25 @@ public class addItemPage extends Fragment{
     public ImageView photoView;
     private DatabaseReference mDatabase;
 
-
     private FloatingActionButton btnOpenCamera;
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
 
-    String dateStr = "04/05/2010";
-
-    private OnFragmentInteractionListener mListener;
-
-    public addItemPage() {
+    public FragmentAddItemPageSport () {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment addItemPage.
-     */
+
     // TODO: Rename and change types and number of parameters
-    public static addItemPage newInstance(String param1, String param2) {
-        addItemPage fragment = new addItemPage();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+    public static FragmentAddItemPageSport newInstance() {
+        FragmentAddItemPageSport fragment = new FragmentAddItemPageSport();
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-
     }
 
     @Override
@@ -105,12 +75,13 @@ public class addItemPage extends Fragment{
 
         txtDatePicker = (TextView)v.findViewById(R.id.txtDatePicker);
         txtTimePicker = (TextView)v.findViewById(R.id.txtTimePicker);
+        txtFood = (TextView)v.findViewById(R.id.txtFood);
+        txtFood.setText("EXERCISE");
         spnFood = (Spinner) v.findViewById(R.id.spnFood);
         etCal = (EditText) v.findViewById(R.id.etCal);
         etMemo = (EditText) v.findViewById(R.id.etMemo);
         rtbStatus = (RatingBar) v.findViewById(R.id.rtbStatus);
         photoView = (ImageView) v.findViewById(R.id.photoView);
-
 
 
         Calendar c = Calendar.getInstance();
@@ -119,6 +90,7 @@ public class addItemPage extends Fragment{
         String formattedDate = df.format(c.getTime());
         String formattedTime = tf.format(c.getTime());
 
+       // Spinner spinner = (Spinner) v.findViewById(R.id.spinner);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(),R.layout.spinner_item){
             @NonNull
@@ -130,12 +102,11 @@ public class addItemPage extends Fragment{
             }
         };
 
-        adapter.add("Fruit");
-        adapter.add("Softdrink");
+        adapter.add("Run");
+        adapter.add("Yoga");
         spnFood.setAdapter(adapter);
         txtDatePicker.setText(formattedDate);
         txtTimePicker.setText(formattedTime);
-
 
         return v;
 
@@ -154,30 +125,6 @@ public class addItemPage extends Fragment{
         });
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
 
 
     /**
@@ -190,29 +137,16 @@ public class addItemPage extends Fragment{
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
-
-
-
 
     private void writeNewDietPost(String userId, String username, String date, String time,
                                   String content,String url,String calories,String memo,Float status) {
-        // Create new post at /user-posts/$userid/$postid and at
-        // /posts/$postid simultaneously
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        String key = mDatabase.child("DietRecoreds").push().getKey();
+        String key = mDatabase.child("SportRecoreds").push().getKey();
         DietRecord post = new DietRecord(userId, username, date, time, content, url, calories,memo,status);
         Map<String, Object> postValues = post.toMap();
-        mDatabase.child("DietRecoreds").child(key).setValue(postValues);
-//        Map<String, Object> childUpdates = new HashMap<>();
-//        childUpdates.put("/DietRecoreds/" + key, postValues);
-//        childUpdates.put("/user-DietRecords/" + userId + "/" + key, postValues);
+        mDatabase.child("SportRecoreds").child(key).setValue(postValues);
 
-//        mDatabase.updateChildren(childUpdates);
-//        records.add(post);
     }
 
     public void getValue(){
@@ -238,5 +172,9 @@ public class addItemPage extends Fragment{
         return imageEncoded;
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AddItemActivity)getActivity()).mState = 2;
+    }
 }

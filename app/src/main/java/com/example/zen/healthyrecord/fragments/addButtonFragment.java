@@ -1,10 +1,8 @@
 package com.example.zen.healthyrecord.fragments;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,9 +77,16 @@ public class addButtonFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                ((AddItemActivity)getActivity()).changeFragment();
+                ((AddItemActivity)getActivity()).changeFragmentFood();
             }
         } );
+        btnSport.setOnClickListener( new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                ((AddItemActivity)getActivity()).changeFragmentSport();
+            }
+        });
         return v;
     }
 
