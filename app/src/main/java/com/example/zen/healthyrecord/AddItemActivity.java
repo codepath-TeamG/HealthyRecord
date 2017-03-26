@@ -241,6 +241,7 @@ public class AddItemActivity extends AppCompatActivity implements addItemPage.On
     public void onSaveAction(View v){
         Toast.makeText(getApplicationContext(),"Success Save",Toast.LENGTH_LONG).show();
 
+        v.setEnabled(false);
         addItemPageFragment = (addItemPage)
                 getSupportFragmentManager().findFragmentByTag("FOOD");
         addItemPageFragment.getValue();
