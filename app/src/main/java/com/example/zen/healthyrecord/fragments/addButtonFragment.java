@@ -73,15 +73,6 @@ public class addButtonFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View v = inflater.inflate( R.layout.fragment_add_button, container, false );
-        btnFood = (Button) v.findViewById(R.id.btnDiet);
-        btnSport = (Button) v.findViewById(R.id.btnSport);
-        btnFood.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                ((AddItemActivity)getActivity()).changeFragment();
-            }
-        } );
         return v;
     }
 

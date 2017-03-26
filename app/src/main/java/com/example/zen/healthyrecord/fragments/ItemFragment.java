@@ -45,7 +45,6 @@ public class ItemFragment extends Fragment {
                 i.putExtra("quantity", adapter.getItem(position).getQuantity());
                 i.putExtra("imageURL", adapter.getItem(position).getImageURL());
 
-                Log.d("D", Float.toString(adapter.getItem(position).getStatusRating()));
 
                 getActivity().startActivity(i);
             }

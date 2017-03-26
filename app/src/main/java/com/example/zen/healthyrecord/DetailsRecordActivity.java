@@ -3,9 +3,13 @@ package com.example.zen.healthyrecord;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.example.zen.healthyrecord.fragments.FragmentAddItemPage;
+import com.example.zen.healthyrecord.fragments.FragmentAddItemPageSport;
 
 public class DetailsRecordActivity extends AppCompatActivity {
 
@@ -15,6 +19,8 @@ public class DetailsRecordActivity extends AppCompatActivity {
     private TextView tvFoodValue;
     private TextView tvQuantityValue;
     private TextView tvMemoValue;
+    private TextView tvFoodLabel;
+    private TextView tvQuantLabel;
     private RatingBar ratingBarValue;
     private String imageLoadURL;
     private TextView tvCaloriesValue;
@@ -34,6 +40,9 @@ public class DetailsRecordActivity extends AppCompatActivity {
         tvMemoValue = (TextView) findViewById(R.id.tvMemoValue);
         ratingBarValue = (RatingBar) findViewById(R.id.ratingBarValue);
         tvCaloriesValue = (TextView) findViewById(R.id.tvCaloriesValue);
+        tvQuantLabel = (TextView) findViewById(R.id.tvQuantLabel);
+        tvFoodLabel = (TextView) findViewById(R.id.tvFoodLabel);
+
 
         //Picasso.with(this).load(getIntent().getStringExtra("imageURL")).into(ivPhoto);
         tvDateValue.setText(getIntent().getStringExtra("date"));
@@ -43,6 +52,13 @@ public class DetailsRecordActivity extends AppCompatActivity {
         tvMemoValue.setText(getIntent().getStringExtra("memo"));
         ratingBarValue.setRating(getIntent().getExtras().getFloat("rating"));
         tvCaloriesValue.setText(getIntent().getStringExtra("calories"));
+
+        int pos= getIntent().getExtras().getInt("POS_ID");
+
+        if(pos==0) {
+            tvQuantLabel.setText("DURATION");
+            tvFoodLabel.setText("EXERCISE");
+        }
     }
 
 }

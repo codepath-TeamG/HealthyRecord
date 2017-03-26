@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -18,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
@@ -28,18 +30,21 @@ import android.widget.Toast;
 
 import com.example.zen.healthyrecord.fragments.DatePickerFragment;
 import com.example.zen.healthyrecord.fragments.FoodFragment;
+import com.example.zen.healthyrecord.fragments.FragmentAddItemPage;
+import com.example.zen.healthyrecord.fragments.FragmentAddItemPageSport;
 import com.example.zen.healthyrecord.fragments.TimePickerFragment;
 import com.example.zen.healthyrecord.fragments.addButtonFragment;
-import com.example.zen.healthyrecord.fragments.addItemPage;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import static com.example.zen.healthyrecord.R.string.food;
 
 /**
  * Created by sharonyu on 2017/3/19.
  */
 
-public class AddItemActivity extends AppCompatActivity implements addItemPage.OnFragmentInteractionListener,
+public class AddItemActivity extends AppCompatActivity implements FragmentAddItemPage.OnFragmentInteractionListener,
         DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
 
 
@@ -49,14 +54,24 @@ public class AddItemActivity extends AppCompatActivity implements addItemPage.On
     private Toolbar toolbar;
     private ImageView photoView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int pos= getIntent().getExtras().getInt("POS_ID");
+        Log.d("d", String.valueOf(pos));
 
 
         if (savedInstanceState == null) {
-            setContentView(R.layout.add_item_layout);
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragAddItem, new addButtonFragment(), "SOMETAG").commit();
+            if(pos==0){
+                setContentView(R.layout.add_item_layout);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragAddItem, new FragmentAddItemPage(), "SOMETAG").commit();
+            }else{
+                setContentView(R.layout.add_item_layout);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragAddItem, new FragmentAddItemPageSport(), "SOMETAG").commit();
+
+            }
+
         }
 
 
@@ -73,7 +88,7 @@ public class AddItemActivity extends AppCompatActivity implements addItemPage.On
         drawerToggle = setupDrawerToggle();
         mDrawer.addDrawerListener(drawerToggle);
 
-        photoView=(ImageView) findViewById(R.id.photoView);
+
     }
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -112,7 +127,7 @@ public class AddItemActivity extends AppCompatActivity implements addItemPage.On
         Class fragmentClass;
         switch(menuItem.getItemId()) {
             case R.id.nav_first_fragment:
-                fragmentClass = addItemPage.class;
+                fragmentClass = FragmentAddItemPage.class;
                 break;
             case R.id.nav_second_fragment:
                 fragmentClass = FoodFragment.class;
@@ -121,7 +136,7 @@ public class AddItemActivity extends AppCompatActivity implements addItemPage.On
                 fragmentClass = addButtonFragment.class;
                 break;
             default:
-                fragmentClass = addItemPage.class;
+                fragmentClass = FragmentAddItemPage.class;
         }
 
         try {
@@ -176,17 +191,25 @@ public class AddItemActivity extends AppCompatActivity implements addItemPage.On
     }
 
 
-    public void changeFragment() {
+    public void changeFragmentFood() {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragAddItem, new addItemPage());
+        ft.replace(R.id.fragAddItem, new FragmentAddItemPage());
         ft.commit();
+    }
+
+    public void changeFragmentSport() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragAddItem, new FragmentAddItemPageSport());
+
+        ft.commit();
+
     }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragAddItem, new addItemPage());
+        ft.replace(R.id.fragAddItem, new FragmentAddItemPage());
         getFragmentManager().popBackStack();
         ft.commit();
 
