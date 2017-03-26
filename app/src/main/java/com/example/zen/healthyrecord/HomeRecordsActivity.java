@@ -16,7 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -34,27 +33,29 @@ public class HomeRecordsActivity extends AppCompatActivity {
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
     private Toolbar toolbar;
+<<<<<<< HEAD
     private ImageView drawerIcon;
     RecordsPageAdapter rAdapter;
     ViewPager vpPager;
+=======
+>>>>>>> master
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_records);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_homescreen);
         setSupportActionBar(toolbar);
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        setupDrawerContent(nvDrawer);
 
         //Setup the drawer view
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
-        //drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                //R.string.drawer_open, R.string.drawer_close);
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.drawer_open, R.string.drawer_close);
 
-        //drawerLayout.addDrawerListener(drawerToggle);
-
-        setupDrawerContent(nvDrawer);
+        drawerLayout.addDrawerListener(drawerToggle);
 
         vpPager = (ViewPager) findViewById(R.id.viewpager);
         vpPager.setAdapter(new RecordsPageAdapter(getSupportFragmentManager()));
@@ -63,14 +64,15 @@ public class HomeRecordsActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+
     }
 
-    /*
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         drawerToggle.syncState();
-    }*/
+    }
 
     //setting the drawer content on navigation view
     private void setupDrawerContent(NavigationView nvDrawer) {
@@ -113,11 +115,11 @@ public class HomeRecordsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /*
+
         //handle the Item selected in drawerToggle
         if(drawerToggle.onOptionsItemSelected(item)){
             return true;
-        }*/
+        }
 
         switch (item.getItemId()) {
             case R.id.action_newpost:

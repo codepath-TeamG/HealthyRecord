@@ -14,7 +14,6 @@ import com.example.zen.healthyrecord.models.Records;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Created by joanniehuang on 2017/3/17.
@@ -55,9 +54,6 @@ public class RecordsAdapter extends ArrayAdapter<Records> {
 
         Records record = records.get(position);
 
-
-        Calendar calendar = Calendar.getInstance();
-
         if(convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.list_item_records, parent, false);
         }
@@ -72,8 +68,8 @@ public class RecordsAdapter extends ArrayAdapter<Records> {
 
         tvTitle.setText(record.getType());
         tvMemo.setText(record.getMemo());
-        tvDate.setText(record.getCalendar(calendar));
-        tvCalories.setText(record.getCalFormat(record.getCalories()));
+        tvDate.setText(record.getDate());
+        tvCalories.setText(record.getCaloriesFormat(record.getCalories()));
         status.setRating(record.getStatusRating());
         Picasso.with(context).load(databasekey).into(imageView);
 

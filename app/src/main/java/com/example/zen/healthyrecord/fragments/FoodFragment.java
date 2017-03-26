@@ -22,7 +22,7 @@ public class FoodFragment extends ItemFragment {
     }
 
     private void populateRecords(){
-        Food food =  new Food("Lunch", "The Diner", "1"
+        Food food =  new Food("2017/3/26", "Lunch", "The Diner", "1"
                 , "the food was pretty great with my families", (float)4.5, 2504);
         super.getmRecords().add(food);
     }
