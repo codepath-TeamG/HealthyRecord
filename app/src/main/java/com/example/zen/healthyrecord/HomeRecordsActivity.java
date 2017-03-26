@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.zen.healthyrecord.fragments.ExerciseFragment;
 import com.example.zen.healthyrecord.fragments.FoodFragment;
+import com.google.firebase.database.FirebaseDatabase;
 
 /*
 * This activity is the record page that shows the food and exercise lists
@@ -39,6 +40,8 @@ public class HomeRecordsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home_records);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         //Setup the drawer view
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
