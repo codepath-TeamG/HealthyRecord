@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -93,8 +94,18 @@ public class FoodFragment extends ItemFragment {
                 i.putExtra("calories", adapter.getItem(position)
                         .calories);
                 i.putExtra("quantity", adapter.getItem(position).calories);
-                i.putExtra("imageURL", adapter.getItem(position).url);
 
+                try {
+                    Bitmap imageBitmap = decodeFromFirebaseBase64(adapter.getItem(position).url);
+                    i.putExtra("imageURL", imageBitmap.toString());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+//                i.putExtra("imageURL", adapter.getItem(position).url.toString());
+                Log.d("DEBUG",i.toString());
 
                 getActivity().startActivity(i);
             }

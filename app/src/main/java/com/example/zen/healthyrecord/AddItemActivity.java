@@ -6,7 +6,6 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -35,15 +34,10 @@ import com.example.zen.healthyrecord.fragments.FragmentAddItemPage;
 import com.example.zen.healthyrecord.fragments.FragmentAddItemPageSport;
 import com.example.zen.healthyrecord.fragments.TimePickerFragment;
 import com.example.zen.healthyrecord.fragments.addButtonFragment;
-import com.example.zen.healthyrecord.fragments.FragmentAddItemPage;
 import com.google.firebase.database.DatabaseReference;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import retrofit2.http.HEAD;
-
-import static com.example.zen.healthyrecord.R.string.food;
 
 /**
  * Created by sharonyu on 2017/3/19.
