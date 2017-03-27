@@ -2,13 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.zen.healthyrecord">
-
-    package="com.example.zen.healthyrecord">
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-feature android:name="android.hardware.camera"
+
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <application
@@ -18,20 +17,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--<activity android:name=".AddItemActivity"-->
-            <!--android:theme="@style/Theme.AppCompat.NoActionBar">-->
-        <!--</activity>-->
-        <activity android:name=".EditActivity"></activity>
-
-        <activity android:name=".AddItemActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-        </activity>
+        <!-- <activity android:name=".AddItemActivity" -->
+        <!-- android:theme="@style/Theme.AppCompat.NoActionBar"> -->
+        <!-- </activity> -->
+        <activity android:name=".EditActivity" />
+        <activity
+            android:name=".AddItemActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
         <activity android:name=".LoginActivity">
-
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
@@ -41,18 +38,17 @@
             tools:replace="android:value" />
 
         <activity android:name=".FirebaseTestActivity" />
-        <!--<activity android:name=".EditActivity"></activity>-->
-
+        <!-- <activity android:name=".EditActivity"></activity> -->
 
         <activity
             android:name=".HomeRecordsActivity"
             android:label="@string/title_activity_home_records"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".DetailsRecordActivity"
             android:label="@string/title_activity_details_record"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".SignUpActivity"></activity>
     </application>
 
 </manifest>
