@@ -24,4 +24,5 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="title_activity_details_record">DetailsRecordActivity</string>
     <string name="duration">Duration</string>
+    <string name="auth_failed">Login fails!</string>
 </resources>
