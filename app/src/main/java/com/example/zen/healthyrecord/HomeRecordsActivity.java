@@ -22,7 +22,8 @@ import android.widget.Toast;
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.zen.healthyrecord.fragments.ExerciseFragment;
 import com.example.zen.healthyrecord.fragments.FoodFragment;
-import com.example.zen.healthyrecord.fragments.FragmentAddItemPage;
+import com.google.firebase.database.FirebaseDatabase;
+
 
 /*
 * This activity is the record page that shows the food and exercise lists
@@ -47,6 +48,7 @@ public class HomeRecordsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
+
 
         //Setup the drawer view
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
