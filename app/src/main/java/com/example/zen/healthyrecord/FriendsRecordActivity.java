@@ -6,14 +6,11 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -22,14 +19,12 @@ import android.widget.Toast;
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.zen.healthyrecord.fragments.ExerciseFragment;
 import com.example.zen.healthyrecord.fragments.FoodFragment;
-import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * Created by sharonyu on 2017/3/30.
+ */
 
-/*
-* This activity is the record page that shows the food and exercise lists
-* */
-
-public class HomeRecordsActivity extends AppCompatActivity {
+public class FriendsRecordActivity extends AppCompatActivity{
 
     private DrawerLayout drawerLayout;
     private NavigationView nvDrawer;
@@ -48,7 +43,6 @@ public class HomeRecordsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
-
 
         //Setup the drawer view
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -94,14 +88,13 @@ public class HomeRecordsActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.nav_first_fragment:
                 //you can replace the Toast message
-                int pos = vpPager.getCurrentItem();
-                Intent i = new Intent(this, AddItemActivity.class);
-                i.putExtra("POS_ID", pos);
-                startActivity(i);
+                Intent intent = new Intent(this,AddItemActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 break;
             case R.id.nav_second_fragment:
                 //you can replace the Toast message
-
+                Toast.makeText(this,"press 2nd item",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_third_fragment:
                 //you can replace the Toast message
@@ -172,5 +165,3 @@ public class HomeRecordsActivity extends AppCompatActivity {
         }
     }
 }
-
-

@@ -44,7 +44,7 @@
                 android:textColor="@color/colorTextSecondary" />
 
             <RatingBar
-                android:id="@+id/ratingStatus"
+                android:id="@+id/rtbStatus"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -74,7 +74,7 @@
                 android:textColor="@color/colorTextSecondary" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/etMemo"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -104,7 +104,7 @@
                 android:textColor="@color/colorTextSecondary" />
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/spnFood"
                 android:layout_width="250dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.66"
@@ -124,20 +124,22 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/txtQuan"
+                android:id="@+id/txtCal"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.01"
+                android:layout_weight="0.00"
                 android:gravity="center"
-                android:text="@string/quant"
-                android:textColor="@color/colorTextSecondary" />
+                android:textColor="@color/colorTextSecondary"
+                android:text="@string/cal"/>
 
-            <NumberPicker
-                android:id="@+id/numberPicker2"
+
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/colorTextSecondary" />
+                android:ems="10"
+                android:inputType="number"
+                android:textColor="@color/colorTextSecondary"
+                android:id="@+id/etCal" />
 
         </LinearLayout>
 
