@@ -50,6 +50,8 @@ public class FoodFragment extends ItemFragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         Query firebaserecords = mDatabase.child("DietRecoreds").orderByChild("date");
         adapter = new FirebaseListAdapter<DietRecord>(getActivity(), DietRecord.class, R.layout.list_item_records, firebaserecords) {
+            
+
             @Override
             protected void populateView(View convertView, DietRecord dietRecord, int position) {
 
