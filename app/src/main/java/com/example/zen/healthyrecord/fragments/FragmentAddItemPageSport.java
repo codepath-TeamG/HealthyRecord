@@ -1,26 +1,42 @@
 package com.example.zen.healthyrecord.fragments;
 
+import android.graphics.Bitmap;
 import android.content.Context;
+
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RatingBar;
+
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.zen.healthyrecord.AddItemActivity;
 import com.example.zen.healthyrecord.R;
+import com.example.zen.healthyrecord.model.DietRecord;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import java.util.Map;
+
 
 import static com.example.zen.healthyrecord.R.id.photoView;
 import static com.example.zen.healthyrecord.R.id.txtFood;
@@ -36,11 +52,12 @@ public class FragmentAddItemPageSport extends Fragment{
     TextView txtDatePicker;
     TextView txtTimePicker;
     TextView txtFood;
-    TextView txtQuan;
-    ImageView photoView;
-
-
-
+    public Spinner spnFood;
+    public EditText etCal;
+    public EditText etMemo;
+    public RatingBar rtbStatus;
+    public ImageView photoView;
+    private DatabaseReference mDatabase;
 
 
 
@@ -74,12 +91,13 @@ public class FragmentAddItemPageSport extends Fragment{
         txtDatePicker = (TextView)v.findViewById(R.id.txtDatePicker);
         txtTimePicker = (TextView)v.findViewById(R.id.txtTimePicker);
         txtFood = (TextView)v.findViewById(R.id.txtFood);
-        txtQuan = (TextView)v.findViewById(R.id.txtQuan);
         txtFood.setText("EXERCISE");
-        txtQuan.setText("DURATION");
-        photoView = (ImageView)v.findViewById(R.id.photoView);
+        spnFood = (Spinner) v.findViewById(R.id.spnFood);
+        etCal = (EditText) v.findViewById(R.id.etCal);
+        etMemo = (EditText) v.findViewById(R.id.etMemo);
+        rtbStatus = (RatingBar) v.findViewById(R.id.rtbStatus);
+        photoView = (ImageView) v.findViewById(R.id.photoView);
         photoView.setImageResource(R.drawable.top_photo_healthy);
-
 
 
         Calendar c = Calendar.getInstance();
@@ -88,7 +106,7 @@ public class FragmentAddItemPageSport extends Fragment{
         String formattedDate = df.format(c.getTime());
         String formattedTime = tf.format(c.getTime());
 
-        Spinner spinner = (Spinner) v.findViewById(R.id.spinner);
+       // Spinner spinner = (Spinner) v.findViewById(R.id.spinner);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(),R.layout.spinner_item){
             @NonNull
@@ -100,9 +118,9 @@ public class FragmentAddItemPageSport extends Fragment{
             }
         };
 
-        adapter.add("Fruit");
-        adapter.add("Softdrink");
-        spinner.setAdapter(adapter);
+        adapter.add("Run");
+        adapter.add("Yoga");
+        spnFood.setAdapter(adapter);
         txtDatePicker.setText(formattedDate);
         txtTimePicker.setText(formattedTime);
 
@@ -136,4 +154,43 @@ public class FragmentAddItemPageSport extends Fragment{
      * >Communicating with Other Fragments</a> for more information.
      */
 
+    private void writeNewDietPost(String userId, String username, String date, String time,
+                                  String content,String url,String calories,String memo,Float status) {
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        String key = mDatabase.child("SportRecoreds").push().getKey();
+        DietRecord post = new DietRecord(userId, username, date, time, content, url, calories,memo,status);
+        Map<String, Object> postValues = post.toMap();
+        mDatabase.child("SportRecoreds").child(key).setValue(postValues);
+
+    }
+
+    public void getValue(){
+        String date = txtDatePicker.getText().toString();
+        String time = txtTimePicker.getText().toString();
+        String food = spnFood.getSelectedItem().toString();
+        String calories = etCal.getText().toString();
+        String memo = etMemo.getText().toString();
+        Float status = rtbStatus.getRating();
+
+        photoView.buildDrawingCache();
+        Bitmap bmp= photoView.getDrawingCache();
+
+        String imgUrl = encodeBitmap(bmp);
+        writeNewDietPost("1", "Bob", date,time,food, imgUrl,calories,memo,status);
+
+    }
+
+    public String encodeBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
+        return imageEncoded;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AddItemActivity)getActivity()).mState = 2;
+    }
 }

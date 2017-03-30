@@ -73,7 +73,7 @@
         android:id="@+id/tvQuantLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/quant"
+        android:text="@string/cal"
         android:layout_below="@+id/tvFoodLabel"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"/>

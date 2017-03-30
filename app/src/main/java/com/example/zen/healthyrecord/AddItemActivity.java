@@ -6,7 +6,6 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -22,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,11 +34,10 @@ import com.example.zen.healthyrecord.fragments.FragmentAddItemPage;
 import com.example.zen.healthyrecord.fragments.FragmentAddItemPageSport;
 import com.example.zen.healthyrecord.fragments.TimePickerFragment;
 import com.example.zen.healthyrecord.fragments.addButtonFragment;
+import com.google.firebase.database.DatabaseReference;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import static com.example.zen.healthyrecord.R.string.food;
 
 /**
  * Created by sharonyu on 2017/3/19.
@@ -48,11 +47,21 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
         DatePickerDialog.OnDateSetListener,TimePickerDialog.OnTimeSetListener {
 
 
+    private DatabaseReference mDatabase;
+    private FragmentAddItemPage addItemPageFragment;
+    private FragmentAddItemPageSport addSportItemPageFragment;
+
+    Button btnSport;
+    Button btnFood;
+
+
     private ActionBarDrawerToggle drawerToggle;
     private DrawerLayout mDrawer;
     private NavigationView nvDrawer;
     private Toolbar toolbar;
     private ImageView photoView;
+    public int mState;
+
 
 
     @Override
@@ -65,10 +74,10 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
         if (savedInstanceState == null) {
             if(pos==0){
                 setContentView(R.layout.add_item_layout);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragAddItem, new FragmentAddItemPage(), "SOMETAG").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragAddItem, new FragmentAddItemPage(), "FOOD").commit();
             }else{
                 setContentView(R.layout.add_item_layout);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragAddItem, new FragmentAddItemPageSport(), "SOMETAG").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragAddItem, new FragmentAddItemPageSport(), "SPORT").commit();
 
             }
 
@@ -191,17 +200,17 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
     }
 
 
+
     public void changeFragmentFood() {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragAddItem, new FragmentAddItemPage());
+        ft.replace(R.id.fragAddItem, new FragmentAddItemPage(),"FOOD");
         ft.commit();
     }
 
     public void changeFragmentSport() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragAddItem, new FragmentAddItemPageSport());
-
+        ft.replace(R.id.fragAddItem, new FragmentAddItemPageSport(),"SPORT");
         ft.commit();
 
     }
@@ -249,4 +258,25 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
         TextView txtTimePicker = (TextView) findViewById(R.id.txtTimePicker);
         txtTimePicker.setText(formattedTime);
     }
+
+    public void onSaveAction(View v){
+        Toast.makeText(getApplicationContext(),"Success Save",Toast.LENGTH_LONG).show();
+
+        v.setEnabled(false);
+        if (mState == 1){
+            addItemPageFragment = (FragmentAddItemPage)
+                    getSupportFragmentManager().findFragmentByTag("FOOD");
+            addItemPageFragment.getValue();
+        } else {
+            addSportItemPageFragment = (FragmentAddItemPageSport)
+                    getSupportFragmentManager().findFragmentByTag("SPORT");
+            addSportItemPageFragment.getValue();
+        }
+
+        Intent i = new Intent(AddItemActivity.this, HomeRecordsActivity.class);
+        startActivity(i);
+
+    }
+
+
 }

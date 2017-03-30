@@ -1,5 +1,6 @@
 package com.example.zen.healthyrecord;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,8 +9,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.example.zen.healthyrecord.fragments.FragmentAddItemPage;
-import com.example.zen.healthyrecord.fragments.FragmentAddItemPageSport;
+import com.squareup.picasso.Picasso;
 
 public class DetailsRecordActivity extends AppCompatActivity {
 
@@ -43,8 +43,10 @@ public class DetailsRecordActivity extends AppCompatActivity {
         tvQuantLabel = (TextView) findViewById(R.id.tvQuantLabel);
         tvFoodLabel = (TextView) findViewById(R.id.tvFoodLabel);
 
-
-        //Picasso.with(this).load(getIntent().getStringExtra("imageURL")).into(ivPhoto);
+        Uri imageURL = Uri.parse(getIntent().getStringExtra("imageURL"));
+//        ivPhoto.setImageURI(imageURL);
+        Log.d("DEBUG",imageURL.toString());
+        Picasso.with(this).load(imageURL).into(ivPhoto);
         tvDateValue.setText(getIntent().getStringExtra("date"));
         tvTimeValue.setText(getIntent().getStringExtra("time"));
         tvFoodValue.setText(getIntent().getStringExtra("type"));

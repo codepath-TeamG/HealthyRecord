@@ -19,16 +19,6 @@
         style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
         android:layout_gravity="left"/>
 
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/ivSave"
-        android:src="@drawable/ic_save2"
-        android:onClick="onSaveAction"
-        android:layout_gravity="right"
-        />
+
 
 </android.support.v7.widget.Toolbar>
-
-
-
