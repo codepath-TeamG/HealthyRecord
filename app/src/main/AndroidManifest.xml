@@ -20,11 +20,14 @@
         <!-- <activity android:name=".AddItemActivity" -->
         <!-- android:theme="@style/Theme.AppCompat.NoActionBar"> -->
         <!-- </activity> -->
-        <activity android:name=".EditActivity" />
+        <activity android:name=".EditActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".AddItemActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
-        <activity android:name=".LoginActivity">
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait" ></activity>
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,18 +40,22 @@
             android:value="0b5481738741c7b99bd60a435a687b21bc40b777"
             tools:replace="android:value" />
 
-        <activity android:name=".FirebaseTestActivity" />
+        <activity android:name=".FirebaseTestActivity"
+            android:screenOrientation="portrait" />
         <!-- <activity android:name=".EditActivity"></activity> -->
 
         <activity
             android:name=".HomeRecordsActivity"
             android:label="@string/title_activity_home_records"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".DetailsRecordActivity"
             android:label="@string/title_activity_details_record"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".SignUpActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" ></activity>
+        <activity android:name=".SignUpActivity"
+            android:screenOrientation="portrait" ></activity>
     </application>
 
 </manifest>
