@@ -1,15 +1,17 @@
 package com.example.zen.healthyrecord;
 
-import android.net.Uri;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import java.io.IOException;
+
+import static com.example.zen.healthyrecord.fragments.ItemFragment.decodeFromFirebaseBase64;
 
 public class DetailsRecordActivity extends AppCompatActivity {
 
@@ -43,10 +45,22 @@ public class DetailsRecordActivity extends AppCompatActivity {
         tvQuantLabel = (TextView) findViewById(R.id.tvQuantLabel);
         tvFoodLabel = (TextView) findViewById(R.id.tvFoodLabel);
 
-        Uri imageURL = Uri.parse(getIntent().getStringExtra("imageURL"));
+//        DietRecord r = (DietRecord) getIntent().getSerializableExtra("record");
+//        Uri imageURL = Uri.parse(getIntent().getStringExtra("imageURL"));
 //        ivPhoto.setImageURI(imageURL);
-        Log.d("DEBUG",imageURL.toString());
-        Picasso.with(this).load(imageURL).into(ivPhoto);
+//        Log.d("DEBUG",imageURL.toString());
+//        Picasso.with(this).load(r.url).into(ivPhoto);
+//        String url = (String) getIntent().getStringExtra("imageURL");
+        SharedPreferences sharedPreferences = getSharedPreferences("record",0);
+        String url = sharedPreferences.getString("record", "");
+        try {
+            Bitmap imageBitmap = decodeFromFirebaseBase64(url);
+            ivPhoto.setImageBitmap(imageBitmap);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         tvDateValue.setText(getIntent().getStringExtra("date"));
         tvTimeValue.setText(getIntent().getStringExtra("time"));
         tvFoodValue.setText(getIntent().getStringExtra("type"));

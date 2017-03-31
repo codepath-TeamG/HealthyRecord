@@ -1,6 +1,7 @@
 package com.example.zen.healthyrecord.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -86,7 +87,12 @@ public class ExerciseFragment extends ItemFragment{
                 i.putExtra("calories", adapter.getItem(position)
                         .calories);
                 i.putExtra("quantity", adapter.getItem(position).calories);
-                i.putExtra("imageURL", adapter.getItem(position).url);
+//                DietRecord r= adapter.getItem(position);
+//                i.putExtra("record",r);
+//                i.putExtra("imageURL", adapter.getItem(position).url.toString());
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("record",0);
+                sharedPreferences.edit()
+                        .putString("record", adapter.getItem(position).url.toString()).apply();
 
 
                 getActivity().startActivity(i);
