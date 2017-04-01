@@ -1,8 +1,6 @@
 package com.example.zen.healthyrecord.fragments;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -21,8 +19,7 @@ import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-
-import java.io.IOException;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by joanniehuang on 2017/3/19.
@@ -68,15 +65,33 @@ public class FoodFragment extends ItemFragment {
                 tvCalories.setText(dietRecord.calories);
                 status.setRating(dietRecord.status);
 
-                try {
-                    Bitmap imageBitmap = decodeFromFirebaseBase64(dietRecord.url);
-                    imageView.setImageBitmap(imageBitmap);
+                //
+//                try {
+//                    Picasso.with(getActivity())
+//                            .load(String.valueOf(decodeFromFirebaseBase64(dietRecord.url)))
+//                            .resize(75,75)
+//                            .centerCrop()
+//                            .into(imageView);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                try {
+//                    Bitmap imageBitmap = decodeFromFirebaseBase64(dietRecord.url);
+//                    imageView.setImageBitmap(imageBitmap);
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-//                Picasso.with(getContext()).load(dietRecord.url).resize(75,75).into(imageView);
+//                StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+//                StorageReference riversRef = mStorageRef.child("images");
+//                StorageReference ref = riversRef.child(fileName);
+//                Glide.with(getContext())
+//                        .using(new FirebaseImageLoader())
+//                        .load(dietRecord.url)
+//                        .into(imageView);
+                Picasso.with(getContext()).load(dietRecord.url).resize(75,75).centerCrop().into(imageView);
 
             }
         };
@@ -98,11 +113,11 @@ public class FoodFragment extends ItemFragment {
 
 //                DietRecord r= adapter.getItem(position);
 //                i.putExtra("record",r);
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("record",0);
-                sharedPreferences.edit()
-                        .putString("record", adapter.getItem(position).url.toString()).apply();
+//                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("record",0);
+//                sharedPreferences.edit()
+//                        .putString("record", adapter.getItem(position).url.toString()).apply();
 
-//                i.putExtra("imageURL", adapter.getItem(position).url.toString());
+                i.putExtra("imageURL", adapter.getItem(position).url.toString());
                 Log.d("DEBUG",i.toString());
 
                 getActivity().startActivity(i);

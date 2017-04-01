@@ -1,8 +1,6 @@
 package com.example.zen.healthyrecord.fragments;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -19,8 +17,7 @@ import com.example.zen.healthyrecord.models.Exercise;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-
-import java.io.IOException;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by joanniehuang on 2017/3/19.
@@ -60,15 +57,16 @@ public class ExerciseFragment extends ItemFragment{
                 tvCalories.setText(dietRecord.calories);
                 status.setRating(dietRecord.status);
 
-                try {
-                    Bitmap imageBitmap = decodeFromFirebaseBase64(dietRecord.url);
-                    imageView.setImageBitmap(imageBitmap);
+//                try {
+//                    Bitmap imageBitmap = decodeFromFirebaseBase64(dietRecord.url);
+//                    imageView.setImageBitmap(imageBitmap);
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
 
-//                Picasso.with(getContext()).load(dietRecord.url).resize(75,75).into(imageView);
+                Picasso.with(getContext()).load(dietRecord.url).resize(75,75).centerCrop().into(imageView);
 
             }
         };
@@ -89,10 +87,10 @@ public class ExerciseFragment extends ItemFragment{
                 i.putExtra("quantity", adapter.getItem(position).calories);
 //                DietRecord r= adapter.getItem(position);
 //                i.putExtra("record",r);
-//                i.putExtra("imageURL", adapter.getItem(position).url.toString());
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("record",0);
-                sharedPreferences.edit()
-                        .putString("record", adapter.getItem(position).url.toString()).apply();
+                i.putExtra("imageURL", adapter.getItem(position).url.toString());
+//                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("record",0);
+//                sharedPreferences.edit()
+//                        .putString("record", adapter.getItem(position).url.toString()).apply();
 
 
                 getActivity().startActivity(i);
