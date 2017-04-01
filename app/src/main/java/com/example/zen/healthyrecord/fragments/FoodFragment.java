@@ -16,6 +16,8 @@ import com.example.zen.healthyrecord.R;
 import com.example.zen.healthyrecord.model.DietRecord;
 import com.example.zen.healthyrecord.models.Food;
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -29,6 +31,7 @@ public class FoodFragment extends ItemFragment {
     private ListView listView;
     FirebaseListAdapter<DietRecord> adapter;
     private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,7 @@ public class FoodFragment extends ItemFragment {
 //        listView = getListView();
 
 //        populateRecords();
+        mAuth = FirebaseAuth.getInstance();
 
 
     }
@@ -46,7 +50,8 @@ public class FoodFragment extends ItemFragment {
         super.onViewCreated(view, savedInstanceState);
         listView = (ListView) view.findViewById(R.id.rcListView);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        Query firebaserecords = mDatabase.child("DietRecoreds").orderByChild("date");
+        FirebaseUser user = mAuth.getCurrentUser();
+        Query firebaserecords = mDatabase.child("DietRecoreds").orderByChild("uid").equalTo(user.getUid());
         adapter = new FirebaseListAdapter<DietRecord>(getActivity(), DietRecord.class, R.layout.list_item_records, firebaserecords) {
             @Override
             protected void populateView(View convertView, DietRecord dietRecord, int position) {

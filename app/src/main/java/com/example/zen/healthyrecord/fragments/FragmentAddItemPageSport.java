@@ -20,6 +20,8 @@ import android.widget.TextView;
 import com.example.zen.healthyrecord.AddItemActivity;
 import com.example.zen.healthyrecord.R;
 import com.example.zen.healthyrecord.model.DietRecord;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -46,6 +48,7 @@ public class FragmentAddItemPageSport extends Fragment{
     public ImageView photoView;
     private DatabaseReference mDatabase;
     private String url;
+    private FirebaseAuth mAuth;
 
 
 
@@ -68,6 +71,7 @@ public class FragmentAddItemPageSport extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -168,8 +172,9 @@ public class FragmentAddItemPageSport extends Fragment{
         AddItemActivity activity = (AddItemActivity) getActivity();
 
         url =activity.getDownloadSportUrl();
+        FirebaseUser user = mAuth.getCurrentUser();
 
-        writeNewDietPost("1", "Bob", date,time,food, url,calories,memo,status);
+        writeNewDietPost(user.getUid(), user.getEmail(), date,time,food, url,calories,memo,status);
 
     }
 
