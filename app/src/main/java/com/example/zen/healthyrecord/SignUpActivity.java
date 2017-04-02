@@ -10,18 +10,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.zen.healthyrecord.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private static final String TAG = "SignUpActivity";
-    EditText etUsername;
-    EditText etPassword;
+    private EditText etUsername;
+    private EditText etPassword;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
 
+
     }
 
 
@@ -68,8 +75,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void SignUp(View view) {
-
-        mAuth.createUserWithEmailAndPassword(etUsername.getText().toString(),etPassword.getText().toString())
+        final String email = etUsername.getText().toString();
+        String password = etPassword.getText().toString();
+        mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -82,11 +90,37 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.makeText(SignUpActivity.this, R.string.auth_failed,
                                     Toast.LENGTH_SHORT).show();
                         }
+                            String userName = usernameFromEmail(email);
 
-                        // ...
+                            writeNewUser(mAuth.getCurrentUser().getUid(),userName,mAuth.getCurrentUser().getEmail());
+
+                            Toast.makeText(SignUpActivity.this, "sing up successfully",
+                                    Toast.LENGTH_SHORT).show();
+
+
+
                     }
                 });
         Intent data = new Intent();
         finish();
+    }
+
+    private void writeNewUser(String userId, String username, String email) {
+        // Create new post at /user-posts/$userid/$postid and at
+        // /posts/$postid simultaneously
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        String key = mDatabase.child("Users").push().getKey();
+        User mUser = new User(userId, username, email);
+        Map<String, Object> userValues = mUser.toMap();
+        mDatabase.child("Users").child(key).setValue(userValues);
+
+    }
+
+    private String usernameFromEmail(String email) {
+        if (email.contains("@")) {
+            return email.split("@")[0];
+        } else {
+            return email;
+        }
     }
 }
