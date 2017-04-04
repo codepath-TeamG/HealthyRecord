@@ -56,7 +56,7 @@ public class FriendsRecordActivity extends AppCompatActivity{
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabStrip.setViewPager(vpPager);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("Friend List");
 
 
     }
