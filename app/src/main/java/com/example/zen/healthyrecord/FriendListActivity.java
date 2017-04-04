@@ -40,7 +40,7 @@ public class FriendListActivity extends AppCompatActivity {
 
         // Bind adapter to list
         rvContacts.setAdapter(mAdapter);
-        getSupportActionBar().setTitle("Friend List");
+//        getSupportActionBar().setTitle("Friend List");
     }
 
 
