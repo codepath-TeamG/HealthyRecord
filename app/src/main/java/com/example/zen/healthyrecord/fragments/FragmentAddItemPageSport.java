@@ -1,11 +1,6 @@
 package com.example.zen.healthyrecord.fragments;
 
 import android.graphics.Bitmap;
-import android.content.Context;
-
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,30 +11,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.zen.healthyrecord.AddItemActivity;
 import com.example.zen.healthyrecord.R;
 import com.example.zen.healthyrecord.model.DietRecord;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import java.util.Map;
-
-
-import static com.example.zen.healthyrecord.R.id.photoView;
-import static com.example.zen.healthyrecord.R.id.txtFood;
 
 /**
  * Created by sharonyu on 2017/3/24.
@@ -58,6 +47,8 @@ public class FragmentAddItemPageSport extends Fragment{
     public RatingBar rtbStatus;
     public ImageView photoView;
     private DatabaseReference mDatabase;
+    private String url;
+    private FirebaseAuth mAuth;
 
 
 
@@ -80,6 +71,7 @@ public class FragmentAddItemPageSport extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -173,17 +165,22 @@ public class FragmentAddItemPageSport extends Fragment{
         String memo = etMemo.getText().toString();
         Float status = rtbStatus.getRating();
 
-        photoView.buildDrawingCache();
-        Bitmap bmp= photoView.getDrawingCache();
+//        photoView.buildDrawingCache();
+//        Bitmap bmp= photoView.getDrawingCache();
 
-        String imgUrl = encodeBitmap(bmp);
-        writeNewDietPost("1", "Bob", date,time,food, imgUrl,calories,memo,status);
+//        String imgUrl = encodeBitmap(bmp);
+        AddItemActivity activity = (AddItemActivity) getActivity();
+
+        url =activity.getDownloadSportUrl();
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        writeNewDietPost(user.getUid(), user.getEmail(), date,time,food, url,calories,memo,status);
 
     }
 
     public String encodeBitmap(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 50, baos);
         String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
         return imageEncoded;
     }

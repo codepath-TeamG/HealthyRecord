@@ -6,14 +6,11 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -22,7 +19,6 @@ import android.widget.Toast;
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.zen.healthyrecord.fragments.ExerciseFragment;
 import com.example.zen.healthyrecord.fragments.FoodFragment;
-import com.google.firebase.database.FirebaseDatabase;
 
 
 /*
@@ -101,7 +97,9 @@ public class HomeRecordsActivity extends AppCompatActivity {
                 break;
             case R.id.nav_second_fragment:
                 //you can replace the Toast message
-                Intent f = new Intent(this, FriendsRecordActivity.class);
+//                Intent f = new Intent(this, FriendsRecordActivity.class);
+                Intent f = new Intent(this, FriendListActivity.class);
+                startActivity(f);
                 startActivity(f);
 
                 break;

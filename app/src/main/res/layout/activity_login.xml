@@ -60,5 +60,17 @@
         android:layout_below="@+id/etPassword"
         android:layout_marginTop="80dp" />
 
+    <Button
+        android:text="SignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnLogin"
+        android:layout_alignEnd="@+id/btnLogin"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="76dp"
+        android:onClick="onSignUp"
+        android:background="@color/colorLightPrimary"
+        android:id="@+id/btSignUp" />
+
 
 </RelativeLayout>

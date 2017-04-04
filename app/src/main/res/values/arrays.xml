@@ -22,4 +22,18 @@
         <item>4153708883</item>
         <item>4153708884</item>
     </array>
+
+    <array name="contact_uids">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </array>
+
+    <array name="contact_emails">
+        <item>adom@gmail.com</item>
+        <item>sarah@gmail.com</item>
+        <item>bob@gmail.com</item>
+        <item>joho@gmail.com</item>
+    </array>
 </resources>
