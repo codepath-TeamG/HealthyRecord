@@ -92,7 +92,7 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                             String userName = usernameFromEmail(email);
 
-                            writeNewUser(mAuth.getCurrentUser().getUid(),userName,mAuth.getCurrentUser().getEmail());
+                            writeNewUser(userName,1,"908999",mAuth.getCurrentUser().getUid(),mAuth.getCurrentUser().getEmail());
 
                             Toast.makeText(SignUpActivity.this, "sing up successfully",
                                     Toast.LENGTH_SHORT).show();
@@ -105,12 +105,14 @@ public class SignUpActivity extends AppCompatActivity {
         finish();
     }
 
-    private void writeNewUser(String userId, String username, String email) {
+
+
+    private void writeNewUser(String username, int thumbnailDrawable, String number,String userId,String email) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         mDatabase = FirebaseDatabase.getInstance().getReference();
         String key = mDatabase.child("Users").push().getKey();
-        User mUser = new User(userId, username, email);
+        User mUser = new User(username,thumbnailDrawable,number,userId, email);
         Map<String, Object> userValues = mUser.toMap();
         mDatabase.child("Users").child(key).setValue(userValues);
 
