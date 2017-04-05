@@ -20,6 +20,8 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.example.zen.healthyrecord.fragments.ExerciseFragment;
 import com.example.zen.healthyrecord.fragments.FoodFragment;
 
+import retrofit2.http.HEAD;
+
 /**
  * Created by sharonyu on 2017/3/30.
  */
@@ -56,12 +58,9 @@ public class FriendsRecordActivity extends AppCompatActivity{
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabStrip.setViewPager(vpPager);
 
-<<<<<<< HEAD
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-=======
         String fNmae = getIntent().getStringExtra("friendName");
         getSupportActionBar().setTitle(fNmae + " 's Home");
->>>>>>> firebase
+
 
 
     }
