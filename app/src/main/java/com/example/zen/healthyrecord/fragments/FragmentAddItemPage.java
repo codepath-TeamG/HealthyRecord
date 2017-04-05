@@ -202,7 +202,7 @@ public class FragmentAddItemPage extends Fragment{
 
     private void writeNewDietPost(String userId, String username, String date, String time,
                                   String content,String url,String calories,String memo,Float status) {
-        // Create new post at /user-posts/$userid/$postid and at
+        // Create new post at /User-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         mDatabase = FirebaseDatabase.getInstance().getReference();
         String key = mDatabase.child("DietRecoreds").push().getKey();
@@ -211,7 +211,7 @@ public class FragmentAddItemPage extends Fragment{
         mDatabase.child("DietRecoreds").child(key).setValue(postValues);
 //        Map<String, Object> childUpdates = new HashMap<>();
 //        childUpdates.put("/DietRecoreds/" + key, postValues);
-//        childUpdates.put("/user-DietRecords/" + userId + "/" + key, postValues);
+//        childUpdates.put("/User-DietRecords/" + userId + "/" + key, postValues);
 
 //        mDatabase.updateChildren(childUpdates);
 //        records.add(post);

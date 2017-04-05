@@ -18,13 +18,14 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.zen.healthyrecord.model.Friend;
+import com.example.zen.healthyrecord.model.User;
 
 import java.util.List;
 
 public class FriendListActivity extends AppCompatActivity {
     private RecyclerView rvContacts;
     private UserAdapter mAdapter;
-    private List<Friend> contacts;
+    private List<User> contacts;
 
     private DrawerLayout drawerLayout;
     private NavigationView nvDrawer;
@@ -67,7 +68,7 @@ public class FriendListActivity extends AppCompatActivity {
         rvContacts.setLayoutManager(layout);
 
         // get data
-        contacts = Friend.getContacts();
+        contacts = User.getContacts();
 
         // Create an adapter
         mAdapter = new UserAdapter(FriendListActivity.this, contacts);

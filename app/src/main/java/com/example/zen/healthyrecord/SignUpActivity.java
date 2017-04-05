@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.zen.healthyrecord.model.Friend;
-import com.example.zen.healthyrecord.model.user;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -84,9 +83,9 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
 
-                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // If sign in fails, display a message to the User. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
+                        // signed in User can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this, R.string.auth_failed,
                                     Toast.LENGTH_SHORT).show();
@@ -109,7 +108,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     private void writeNewUser(String username, int thumbnailDrawable, String number,String userId,String email) {
-        // Create new post at /user-posts/$userid/$postid and at
+        // Create new post at /User-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         mDatabase = FirebaseDatabase.getInstance().getReference();
         String key = mDatabase.child("Users").push().getKey();

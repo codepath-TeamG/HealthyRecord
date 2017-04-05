@@ -103,7 +103,7 @@ public class FirebaseTestActivity extends AppCompatActivity {
 
 
 //    private void writeNewPost(String userId, String username, String date,String content, String url,String time) {
-//        // Create new post at /user-posts/$userid/$postid and at
+//        // Create new post at /User-posts/$userid/$postid and at
 //        // /posts/$postid simultaneously
 //        String key = mDatabase.child("DietRecoreds").push().getKey();
 //        DietRecord post = new DietRecord(userId, username, date, content, url, time);
@@ -111,7 +111,7 @@ public class FirebaseTestActivity extends AppCompatActivity {
 //        mDatabase.child("DietRecoreds").child(key).setValue(postValues);
 ////        Map<String, Object> childUpdates = new HashMap<>();
 ////        childUpdates.put("/DietRecoreds/" + key, postValues);
-////        childUpdates.put("/user-DietRecords/" + userId + "/" + key, postValues);
+////        childUpdates.put("/User-DietRecords/" + userId + "/" + key, postValues);
 //
 ////        mDatabase.updateChildren(childUpdates);
 ////        records.add(post);
@@ -123,7 +123,7 @@ public class FirebaseTestActivity extends AppCompatActivity {
 //
 ////        Map<String, Object> childUpdates = new HashMap<>();
 ////        childUpdates.put("/DietRecoreds/" + key, postValues);
-////        childUpdates.put("/user-DietRecords/" + userId + "/" + key, postValues);
+////        childUpdates.put("/User-DietRecords/" + userId + "/" + key, postValues);
 //
 //        mDatabase.child("DietRecoreds").child(key).setValue(postValues);
 //    }
