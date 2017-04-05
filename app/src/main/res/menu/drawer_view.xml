@@ -4,15 +4,15 @@
         <item
             android:id="@+id/nav_first_fragment"
             android:icon="@drawable/ic_home"
-            android:title="@string/overview" />
+            android:title="@string/myHome" />
         <item
             android:id="@+id/nav_second_fragment"
-            android:icon="@drawable/ic_assignment"
-            android:title="@string/summary" />
+            android:icon="@drawable/ic_friends"
+            android:title="@string/friend" />
         <item
             android:id="@+id/nav_third_fragment"
             android:icon="@drawable/ic_share"
-            android:title="@string/share" />
+            android:title="@string/logout" />
     </group>
 
 

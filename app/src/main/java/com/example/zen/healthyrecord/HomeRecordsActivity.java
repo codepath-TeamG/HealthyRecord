@@ -102,7 +102,6 @@ public class HomeRecordsActivity extends AppCompatActivity {
                 Intent f = new Intent(this, FriendListActivity.class);
                 startActivity(f);
 
-
                 break;
             case R.id.nav_third_fragment:
                 //you can replace the Toast message

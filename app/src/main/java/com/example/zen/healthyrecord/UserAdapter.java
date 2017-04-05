@@ -2,6 +2,7 @@ package com.example.zen.healthyrecord;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,15 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
     private Activity mContext;
     private List<User> mContacts;
+    private static OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(View itemView, int position);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
 
     public UserAdapter(Activity context, List<User> contacts) {
         mContext = context;
@@ -58,7 +68,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
         final TextView tvName;
         final View vPalette;
 
-        public VH(View itemView, final Context context) {
+        public VH(final View itemView, final Context context) {
             super(itemView);
             rootView = itemView;
             ivProfile = (ImageView)itemView.findViewById(R.id.ivProfile);
@@ -69,13 +79,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final User contact = (User)v.getTag();
-                    if (contact != null) {
-                        // Fire an intent when a contact is selected
-                        // Pass contact object in the bundle and populate details activity.
+                    if(listener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(itemView, position);
+                        }
                     }
                 }
             });
+
+
         }
     }
 }
