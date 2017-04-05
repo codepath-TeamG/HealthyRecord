@@ -33,6 +33,7 @@ public class FriendsRecordActivity extends AppCompatActivity{
     private ImageView drawerIcon;
     RecordsPageAdapter rAdapter;
     ViewPager vpPager;
+    public String fName;
 
 
     @Override
@@ -56,8 +57,8 @@ public class FriendsRecordActivity extends AppCompatActivity{
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabStrip.setViewPager(vpPager);
 
-        String fNmae = getIntent().getStringExtra("friendName");
-        getSupportActionBar().setTitle(fNmae + " 's Home");
+        fName = getIntent().getStringExtra("friendName");
+        getSupportActionBar().setTitle(fName + " 's Home");
 
 
     }

@@ -32,6 +32,7 @@ public class FoodFragment extends ItemFragment {
     FirebaseListAdapter<DietRecord> adapter;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
+    Query firebaserecords;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,14 @@ public class FoodFragment extends ItemFragment {
         listView = (ListView) view.findViewById(R.id.rcListView);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser user = mAuth.getCurrentUser();
-        Query firebaserecords = mDatabase.child("DietRecoreds").orderByChild("uid").equalTo(user.getUid());
+//        String userEmail = ((FriendsRecordActivity)getActivity()).fName;
+//        if (((FriendsRecordActivity)getActivity()).fName == null){
+//            firebaserecords = mDatabase.child("DietRecoreds").orderByChild("uid").equalTo(user.getUid());
+//        } else{
+//            firebaserecords = mDatabase.child("DietRecoreds").orderByChild("author").equalTo(((FriendsRecordActivity)getActivity()).fName );
+//        }
+
+        firebaserecords = mDatabase.child("DietRecoreds").orderByChild("uid").equalTo(user.getUid());
         adapter = new FirebaseListAdapter<DietRecord>(getActivity(), DietRecord.class, R.layout.list_item_records, firebaserecords) {
             
 
