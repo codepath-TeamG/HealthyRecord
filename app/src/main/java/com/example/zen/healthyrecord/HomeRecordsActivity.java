@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.zen.healthyrecord.fragments.ExerciseFragment;
 import com.example.zen.healthyrecord.fragments.FoodFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 /*
@@ -100,12 +101,16 @@ public class HomeRecordsActivity extends AppCompatActivity {
 //                Intent f = new Intent(this, FriendsRecordActivity.class);
                 Intent f = new Intent(this, FriendListActivity.class);
                 startActivity(f);
-                startActivity(f);
+
 
                 break;
             case R.id.nav_third_fragment:
                 //you can replace the Toast message
                 Toast.makeText(this,"press 3rd item",Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                Intent g = new Intent(this, LoginActivity.class);
+                startActivity(g);
+
                 break;
         }
     }
