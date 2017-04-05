@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 // Container class to hold Contact information.
-public class User implements Serializable {
+public class Friend implements Serializable {
     private String mName;
     private int mThumbnailDrawable;
     private String mNumber;
@@ -26,11 +26,11 @@ public class User implements Serializable {
     public String mEmail;
     public Map<String, Boolean> stars = new HashMap<>();
 
-    public User() {
+    public Friend() {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
-    public User(String name, int thumbnailDrawable, String number,String uid,String email) {
+    public Friend(String name, int thumbnailDrawable, String number,String uid,String email) {
         mName = name;
         mThumbnailDrawable = thumbnailDrawable;
         mNumber = number;
@@ -59,17 +59,17 @@ public class User implements Serializable {
     }
 
     // Returns a list of contacts
-    public static List<User> getContacts() {
-        List<User> contacts = new ArrayList<>();
-        contacts.add(new User("Adam", R.drawable.uphoto, "4153508881","1","adom@gmail.com"));
-        contacts.add(new User("Sarah", R.drawable.uphoto, "4153508882","2","sarah@gmail.com"));
-        contacts.add(new User("Bob", R.drawable.uphoto, "4153508883","3","bob@gmail.com"));
-        contacts.add(new User("John", R.drawable.uphoto, "4153508884","4","joho@gmail.com"));
+    public static List<Friend> getContacts() {
+        List<Friend> contacts = new ArrayList<>();
+        contacts.add(new Friend("Adam", R.drawable.uphoto, "4153508881","1","adom@gmail.com"));
+        contacts.add(new Friend("Sarah", R.drawable.uphoto, "4153508882","2","sarah@gmail.com"));
+        contacts.add(new Friend("Bob", R.drawable.uphoto, "4153508883","3","bob@gmail.com"));
+        contacts.add(new Friend("John", R.drawable.uphoto, "4153508884","4","joho@gmail.com"));
         return contacts;
     }
 
     // Returns a random contact
-    public static User getRandomContact(Context context) {
+    public static Friend getRandomContact(Context context) {
 
         Resources resources = context.getResources();
 
@@ -88,7 +88,7 @@ public class User implements Serializable {
         TypedArray contactEmails = resources.obtainTypedArray(R.array.contact_emails);
         int email = (int) (Math.random() * contactEmails.length());
 
-        return new User(contactNames.getString(name), contactThumbnails.getResourceId(thumbnail, R.drawable.uphoto),
+        return new Friend(contactNames.getString(name), contactThumbnails.getResourceId(thumbnail, R.drawable.uphoto),
                 contactNumbers.getString(number), contactIDs.getString(ID), contactEmails.getString(email));
     }
 

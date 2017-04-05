@@ -1,9 +1,5 @@
 package com.example.zen.healthyrecord.model;
 
-/**
- * Created by Zen on 2017/3/15.
- */
-
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -17,7 +13,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// Container class to hold Contact information.
+/**
+ * Created by sharonyu on 2017/4/5.
+ */
+
 public class User implements Serializable {
     private String mName;
     private int mThumbnailDrawable;
@@ -104,4 +103,3 @@ public class User implements Serializable {
         return result;
     }
 }
-
