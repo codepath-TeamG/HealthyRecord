@@ -10,7 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.zen.healthyrecord.model.User;
+import com.example.zen.healthyrecord.model.Friend;
+import com.example.zen.healthyrecord.model.user;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -112,7 +113,7 @@ public class SignUpActivity extends AppCompatActivity {
         // /posts/$postid simultaneously
         mDatabase = FirebaseDatabase.getInstance().getReference();
         String key = mDatabase.child("Users").push().getKey();
-        User mUser = new User(username,thumbnailDrawable,number,userId, email);
+        Friend mUser = new Friend(username,thumbnailDrawable,number,userId, email);
         Map<String, Object> userValues = mUser.toMap();
         mDatabase.child("Users").child(key).setValue(userValues);
 
