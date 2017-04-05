@@ -25,4 +25,7 @@
     <string name="title_activity_details_record">DetailsRecordActivity</string>
     <string name="duration">Duration</string>
     <string name="auth_failed">Login fails!</string>
+    <string name="myHome">My Home</string>
+    <string name="friend">Friends</string>
+    <string name="logout">Log Out</string>
 </resources>

@@ -101,6 +101,12 @@ public class HomeRecordsActivity extends AppCompatActivity {
                 break;
             case R.id.nav_second_fragment:
                 //you can replace the Toast message
+<<<<<<< HEAD
+=======
+//                Intent f = new Intent(this, FriendsRecordActivity.class);
+                Intent f = new Intent(this, FriendListActivity.class);
+                startActivity(f);
+>>>>>>> firebase
 
                 break;
             case R.id.nav_third_fragment:

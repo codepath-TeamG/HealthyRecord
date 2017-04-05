@@ -38,7 +38,7 @@ public class FriendsRecordActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_records);
+        setContentView(R.layout.activity_friend_records);
         toolbar = (Toolbar) findViewById(R.id.toolbar_homescreen);
         setSupportActionBar(toolbar);
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
@@ -56,7 +56,12 @@ public class FriendsRecordActivity extends AppCompatActivity{
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabStrip.setViewPager(vpPager);
 
+<<<<<<< HEAD
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+=======
+        String fNmae = getIntent().getStringExtra("friendName");
+        getSupportActionBar().setTitle(fNmae + " 's Home");
+>>>>>>> firebase
 
 
     }
@@ -94,7 +99,8 @@ public class FriendsRecordActivity extends AppCompatActivity{
                 break;
             case R.id.nav_second_fragment:
                 //you can replace the Toast message
-                Toast.makeText(this,"press 2nd item",Toast.LENGTH_SHORT).show();
+                Intent f = new Intent(this, FriendListActivity.class);
+                startActivity(f);
                 break;
             case R.id.nav_third_fragment:
                 //you can replace the Toast message
@@ -105,33 +111,12 @@ public class FriendsRecordActivity extends AppCompatActivity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_item,menu);
+        getMenuInflater().inflate(R.menu.menu_friend_home,menu);
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
 
-        //handle the Item selected in drawerToggle
-        if(drawerToggle.onOptionsItemSelected(item)){
-            return true;
-        }
 
-        switch (item.getItemId()) {
-            case R.id.action_newpost:
-                onAddItem(item);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void onAddItem(MenuItem item) {
-        int pos = vpPager.getCurrentItem();
-        Intent i = new Intent(this, AddItemActivity.class);
-        i.putExtra("POS_ID", pos);
-        startActivity(i);
-
-    }
 
 
     //setup the tabs showing on the record page
