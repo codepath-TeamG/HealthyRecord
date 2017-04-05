@@ -1,17 +1,25 @@
 package com.example.zen.healthyrecord.model;
 
+<<<<<<< HEAD
+=======
+/**
+ * Created by Zen on 2017/3/15.
+ */
+
+import java.io.Serializable;
+import java.util.List;
+
+
+>>>>>>> parent of c70aac7... Merge branch 'firebase'
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 
 import com.example.zen.healthyrecord.R;
-import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by sharonyu on 2017/4/5.
@@ -21,20 +29,11 @@ public class User implements Serializable {
     private String mName;
     private int mThumbnailDrawable;
     private String mNumber;
-    public String mUid;
-    public String mEmail;
-    public Map<String, Boolean> stars = new HashMap<>();
 
-    public User() {
-        // Default constructor required for calls to DataSnapshot.getValue(Post.class)
-    }
-
-    public User(String name, int thumbnailDrawable, String number,String uid,String email) {
+    public User(String name, int thumbnailDrawable, String number) {
         mName = name;
         mThumbnailDrawable = thumbnailDrawable;
         mNumber = number;
-        mUid = uid;
-        mEmail = email;
     }
 
     public String getName() {
@@ -49,21 +48,13 @@ public class User implements Serializable {
         return mNumber;
     }
 
-    public String getmUid() {
-        return mUid;
-    }
-
-    public String getmEmail() {
-        return mEmail;
-    }
-
     // Returns a list of contacts
     public static List<User> getContacts() {
         List<User> contacts = new ArrayList<>();
-        contacts.add(new User("Adam", R.drawable.uphoto, "4153508881","1","adom@gmail.com"));
-        contacts.add(new User("Sarah", R.drawable.uphoto, "4153508882","2","sarah@gmail.com"));
-        contacts.add(new User("Bob", R.drawable.uphoto, "4153508883","3","bob@gmail.com"));
-        contacts.add(new User("John", R.drawable.uphoto, "4153508884","4","joho@gmail.com"));
+        contacts.add(new User("Adam", R.drawable.uphoto, "4153508881"));
+        contacts.add(new User("Sarah", R.drawable.uphoto, "4153508882"));
+        contacts.add(new User("Bob", R.drawable.uphoto, "4153508883"));
+        contacts.add(new User("John", R.drawable.uphoto, "4153508884"));
         return contacts;
     }
 
@@ -81,25 +72,6 @@ public class User implements Serializable {
         TypedArray contactNumbers = resources.obtainTypedArray(R.array.contact_numbers);
         int number = (int) (Math.random() * contactNumbers.length());
 
-        TypedArray contactIDs = resources.obtainTypedArray(R.array.contact_uids);
-        int ID = (int) (Math.random() * contactIDs.length());
-
-        TypedArray contactEmails = resources.obtainTypedArray(R.array.contact_emails);
-        int email = (int) (Math.random() * contactEmails.length());
-
-        return new User(contactNames.getString(name), contactThumbnails.getResourceId(thumbnail, R.drawable.uphoto),
-                contactNumbers.getString(number), contactIDs.getString(ID), contactEmails.getString(email));
-    }
-
-    @Exclude
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("uid", mUid);
-        result.put("name", mName);
-        result.put("email", mEmail);
-        result.put("number", mNumber);
-        result.put("photo", mThumbnailDrawable );
-
-        return result;
+        return new User(contactNames.getString(name), contactThumbnails.getResourceId(thumbnail, R.drawable.uphoto), contactNumbers.getString(number));
     }
 }

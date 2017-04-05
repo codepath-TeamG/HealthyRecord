@@ -22,8 +22,6 @@ import android.widget.TextView;
 import com.example.zen.healthyrecord.AddItemActivity;
 import com.example.zen.healthyrecord.R;
 import com.example.zen.healthyrecord.model.DietRecord;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -53,8 +51,6 @@ public class FragmentAddItemPage extends Fragment{
     public RatingBar rtbStatus;
     public ImageView photoView;
     private DatabaseReference mDatabase;
-    private String url;
-    private FirebaseAuth mAuth;
 
 
 
@@ -96,7 +92,6 @@ public class FragmentAddItemPage extends Fragment{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        mAuth = FirebaseAuth.getInstance();
 
     }
 
@@ -228,31 +223,17 @@ public class FragmentAddItemPage extends Fragment{
         String memo = etMemo.getText().toString();
         Float status = rtbStatus.getRating();
 
-//        photoView.buildDrawingCache();
-//        Bitmap bmp= photoView.getDrawingCache();
+        photoView.buildDrawingCache();
+        Bitmap bmp= photoView.getDrawingCache();
 
-//        String imgUrl = encodeBitmap(bmp);
-
-
-//        String url = getArguments().getString("ImageDownloadUrl");
-
-        AddItemActivity activity = (AddItemActivity) getActivity();
-
-        url =activity.getDownloadUrl();
-
-
-//        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("photo",0);
-//        String url = sharedPreferences.getString("i", "");
-
-        FirebaseUser user = mAuth.getCurrentUser();
-
-        writeNewDietPost(user.getUid(), user.getEmail(), date,time,food, url,calories,memo,status);
+        String imgUrl = encodeBitmap(bmp);
+        writeNewDietPost("1", "Bob", date,time,food, imgUrl,calories,memo,status);
 
     }
 
     public String encodeBitmap(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 50, baos);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
         return imageEncoded;
     }

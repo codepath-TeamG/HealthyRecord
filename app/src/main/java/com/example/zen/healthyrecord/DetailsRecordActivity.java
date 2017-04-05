@@ -1,8 +1,10 @@
 package com.example.zen.healthyrecord;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -41,25 +43,10 @@ public class DetailsRecordActivity extends AppCompatActivity {
         tvQuantLabel = (TextView) findViewById(R.id.tvQuantLabel);
         tvFoodLabel = (TextView) findViewById(R.id.tvFoodLabel);
 
-//        DietRecord r = (DietRecord) getIntent().getSerializableExtra("record");
-//        Uri imageURL = Uri.parse(getIntent().getStringExtra("imageURL"));
+        Uri imageURL = Uri.parse(getIntent().getStringExtra("imageURL"));
 //        ivPhoto.setImageURI(imageURL);
-//        Log.d("DEBUG",imageURL.toString());
-
-        String url = (String) getIntent().getStringExtra("imageURL");
-        Picasso.with(this).load(url).resize(1200,700).centerCrop().into(ivPhoto);
-
-
-//        SharedPreferences sharedPreferences = getSharedPreferences("record",0);
-//        String url = sharedPreferences.getString("record", "");
-//        try {
-//            Bitmap imageBitmap = decodeFromFirebaseBase64(url);
-//            ivPhoto.setImageBitmap(imageBitmap);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
+        Log.d("DEBUG",imageURL.toString());
+        Picasso.with(this).load(imageURL).into(ivPhoto);
         tvDateValue.setText(getIntent().getStringExtra("date"));
         tvTimeValue.setText(getIntent().getStringExtra("time"));
         tvFoodValue.setText(getIntent().getStringExtra("type"));

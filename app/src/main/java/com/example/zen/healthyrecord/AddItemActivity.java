@@ -5,11 +5,10 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -35,18 +34,10 @@ import com.example.zen.healthyrecord.fragments.FragmentAddItemPage;
 import com.example.zen.healthyrecord.fragments.FragmentAddItemPageSport;
 import com.example.zen.healthyrecord.fragments.TimePickerFragment;
 import com.example.zen.healthyrecord.fragments.addButtonFragment;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Random;
 
 /**
  * Created by sharonyu on 2017/3/19.
@@ -57,7 +48,6 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
 
 
     private DatabaseReference mDatabase;
-    private StorageReference mStorageRef;
     private FragmentAddItemPage addItemPageFragment;
     private FragmentAddItemPageSport addSportItemPageFragment;
 
@@ -71,9 +61,6 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
     private Toolbar toolbar;
     private ImageView photoView;
     public int mState;
-    public String photoFileName = "photo.jpg";
-    public final String APP_TAG = "HealthyRecordApp";
-    public Uri downloadUrl;
 
 
 
@@ -82,7 +69,6 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
         super.onCreate(savedInstanceState);
         int pos= getIntent().getExtras().getInt("POS_ID");
         Log.d("d", String.valueOf(pos));
-        mStorageRef = FirebaseStorage.getInstance().getReference();
 
 
         if (savedInstanceState == null) {
@@ -103,7 +89,7 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
 
 
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
-//        View headerLayout = nvDrawer.getHeaderView(0);
+        View headerLayout = nvDrawer.getHeaderView(0);
 
         setupDrawerContent(nvDrawer);
 
@@ -195,7 +181,6 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
 
     public void camera(View v) {
         Intent it = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        it.putExtra(MediaStore.EXTRA_OUTPUT, getPhotoFileUri(photoFileName)); // set the image file name
         startActivityForResult(it, 100);
     }
 
@@ -203,92 +188,15 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == Activity.RESULT_OK && requestCode == 100) {
-//            Bundle extras = data.getExtras();
-//            Bitmap bmp = (Bitmap) extras.get("data");
-            photoView = (ImageView) findViewById(R.id.photoView);
-//            photoView.setImageBitmap(bmp);
-
-            Uri takenPhotoUri = getPhotoFileUri(photoFileName);
-            // by this point we have the camera photo on disk
-//            Bitmap takenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
-
-
-            // RESIZE BITMAP, see section below
-            // Load the taken image into a preview
-//            ImageView ivPreview = (ImageView) findViewById(R.id.photoView);
-//            ivPreview.setImageBitmap(takenImage);
-            Picasso.with(this).load(takenPhotoUri).resize(75, 75).centerCrop().into(photoView);
-
-            Random rand = new Random();
-
-            int  n = rand.nextInt(1000) + 1;
-            String fileName = "record" + n+".jpg";
-
-            StorageReference riversRef = mStorageRef.child("images");
-            StorageReference ref = riversRef.child(fileName);
-            UploadTask uploadTask;
-            uploadTask = ref.putFile(takenPhotoUri);
-
-
-
-//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//            takenImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-//            byte[] data2 = baos.toByteArray();
-//
-//            uploadTask = mountainsRef.putBytes(data2);
-            uploadTask.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle unsuccessful uploads
-                }
-            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-                    downloadUrl =  taskSnapshot.getMetadata().getDownloadUrl();
-//                    SharedPreferences sharedPreferences = getSharedPreferences("photo", 0);
-//                    sharedPreferences.edit()
-//                            .putString("i", downloadUrl.toString()).apply();
-                }
-            });
-
+            Bundle extras = data.getExtras();
+            Bitmap bmp = (Bitmap) extras.get("data");
+            photoView = (ImageView)findViewById(R.id.photoView);
+            photoView.setImageBitmap(bmp);
             Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
 
         } else {
             Toast.makeText(this, "You didn't take photo", Toast.LENGTH_LONG).show();
         }
-    }
-
-    // Returns the Uri for a photo stored on disk given the fileName
-    public Uri getPhotoFileUri(String fileName) {
-        // Only continue if the SD Card is mounted
-        if (isExternalStorageAvailable()) {
-            // Get safe storage directory for photos
-            // Use `getExternalFilesDir` on Context to access package-specific directories.
-            // This way, we don't need to request external read/write runtime permissions.
-            File mediaStorageDir = new File(
-                    getExternalFilesDir(Environment.DIRECTORY_PICTURES), APP_TAG);
-
-            // Create the storage directory if it does not exist
-            if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
-                Log.d(APP_TAG, "failed to create directory");
-            }
-
-            // Return the file target for the photo based on filename
-            return Uri.fromFile(new File(mediaStorageDir.getPath() + File.separator + fileName));
-
-            // wrap File object into a content provider
-            // required for API >= 24
-            // See https://guides.codepath.com/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
-//            return FileProvider.getUriForFile(AddItemActivity.this, "com.codepath.fileprovider", file);
-        }
-        return null;
-    }
-
-    // Returns true if external storage for photos is available
-    private boolean isExternalStorageAvailable() {
-        String state = Environment.getExternalStorageState();
-        return state.equals(Environment.MEDIA_MOUNTED);
     }
 
 
@@ -355,12 +263,6 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
         Toast.makeText(getApplicationContext(),"Success Save",Toast.LENGTH_LONG).show();
 
         v.setEnabled(false);
-
-//        Bundle bundle = new Bundle();
-//        bundle.putString("ImageDownloadUrl", downloadUrl.toString());
-//
-//        addItemPageFragment.setArguments(bundle);
-
         if (mState == 1){
             addItemPageFragment = (FragmentAddItemPage)
                     getSupportFragmentManager().findFragmentByTag("FOOD");
@@ -373,24 +275,6 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
 
         Intent i = new Intent(AddItemActivity.this, HomeRecordsActivity.class);
         startActivity(i);
-
-    }
-
-    public String getDownloadUrl() {
-        if (downloadUrl == null){
-            return "https://firebasestorage.googleapis.com/v0/b/healthyrecord-cf27b.appspot.com/o/images%2Ffood1.jpg?alt=media&token=e242bfb9-eef5-4e3b-ac85-4f831d52cca4";
-        } else{
-            return downloadUrl.toString();
-        }
-
-    }
-
-    public String getDownloadSportUrl() {
-        if (downloadUrl == null){
-            return "https://firebasestorage.googleapis.com/v0/b/healthyrecord-cf27b.appspot.com/o/images%2Ftop_photo_healthy.jpg?alt=media&token=6ca9ebd1-bfe1-4f44-8704-1d4a0cb556df";
-        } else{
-            return downloadUrl.toString();
-        }
 
     }
 

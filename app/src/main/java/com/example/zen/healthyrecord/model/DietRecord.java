@@ -3,12 +3,11 @@ package com.example.zen.healthyrecord.model;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 @IgnoreExtraProperties
-public class DietRecord implements Serializable {
+public class DietRecord {
     public static final String REF_DIETRECORDS = "DietRecords";
     public String uid;
     public String author;

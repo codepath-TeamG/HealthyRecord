@@ -1,6 +1,7 @@
 package com.example.zen.healthyrecord.fragments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -15,11 +16,10 @@ import com.example.zen.healthyrecord.R;
 import com.example.zen.healthyrecord.model.DietRecord;
 import com.example.zen.healthyrecord.models.Exercise;
 import com.firebase.ui.database.FirebaseListAdapter;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 /**
  * Created by joanniehuang on 2017/3/19.
@@ -27,14 +27,12 @@ import com.squareup.picasso.Picasso;
 
 public class ExerciseFragment extends ItemFragment{
     private ListView listView;
-    private FirebaseAuth mAuth;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        listView = super.getListView();
 //        populateRecords();
-        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -42,8 +40,7 @@ public class ExerciseFragment extends ItemFragment{
         super.onViewCreated(view, savedInstanceState);
         listView = (ListView) view.findViewById(R.id.rcListView);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        FirebaseUser user = mAuth.getCurrentUser();
-        Query firebaserecords = mDatabase.child("SportRecoreds").orderByChild("uid").equalTo(user.getUid());
+        Query firebaserecords = mDatabase.child("SportRecoreds").orderByChild("date");
         adapter = new FirebaseListAdapter<DietRecord>(getActivity(), DietRecord.class, R.layout.list_item_records, firebaserecords) {
             @Override
             protected void populateView(View convertView, DietRecord dietRecord, int position) {
@@ -62,16 +59,15 @@ public class ExerciseFragment extends ItemFragment{
                 tvCalories.setText(dietRecord.calories);
                 status.setRating(dietRecord.status);
 
-//                try {
-//                    Bitmap imageBitmap = decodeFromFirebaseBase64(dietRecord.url);
-//                    imageView.setImageBitmap(imageBitmap);
-//
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
+                try {
+                    Bitmap imageBitmap = decodeFromFirebaseBase64(dietRecord.url);
+                    imageView.setImageBitmap(imageBitmap);
 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-                Picasso.with(getContext()).load(dietRecord.url).resize(75,75).centerCrop().into(imageView);
+//                Picasso.with(getContext()).load(dietRecord.url).resize(75,75).into(imageView);
 
             }
         };
@@ -90,12 +86,7 @@ public class ExerciseFragment extends ItemFragment{
                 i.putExtra("calories", adapter.getItem(position)
                         .calories);
                 i.putExtra("quantity", adapter.getItem(position).calories);
-//                DietRecord r= adapter.getItem(position);
-//                i.putExtra("record",r);
-                i.putExtra("imageURL", adapter.getItem(position).url.toString());
-//                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("record",0);
-//                sharedPreferences.edit()
-//                        .putString("record", adapter.getItem(position).url.toString()).apply();
+                i.putExtra("imageURL", adapter.getItem(position).url);
 
 
                 getActivity().startActivity(i);

@@ -1,6 +1,7 @@
 package com.example.zen.healthyrecord.fragments;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -16,12 +17,11 @@ import com.example.zen.healthyrecord.R;
 import com.example.zen.healthyrecord.model.DietRecord;
 import com.example.zen.healthyrecord.models.Food;
 import com.firebase.ui.database.FirebaseListAdapter;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 
 /**
  * Created by joanniehuang on 2017/3/19.
@@ -31,7 +31,6 @@ public class FoodFragment extends ItemFragment {
     private ListView listView;
     FirebaseListAdapter<DietRecord> adapter;
     private DatabaseReference mDatabase;
-    private FirebaseAuth mAuth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,6 @@ public class FoodFragment extends ItemFragment {
 //        listView = getListView();
 
 //        populateRecords();
-        mAuth = FirebaseAuth.getInstance();
 
 
     }
@@ -50,8 +48,7 @@ public class FoodFragment extends ItemFragment {
         super.onViewCreated(view, savedInstanceState);
         listView = (ListView) view.findViewById(R.id.rcListView);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        FirebaseUser user = mAuth.getCurrentUser();
-        Query firebaserecords = mDatabase.child("DietRecoreds").orderByChild("uid").equalTo(user.getUid());
+        Query firebaserecords = mDatabase.child("DietRecoreds").orderByChild("date");
         adapter = new FirebaseListAdapter<DietRecord>(getActivity(), DietRecord.class, R.layout.list_item_records, firebaserecords) {
             
 
@@ -72,33 +69,15 @@ public class FoodFragment extends ItemFragment {
                 tvCalories.setText(dietRecord.calories);
                 status.setRating(dietRecord.status);
 
-                //
-//                try {
-//                    Picasso.with(getActivity())
-//                            .load(String.valueOf(decodeFromFirebaseBase64(dietRecord.url)))
-//                            .resize(75,75)
-//                            .centerCrop()
-//                            .into(imageView);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                try {
-//                    Bitmap imageBitmap = decodeFromFirebaseBase64(dietRecord.url);
-//                    imageView.setImageBitmap(imageBitmap);
-//
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
+                try {
+                    Bitmap imageBitmap = decodeFromFirebaseBase64(dietRecord.url);
+                    imageView.setImageBitmap(imageBitmap);
 
-//                StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
-//                StorageReference riversRef = mStorageRef.child("images");
-//                StorageReference ref = riversRef.child(fileName);
-//                Glide.with(getContext())
-//                        .using(new FirebaseImageLoader())
-//                        .load(dietRecord.url)
-//                        .into(imageView);
-                Picasso.with(getContext()).load(dietRecord.url).resize(75,75).centerCrop().into(imageView);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+//                Picasso.with(getContext()).load(dietRecord.url).resize(75,75).into(imageView);
 
             }
         };
@@ -118,13 +97,16 @@ public class FoodFragment extends ItemFragment {
                         .calories);
                 i.putExtra("quantity", adapter.getItem(position).calories);
 
-//                DietRecord r= adapter.getItem(position);
-//                i.putExtra("record",r);
-//                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("record",0);
-//                sharedPreferences.edit()
-//                        .putString("record", adapter.getItem(position).url.toString()).apply();
+                try {
+                    Bitmap imageBitmap = decodeFromFirebaseBase64(adapter.getItem(position).url);
+                    i.putExtra("imageURL", imageBitmap.toString());
 
-                i.putExtra("imageURL", adapter.getItem(position).url.toString());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+//                i.putExtra("imageURL", adapter.getItem(position).url.toString());
                 Log.d("DEBUG",i.toString());
 
                 getActivity().startActivity(i);

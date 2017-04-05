@@ -43,8 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
 
-        etUsername.setText("zuzen324@gmail.com");
-        etPassword.setText("123456");
+//        etUsername.setText("test");
+//        etPassword.setText("1234");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,8 +116,5 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void onSignUp(View view) {
-        Intent intent = new Intent(this, SignUpActivity.class);
-        startActivity(intent);
-    }
+
 }

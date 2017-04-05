@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "353322641814-2kiv36iho7qi524s63f4ndqjsofkledh.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.zen.healthyrecord",
-            "certificate_hash": "9d45cbb3a33c896d958562e0dd58b28142b54a5c"
-          }
-        },
-        {
           "client_id": "353322641814-o6c3uimil1p9q2jjflm74k6d3d06u2id.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "353322641814-o6c3uimil1p9q2jjflm74k6d3d06u2id.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2

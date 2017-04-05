@@ -1,9 +1,11 @@
 package com.example.zen.healthyrecord;
 
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.zen.healthyrecord.model.User;
 
@@ -40,7 +42,7 @@ public class FriendListActivity extends AppCompatActivity {
 
         // Bind adapter to list
         rvContacts.setAdapter(mAdapter);
-//        getSupportActionBar().setTitle("Friend List");
+        getSupportActionBar().setTitle("Friend List");
     }
 
 
