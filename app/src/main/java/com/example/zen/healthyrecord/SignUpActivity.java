@@ -1,120 +1,128 @@
-<<<<<<< HEAD
-package com.example.zen.healthyrecord.model;
-
-/**
- * Created by Zen on 2017/3/15.
- */
-
-import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-
-import com.example.zen.healthyrecord.R;
-import com.google.firebase.database.Exclude;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-// Container class to hold Contact information.
-public class User implements Serializable {
-    private String mName;
-    private int mThumbnailDrawable;
-    private String mNumber;
-    public String mUid;
-    public String mEmail;
-    public Map<String, Boolean> stars = new HashMap<>();
-
-    public User() {
-        // Default constructor required for calls to DataSnapshot.getValue(Post.class)
-    }
-
-    public User(String name, int thumbnailDrawable, String number,String uid,String email) {
-        mName = name;
-        mThumbnailDrawable = thumbnailDrawable;
-        mNumber = number;
-        mUid = uid;
-        mEmail = email;
-    }
-
-    public String getName() {
-        return mName;
-    }
-
-    public int getThumbnailDrawable() {
-        return mThumbnailDrawable;
-    }
-
-    public String getNumber() {
-        return mNumber;
-    }
-
-    public String getmUid() {
-        return mUid;
-    }
-
-    public String getmEmail() {
-        return mEmail;
-    }
-
-    // Returns a list of contacts
-    public static List<User> getContacts() {
-        List<User> contacts = new ArrayList<>();
-        contacts.add(new User("Adam", R.drawable.uphoto, "4153508881","1","adom@gmail.com"));
-        contacts.add(new User("Sarah", R.drawable.uphoto, "4153508882","2","sarah@gmail.com"));
-        contacts.add(new User("Bob", R.drawable.uphoto, "4153508883","3","bob@gmail.com"));
-        contacts.add(new User("John", R.drawable.uphoto, "4153508884","4","joho@gmail.com"));
-        return contacts;
-    }
-
-    // Returns a random contact
-    public static User getRandomContact(Context context) {
-
-        Resources resources = context.getResources();
-
-        TypedArray contactNames = resources.obtainTypedArray(R.array.contact_names);
-        int name = (int) (Math.random() * contactNames.length());
-
-        TypedArray contactThumbnails = resources.obtainTypedArray(R.array.contact_thumbnails);
-        int thumbnail = (int) (Math.random() * contactThumbnails.length());
-
-        TypedArray contactNumbers = resources.obtainTypedArray(R.array.contact_numbers);
-        int number = (int) (Math.random() * contactNumbers.length());
-
-        TypedArray contactIDs = resources.obtainTypedArray(R.array.contact_uids);
-        int ID = (int) (Math.random() * contactIDs.length());
-
-        TypedArray contactEmails = resources.obtainTypedArray(R.array.contact_emails);
-        int email = (int) (Math.random() * contactEmails.length());
-
-        return new User(contactNames.getString(name), contactThumbnails.getResourceId(thumbnail, R.drawable.uphoto),
-                contactNumbers.getString(number), contactIDs.getString(ID), contactEmails.getString(email));
-    }
-
-    @Exclude
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("uid", mUid);
-        result.put("name", mName);
-        result.put("email", mEmail);
-        result.put("number", mNumber);
-        result.put("photo", mThumbnailDrawable );
-
-        return result;
-=======
 package com.example.zen.healthyrecord;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.zen.healthyrecord.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private static final String TAG = "SignUpActivity";
+    private EditText etUsername;
+    private EditText etPassword;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
->>>>>>> parent of c70aac7... Merge branch 'firebase'
+        Button button = (Button) findViewById(R.id.btnLogin);
+        etUsername = (EditText) findViewById(R.id.etUsername);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+                // ...
+            }
+        };
+
+
+
+
+    }
+
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
+    public void SignUp(View view) {
+        final String email = etUsername.getText().toString();
+        String password = etPassword.getText().toString();
+        mAuth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(SignUpActivity.this, R.string.auth_failed,
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        String userName = usernameFromEmail(email);
+
+                        writeNewUser(userName,1,"908999",mAuth.getCurrentUser().getUid(),mAuth.getCurrentUser().getEmail());
+
+                        Toast.makeText(SignUpActivity.this, "sing up successfully",
+                                Toast.LENGTH_SHORT).show();
+
+
+
+                    }
+                });
+        Intent data = new Intent();
+        finish();
+    }
+
+
+
+    private void writeNewUser(String username, int thumbnailDrawable, String number,String userId,String email) {
+        // Create new post at /user-posts/$userid/$postid and at
+        // /posts/$postid simultaneously
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        String key = mDatabase.child("Users").push().getKey();
+        User mUser = new User(username,thumbnailDrawable,number,userId, email);
+        Map<String, Object> userValues = mUser.toMap();
+        mDatabase.child("Users").child(key).setValue(userValues);
+
+    }
+
+    private String usernameFromEmail(String email) {
+        if (email.contains("@")) {
+            return email.split("@")[0];
+        } else {
+            return email;
+        }
     }
 }
