@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="contact_names">
+        <item>Alex</item>
+        <item>Charlie</item>
+        <item>Brooke</item>
+        <item>Piper</item>
+
+    </array>
+
+
+    <array name="contact_thumbnails">
+        <item>@drawable/uphoto</item>
+        <item>@drawable/uphoto</item>
+        <item>@drawable/uphoto</item>
+        <item>@drawable/uphoto</item>
+    </array>
+
+    <array name="contact_numbers">
+        <item>4153708881</item>
+        <item>4153708882</item>
+        <item>4153708883</item>
+        <item>4153708884</item>
+    </array>
+
+    <array name="contact_uids">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </array>
+
+    <array name="contact_emails">
+        <item>adom@gmail.com</item>
+        <item>sarah@gmail.com</item>
+        <item>bob@gmail.com</item>
+        <item>joho@gmail.com</item>
+    </array>
+</resources>

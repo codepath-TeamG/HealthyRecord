@@ -9,4 +9,5 @@
         android:icon="@drawable/newpost"
         android:title="Profile"
         android:onClick="onAddItem"></item>
+
 </menu>
