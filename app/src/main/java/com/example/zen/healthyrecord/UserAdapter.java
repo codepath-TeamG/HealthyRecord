@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.zen.healthyrecord.model.User;
+import com.example.zen.healthyrecord.model.Friend;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
     private Activity mContext;
-    private List<User> mContacts;
+    private List<Friend> mContacts;
     private static OnItemClickListener listener;
 
     public interface OnItemClickListener {
@@ -32,7 +32,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
     }
 
 
-    public UserAdapter(Activity context, List<User> contacts) {
+    public UserAdapter(Activity context, List<Friend> contacts) {
         mContext = context;
         if (contacts == null) {
             throw new IllegalArgumentException("contacts must not be null");
@@ -50,7 +50,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
     // Display data at the specified position
     @Override
     public void onBindViewHolder(VH holder, int position) {
-        User contact = mContacts.get(position);
+        Friend contact = mContacts.get(position);
         holder.rootView.setTag(contact);
         holder.tvName.setText(contact.getName());
         Picasso.with(mContext).load(contact.getThumbnailDrawable()).fit().centerCrop().into(holder.ivProfile);
