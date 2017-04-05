@@ -65,9 +65,11 @@
         <activity android:name=".SignUpActivity"
             android:screenOrientation="portrait" ></activity>
 
-        <activity android:name=".FriendListActivity">
+        <activity android:name=".FriendListActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".FriendsRecordActivity"></activity>
+        <activity android:name=".FriendsRecordActivity"
+            android:screenOrientation="portrait"></activity>
 
     </application>
 

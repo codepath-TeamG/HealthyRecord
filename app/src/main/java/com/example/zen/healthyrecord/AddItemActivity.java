@@ -4,7 +4,8 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -12,15 +13,12 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -30,20 +28,21 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.zen.healthyrecord.fragments.DatePickerFragment;
-import com.example.zen.healthyrecord.fragments.FoodFragment;
 import com.example.zen.healthyrecord.fragments.FragmentAddItemPage;
 import com.example.zen.healthyrecord.fragments.FragmentAddItemPageSport;
 import com.example.zen.healthyrecord.fragments.TimePickerFragment;
-import com.example.zen.healthyrecord.fragments.addButtonFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
@@ -102,94 +101,13 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
         setSupportActionBar(toolbar);
 
 
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
-//        View headerLayout = nvDrawer.getHeaderView(0);
-
-        setupDrawerContent(nvDrawer);
-
-        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerToggle = setupDrawerToggle();
-        mDrawer.addDrawerListener(drawerToggle);
 
 
     }
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        drawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggles
-        drawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    private ActionBarDrawerToggle setupDrawerToggle() {
-
-        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
-
-    }
-
-        private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        selectDrawerItem(menuItem);
-                        return true;
-                    }
-                });
-    }
-
-    public void selectDrawerItem(MenuItem menuItem) {
-        // Create a new fragment and specify the fragment to show based on nav item clicked
-        Fragment fragment = null;
-        Class fragmentClass;
-        switch(menuItem.getItemId()) {
-            case R.id.nav_first_fragment:
-                fragmentClass = FragmentAddItemPage.class;
-                break;
-            case R.id.nav_second_fragment:
-                fragmentClass = FoodFragment.class;
-                break;
-            case R.id.nav_third_fragment:
-                fragmentClass = addButtonFragment.class;
-                break;
-            default:
-                fragmentClass = FragmentAddItemPage.class;
-        }
-
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragAddItem, fragment).commit();
-
-        // Highlight the selected item has been done by NavigationView
-        menuItem.setChecked(true);
-        // Set action bar title
-        setTitle(menuItem.getTitle());
-        // Close the navigation drawer
-        mDrawer.closeDrawers();
-    }
 
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (drawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
 
-    }
 
 
 
@@ -205,19 +123,50 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
         if (resultCode == Activity.RESULT_OK && requestCode == 100) {
 //            Bundle extras = data.getExtras();
 //            Bitmap bmp = (Bitmap) extras.get("data");
-            photoView = (ImageView) findViewById(R.id.photoView);
+//            photoView = (ImageView) findViewById(R.id.photoView);
 //            photoView.setImageBitmap(bmp);
 
             Uri takenPhotoUri = getPhotoFileUri(photoFileName);
             // by this point we have the camera photo on disk
-//            Bitmap takenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
-
+            Bitmap rawTakenImage = BitmapFactory.decodeFile(takenPhotoUri.getPath());
 
             // RESIZE BITMAP, see section below
+            Bitmap resizedBitmap = BitmapScaler.scaleToFitWidth(rawTakenImage, 800);
+
+            // Configure byte output stream
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            // Compress the image further
+            resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+            // Create a new file for the resized bitmap (`getPhotoFileUri` defined above)
+            Uri resizedUri = getPhotoFileUri(photoFileName + "_resized");
+            File resizedFile = new File(resizedUri.getPath());
+            try {
+                resizedFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            FileOutputStream fos = null;
+            try {
+                fos = new FileOutputStream(resizedFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            // Write the bytes of the bitmap to file
+            try {
+                fos.write(bytes.toByteArray());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             // Load the taken image into a preview
-//            ImageView ivPreview = (ImageView) findViewById(R.id.photoView);
-//            ivPreview.setImageBitmap(takenImage);
-            Picasso.with(this).load(takenPhotoUri).resize(75, 75).centerCrop().into(photoView);
+            ImageView ivPreview = (ImageView) findViewById(R.id.photoView);
+            ivPreview.setImageBitmap(resizedBitmap);
+//            Picasso.with(this).load(takenPhotoUri).resize(75, 75).centerCrop().into(photoView);
 
             Random rand = new Random();
 
@@ -227,7 +176,7 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
             StorageReference riversRef = mStorageRef.child("images");
             StorageReference ref = riversRef.child(fileName);
             UploadTask uploadTask;
-            uploadTask = ref.putFile(takenPhotoUri);
+            uploadTask = ref.putFile(resizedUri);
 
 
 
@@ -235,7 +184,7 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
 //            takenImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 //            byte[] data2 = baos.toByteArray();
 //
-//            uploadTask = mountainsRef.putBytes(data2);
+//            uploadTask = ref.putBytes(data2);
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
@@ -395,4 +344,7 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
     }
 
 
+
+
 }
+
