@@ -100,7 +100,6 @@ public class HomeRecordsActivity extends AppCompatActivity {
 //                Intent f = new Intent(this, FriendsRecordActivity.class);
                 Intent f = new Intent(this, FriendListActivity.class);
                 startActivity(f);
-                startActivity(f);
 
                 break;
             case R.id.nav_third_fragment:

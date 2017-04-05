@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
@@ -113,6 +114,7 @@ public class FragmentAddItemPage extends Fragment{
         etMemo = (EditText) v.findViewById(R.id.etMemo);
         rtbStatus = (RatingBar) v.findViewById(R.id.rtbStatus);
         photoView = (ImageView) v.findViewById(R.id.photoView);
+        Picasso.with(getContext()).load(R.drawable.food1).resize(600, 300).into(photoView);
 
 
 
