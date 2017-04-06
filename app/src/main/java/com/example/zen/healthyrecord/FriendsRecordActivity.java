@@ -151,7 +151,7 @@ public class FriendsRecordActivity extends AppCompatActivity{
     public void sendEmail(MenuItem item) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("plain/text");
-        String userMail = getIntent().getStringExtra("friendMail");
+        String userMail[] = {getIntent().getStringExtra("friendMail")};
         intent.putExtra(Intent.EXTRA_EMAIL, userMail);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(Intent.createChooser(intent, ""));
