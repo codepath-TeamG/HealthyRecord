@@ -101,7 +101,7 @@ public class FriendsRecordActivity extends AppCompatActivity{
                 break;
             case R.id.nav_third_fragment:
                 //you can replace the Toast message
-                Toast.makeText(this,"press 3rd item",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Log Out",Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -127,13 +127,14 @@ public class FriendsRecordActivity extends AppCompatActivity{
         @Override
         public Fragment getItem(int position) {
             if (position == 0) {
-                FoodFragment foodFragment = new FoodFragment();
+                FoodFragment foodFragment = FoodFragment.newInstance(fName);
                 return foodFragment;
             } else {
-                ExerciseFragment exerciseFragment = new ExerciseFragment();
+                ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(fName);
                 return exerciseFragment;
             }
         }
+
 
         //Return the tab title
         @Override

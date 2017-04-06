@@ -28,6 +28,17 @@ import com.squareup.picasso.Picasso;
 public class ExerciseFragment extends ItemFragment{
     private ListView listView;
     private FirebaseAuth mAuth;
+    Query firebaserecords;
+    String mParam1;
+    String author;
+
+    public static ExerciseFragment newInstance(String param1) {
+        ExerciseFragment fragment = new ExerciseFragment();
+        Bundle args = new Bundle();
+        args.putString("record", param1);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +46,10 @@ public class ExerciseFragment extends ItemFragment{
 //        listView = super.getListView();
 //        populateRecords();
         mAuth = FirebaseAuth.getInstance();
+
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString("record");
+        }
     }
 
     @Override
@@ -43,7 +58,14 @@ public class ExerciseFragment extends ItemFragment{
         listView = (ListView) view.findViewById(R.id.rcListView);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser user = mAuth.getCurrentUser();
-        Query firebaserecords = mDatabase.child("SportRecoreds").orderByChild("uid").equalTo(user.getUid());
+
+        if ( mParam1 == null){
+            author = user.getEmail();
+
+        } else{
+            author =mParam1;
+        }
+        firebaserecords = mDatabase.child("SportRecoreds").orderByChild("author").equalTo(author);
         adapter = new FirebaseListAdapter<DietRecord>(getActivity(), DietRecord.class, R.layout.list_item_records, firebaserecords) {
             @Override
             protected void populateView(View convertView, DietRecord dietRecord, int position) {

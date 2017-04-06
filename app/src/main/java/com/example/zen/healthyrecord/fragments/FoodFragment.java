@@ -33,6 +33,17 @@ public class FoodFragment extends ItemFragment {
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     Query firebaserecords;
+    String mParam1;
+    String author;
+
+    public static FoodFragment newInstance(String param1) {
+        FoodFragment fragment = new FoodFragment();
+        Bundle args = new Bundle();
+        args.putString("record", param1);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +53,9 @@ public class FoodFragment extends ItemFragment {
 //        populateRecords();
         mAuth = FirebaseAuth.getInstance();
 
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString("record");
+        }
 
     }
 
@@ -52,14 +66,15 @@ public class FoodFragment extends ItemFragment {
         listView = (ListView) view.findViewById(R.id.rcListView);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser user = mAuth.getCurrentUser();
-//        String userEmail = ((FriendsRecordActivity)getActivity()).fName;
-//        if (((FriendsRecordActivity)getActivity()).fName == null){
-//            firebaserecords = mDatabase.child("DietRecoreds").orderByChild("uid").equalTo(user.getUid());
-//        } else{
-//            firebaserecords = mDatabase.child("DietRecoreds").orderByChild("author").equalTo(((FriendsRecordActivity)getActivity()).fName );
-//        }
 
-        firebaserecords = mDatabase.child("DietRecoreds").orderByChild("uid").equalTo(user.getUid());
+        if ( mParam1 == null){
+            author = user.getEmail();
+
+        } else{
+            author =mParam1;
+        }
+        firebaserecords = mDatabase.child("DietRecoreds").orderByChild("author").equalTo(author);
+
         adapter = new FirebaseListAdapter<DietRecord>(getActivity(), DietRecord.class, R.layout.list_item_records, firebaserecords) {
             
 
