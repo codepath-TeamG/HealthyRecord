@@ -76,7 +76,7 @@ public class FriendListActivity extends AppCompatActivity {
 
     }
 
-    
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

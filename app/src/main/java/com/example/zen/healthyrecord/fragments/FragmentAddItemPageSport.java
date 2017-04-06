@@ -113,7 +113,9 @@ public class FragmentAddItemPageSport extends Fragment{
         };
 
         adapter.add("Run");
+        adapter.add("Cycling");
         adapter.add("Yoga");
+        adapter.add("Other");
         spnFood.setAdapter(adapter);
         txtDatePicker.setText(formattedDate);
         txtTimePicker.setText(formattedTime);

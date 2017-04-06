@@ -137,8 +137,11 @@ public class FragmentAddItemPage extends Fragment{
             }
         };
 
+        adapter.add("Hamberger");
         adapter.add("Fruit");
         adapter.add("Softdrink");
+        adapter.add("Other");
+
         spnFood.setAdapter(adapter);
         txtDatePicker.setText(formattedDate);
         txtTimePicker.setText(formattedTime);
