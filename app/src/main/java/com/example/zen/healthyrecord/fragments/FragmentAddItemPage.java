@@ -114,7 +114,7 @@ public class FragmentAddItemPage extends Fragment{
         etMemo = (EditText) v.findViewById(R.id.etMemo);
         rtbStatus = (RatingBar) v.findViewById(R.id.rtbStatus);
         photoView = (ImageView) v.findViewById(R.id.photoView);
-        Picasso.with(getContext()).load(R.drawable.food1).resize(600, 300).into(photoView);
+        Picasso.with(getContext()).load(R.drawable.food1).resize(600, 400).into(photoView);
 
 
 

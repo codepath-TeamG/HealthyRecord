@@ -47,7 +47,7 @@ public class DetailsRecordActivity extends AppCompatActivity {
 //        Log.d("DEBUG",imageURL.toString());
 
         String url = (String) getIntent().getStringExtra("imageURL");
-        Picasso.with(this).load(url).resize(1200,700).centerCrop().into(ivPhoto);
+        Picasso.with(this).load(url).resize(1500,700).into(ivPhoto);
 
 
 //        SharedPreferences sharedPreferences = getSharedPreferences("record",0);

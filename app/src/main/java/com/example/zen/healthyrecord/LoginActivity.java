@@ -39,8 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         if(FirebaseDatabase.getInstance() == null) {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         }
-
-        mAuth = FirebaseAuth.getInstance();
         Button button = (Button) findViewById(R.id.btnLogin);
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -55,6 +53,17 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+
+        mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -69,14 +78,13 @@ public class LoginActivity extends AppCompatActivity {
                 // ...
             }
         };
-
-
+        mAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+
     }
 
     @Override
@@ -92,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //we also need to check the credential while login
 
-        Intent intent = new Intent(this, HomeRecordsActivity.class);
+
 //        mAuth.signInWithEmailAndPassword(etUsername.getText().toString(), etPassword.getText().toString());
         mAuth.signInWithEmailAndPassword(etUsername.getText().toString(), etPassword.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -107,13 +115,21 @@ public class LoginActivity extends AppCompatActivity {
                             Log.w(TAG, "signInWithEmail:failed", task.getException());
                             Toast.makeText(LoginActivity.this, R.string.auth_failed,
                                     Toast.LENGTH_SHORT).show();
+                        }else {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(LoginActivity.this, "success login",
+                                            Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(LoginActivity.this, HomeRecordsActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
                         }
-
                         // ...
                     }
                 });
 
-        startActivity(intent);
 
     }
 

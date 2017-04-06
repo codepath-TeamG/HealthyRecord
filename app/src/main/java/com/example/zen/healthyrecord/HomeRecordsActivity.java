@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -59,8 +60,8 @@ public class HomeRecordsActivity extends AppCompatActivity {
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabStrip.setViewPager(vpPager);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Brooklyn's Home</font>"));
 
     }
 
@@ -91,10 +92,7 @@ public class HomeRecordsActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.nav_first_fragment:
                 //you can replace the Toast message
-                int pos = vpPager.getCurrentItem();
-                Intent i = new Intent(this, AddItemActivity.class);
-                i.putExtra("POS_ID", pos);
-                startActivity(i);
+                Toast.makeText(this,"You are currently at your Homepage",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_second_fragment:
                 //you can replace the Toast message
@@ -105,7 +103,7 @@ public class HomeRecordsActivity extends AppCompatActivity {
                 break;
             case R.id.nav_third_fragment:
                 //you can replace the Toast message
-                Toast.makeText(this,"press 3rd item",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"log out",Toast.LENGTH_SHORT).show();
                 FirebaseAuth.getInstance().signOut();
                 Intent g = new Intent(this, LoginActivity.class);
                 startActivity(g);

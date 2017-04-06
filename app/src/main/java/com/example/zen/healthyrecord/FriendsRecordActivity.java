@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.zen.healthyrecord.fragments.ExerciseFragment;
 import com.example.zen.healthyrecord.fragments.FoodFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Created by sharonyu on 2017/3/30.
@@ -58,7 +60,11 @@ public class FriendsRecordActivity extends AppCompatActivity{
         tabStrip.setViewPager(vpPager);
 
         fName = getIntent().getStringExtra("friendName");
+
+
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'></font>"));
         getSupportActionBar().setTitle(fName + " 's Home");
+
 
 
     }
@@ -90,7 +96,7 @@ public class FriendsRecordActivity extends AppCompatActivity{
         switch (item.getItemId()){
             case R.id.nav_first_fragment:
                 //you can replace the Toast message
-                Intent intent = new Intent(this,AddItemActivity.class);
+                Intent intent = new Intent(this,HomeRecordsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;
@@ -101,8 +107,12 @@ public class FriendsRecordActivity extends AppCompatActivity{
                 break;
             case R.id.nav_third_fragment:
                 //you can replace the Toast message
-                Toast.makeText(this,"Log Out",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"log out",Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                Intent g = new Intent(this, LoginActivity.class);
+                startActivity(g);
                 break;
+
         }
     }
 
