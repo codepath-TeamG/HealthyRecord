@@ -80,9 +80,11 @@ public class FriendListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 String name = contacts.get(position).getName();
+                String mail = contacts.get(position).getmEmail();
                 Toast.makeText(FriendListActivity.this, name + " was clicked!", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(FriendListActivity.this, FriendsRecordActivity.class);
                 i.putExtra("friendName",name);
+                i.putExtra("friendMail",mail);
                 startActivity(i);
 
             }

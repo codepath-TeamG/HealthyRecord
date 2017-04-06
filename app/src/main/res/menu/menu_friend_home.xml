@@ -5,7 +5,8 @@
         android:id="@+id/miCompose"
         android:icon="@drawable/ic_email"
         app:showAsAction="always"
-        android:title="Compose">
+        android:title="Compose"
+        android:onClick="sendEmail">
     </item>
 
 </menu>
