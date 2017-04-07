@@ -123,6 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                                             Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, HomeRecordsActivity.class);
                                     startActivity(intent);
+                                    finish();
                                 }
                             });
                         }

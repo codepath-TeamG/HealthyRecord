@@ -34,6 +34,7 @@ public class HomeRecordsActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
     private Toolbar toolbar;
     private ImageView drawerIcon;
+    private String temp;
     RecordsPageAdapter rAdapter;
     ViewPager vpPager;
 
@@ -63,8 +64,23 @@ public class HomeRecordsActivity extends AppCompatActivity {
 //        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Brooklyn's Home</font>"));
 
+        if (savedInstanceState != null) {
+            temp = savedInstanceState.getString("temp");
+            System.out.println("onCreate: temp = " + temp);
+        }
+
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("temp", temp);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
