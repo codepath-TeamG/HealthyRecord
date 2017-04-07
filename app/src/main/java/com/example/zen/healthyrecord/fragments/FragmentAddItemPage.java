@@ -2,12 +2,14 @@ package com.example.zen.healthyrecord.fragments;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -116,9 +118,7 @@ public class FragmentAddItemPage extends Fragment{
         photoView = (ImageView) v.findViewById(R.id.photoView);
         Picasso.with(getContext()).load(R.drawable.food1).resize(600, 400).into(photoView);
 
-
-
-
+        spnFood.getBackground().setColorFilter(ContextCompat.getColor(getContext(),R.color.colorPrimary),PorterDuff.Mode.SRC_ATOP);
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
@@ -137,7 +137,7 @@ public class FragmentAddItemPage extends Fragment{
             }
         };
 
-        adapter.add("Hamberger");
+        adapter.add("Hamburger");
         adapter.add("Fruit");
         adapter.add("Softdrink");
         adapter.add("Other");

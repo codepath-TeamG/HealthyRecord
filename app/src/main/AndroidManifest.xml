@@ -69,7 +69,8 @@
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".FriendsRecordActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"></activity>
 
     </application>
 

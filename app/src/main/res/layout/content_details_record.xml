@@ -10,8 +10,9 @@
 
     <ImageView
         android:id="@+id/photoView"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
         app:srcCompat="@drawable/top_photo_healthy" />
 
     <TextView
@@ -123,6 +124,7 @@
         android:layout_below="@+id/tvMemoValue"
         android:theme="@style/RatingBar"
         android:layout_marginTop="20dp"
+        android:isIndicator="true"
         android:layout_alignStart="@+id/tvDateValue" />
 
     <TextView

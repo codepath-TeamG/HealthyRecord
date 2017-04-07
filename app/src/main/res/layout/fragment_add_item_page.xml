@@ -45,24 +45,26 @@
 
             <RatingBar
                 android:id="@+id/rtbStatus"
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_weight="1"
+                android:layout_weight="0.8"
                 android:isIndicator="false"
-                android:padding="15dp" />
+                android:padding="15dp"
+                android:numStars="5"
+                android:theme="@style/RatingBar"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/LayoutMemo"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_above="@+id/LayoutStatus"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+        android:id="@+id/LayoutMemo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/LayoutStatus"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/txtMemo"
@@ -75,12 +77,13 @@
 
             <EditText
                 android:id="@+id/etMemo"
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.8"
                 android:ems="10"
                 android:inputType="textMultiLine"
-                android:textColor="@color/colorTextSecondary" />
+                android:textColor="@color/colorTextSecondary"
+                android:backgroundTint="@color/colorPrimary"/>
 
         </LinearLayout>
 
@@ -134,11 +137,13 @@
 
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.8"
                 android:ems="10"
                 android:inputType="number"
                 android:textColor="@color/colorTextSecondary"
+                android:backgroundTint="@color/colorPrimary"
                 android:id="@+id/etCal" />
 
         </LinearLayout>
@@ -204,8 +209,9 @@
 
         <ImageView
             android:id="@+id/photoView"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="300dp"
+            android:scaleType="centerCrop"
             android:layout_above="@+id/LayoutDate"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/include"
@@ -218,8 +224,7 @@
             android:layout_above="@+id/LayoutDate"
             android:layout_alignParentEnd="true"
             android:layout_gravity="right"
-            android:layout_marginEnd="34dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginRight="16dp"
             android:src="@drawable/ic_camera"
             app:backgroundTint="@color/colorPrimary" />

@@ -47,7 +47,7 @@ public class DetailsRecordActivity extends AppCompatActivity {
 //        Log.d("DEBUG",imageURL.toString());
 
         String url = (String) getIntent().getStringExtra("imageURL");
-        Picasso.with(this).load(url).resize(1500,700).into(ivPhoto);
+        Picasso.with(this).load(url).into(ivPhoto);
 
 
 //        SharedPreferences sharedPreferences = getSharedPreferences("record",0);
@@ -75,5 +75,6 @@ public class DetailsRecordActivity extends AppCompatActivity {
             tvFoodLabel.setText("EXERCISE");
         }
     }
+
 
 }
