@@ -60,17 +60,25 @@
         android:layout_below="@+id/etPassword"
         android:layout_marginTop="80dp" />
 
-    <Button
-        android:text="SignUp"
+    <TextView
+        android:text="@string/signup"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="12sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnLogin"
         android:layout_alignEnd="@+id/btnLogin"
         android:layout_marginEnd="14dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="20dp"
         android:onClick="onSignUp"
-        android:background="@color/colorLightPrimary"
-        android:id="@+id/btSignUp" />
+        android:id="@+id/tvSignUp" />
+    <View
+        android:layout_width="43dp"
+        android:layout_height="1dp"
+        android:background="@color/colorTextPrimary"
+        android:layout_below="@+id/tvSignUp"
+        android:layout_alignStart="@+id/tvSignUp"
+        android:layout_marginTop="1dp"/>
 
 
 </RelativeLayout>
