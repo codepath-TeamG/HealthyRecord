@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -32,12 +33,9 @@ public class HomeRecordsActivity extends AppCompatActivity {
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
     private Toolbar toolbar;
-<<<<<<< HEAD
     private ImageView drawerIcon;
     private String temp;
     RecordsPageAdapter rAdapter;
-=======
->>>>>>> UI
     ViewPager vpPager;
 
 
