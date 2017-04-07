@@ -28,4 +28,6 @@
     <string name="myHome">My Home</string>
     <string name="friend">Friends</string>
     <string name="logout">Log Out</string>
+    <string name="signup">Sign Up</string>
+    <string name="signupWelcome">Sign Up for Free!</string>
 </resources>

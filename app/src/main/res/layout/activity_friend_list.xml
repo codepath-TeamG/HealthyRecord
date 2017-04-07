@@ -17,7 +17,8 @@
             android:titleTextColor="@color/tw__composer_white"
             android:background="?attr/colorPrimary"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:fitsSystemWindows="true">
         </android.support.v7.widget.Toolbar>
 
         <android.support.v7.widget.RecyclerView
