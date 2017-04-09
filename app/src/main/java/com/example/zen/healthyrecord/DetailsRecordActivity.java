@@ -17,7 +17,7 @@ public class DetailsRecordActivity extends AppCompatActivity {
     private TextView tvFoodValue;
     private TextView tvQuantityValue;
     private TextView tvMemoValue;
-    private TextView tvFoodLabel;
+    private TextView tvTimeLabel;
     private TextView tvQuantLabel;
     private RatingBar ratingBarValue;
     private String imageLoadURL;
@@ -37,9 +37,8 @@ public class DetailsRecordActivity extends AppCompatActivity {
         tvQuantityValue = (TextView) findViewById(R.id.tvQuantValue);
         tvMemoValue = (TextView) findViewById(R.id.tvMemoValue);
         ratingBarValue = (RatingBar) findViewById(R.id.ratingBarValue);
-        tvCaloriesValue = (TextView) findViewById(R.id.tvCaloriesValue);
         tvQuantLabel = (TextView) findViewById(R.id.tvQuantLabel);
-        tvFoodLabel = (TextView) findViewById(R.id.tvFoodLabel);
+        tvTimeLabel = (TextView) findViewById(R.id.tvTimeLabel);
 
 //        DietRecord r = (DietRecord) getIntent().getSerializableExtra("record");
 //        Uri imageURL = Uri.parse(getIntent().getStringExtra("imageURL"));
@@ -61,18 +60,16 @@ public class DetailsRecordActivity extends AppCompatActivity {
 //        }
 
         tvDateValue.setText(getIntent().getStringExtra("date"));
-        tvTimeValue.setText(getIntent().getStringExtra("time"));
-        tvFoodValue.setText(getIntent().getStringExtra("type"));
+        tvTimeValue.setText(getIntent().getStringExtra("type"));
+        tvFoodValue.setText(getIntent().getStringExtra("content"));
         tvQuantityValue.setText(getIntent().getStringExtra("quantity"));
         tvMemoValue.setText(getIntent().getStringExtra("memo"));
         ratingBarValue.setRating(getIntent().getExtras().getFloat("rating"));
-        tvCaloriesValue.setText(getIntent().getStringExtra("calories"));
 
         int pos= getIntent().getExtras().getInt("POS_ID");
 
         if(pos==0) {
-            tvQuantLabel.setText("DURATION");
-            tvFoodLabel.setText("EXERCISE");
+            tvTimeLabel.setText("TYPE");
         }
     }
 

@@ -91,7 +91,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/LayoutFood"
+            android:id="@+id/LayoutType"
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:layout_below="@+id/open_camera"
@@ -101,7 +101,7 @@
             android:weightSum="1">
 
             <TextView
-                android:id="@+id/txtFood"
+                android:id="@+id/txtType"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
@@ -110,7 +110,7 @@
                 android:textSize="10dp"/>
 
             <Spinner
-                android:id="@+id/spnFood"
+                android:id="@+id/spnType"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_above="@+id/LayoutQuant"
@@ -123,8 +123,8 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/LayoutQuant"
-            android:layout_width="match_parent"
+            android:id="@+id/LayoutFood"
+            android:layout_width="180dp"
             android:layout_height="50dp"
             android:layout_above="@+id/LayoutMemo"
             android:layout_alignParentLeft="true"
@@ -133,10 +133,42 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/txtFood"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="CONTENT"
+                android:textColor="@color/black"
+                android:textSize="10dp"/>
+
+
+            <EditText
+                android:id="@+id/etFood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="AS PHOTO"
+                android:ems="10"
+                android:paddingLeft="10dp"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="12dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LayoutQuant"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_above="@id/LayoutMemo"
+            android:layout_toRightOf="@id/LayoutFood"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
                 android:id="@+id/txtCal"
                 android:layout_width="100dp"
-                android:layout_height="15dp"
-                android:layout_weight="0.00"
+                android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:text="@string/cal"
                 android:textColor="@color/black"
@@ -208,7 +240,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="33dp"
             android:layout_above="@+id/LayoutDate"
-            android:layout_alignEnd="@+id/LayoutFood"/>
+            android:layout_alignEnd="@+id/LayoutType"/>
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

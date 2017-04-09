@@ -46,7 +46,7 @@ public class FirebaseTestActivity extends AppCompatActivity {
                 TextView tvDietContent = (TextView) convertView.findViewById(R.id.tvDietContent);
 
                 tvDate.setText(dietRecord.date);
-                tvDietTime.setText(dietRecord.time);
+                tvDietTime.setText(dietRecord.type);
                 tvDietContent.setText(dietRecord.content);
 
 

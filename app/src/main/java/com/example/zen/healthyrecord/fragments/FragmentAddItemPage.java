@@ -49,8 +49,9 @@ public class FragmentAddItemPage extends Fragment{
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public TextView txtDatePicker;
-    public TextView txtTimePicker;
-    public Spinner spnFood;
+    public TextView txtType;
+    public Spinner spnType;
+    public EditText etFood;
     public EditText etCal;
     public EditText etMemo;
     public RatingBar rtbStatus;
@@ -111,14 +112,15 @@ public class FragmentAddItemPage extends Fragment{
 
         txtDatePicker = (TextView)v.findViewById(R.id.txtDatePicker);
 //        txtTimePicker = (TextView)v.findViewById(R.id.txtTimePicker);
-        spnFood = (Spinner) v.findViewById(R.id.spnFood);
+        spnType = (Spinner) v.findViewById(R.id.spnType);
+        etFood = (EditText) v.findViewById(R.id.etFood);
         etCal = (EditText) v.findViewById(R.id.etCal);
         etMemo = (EditText) v.findViewById(R.id.etMemo);
         rtbStatus = (RatingBar) v.findViewById(R.id.rtbStatus);
         photoView = (ImageView) v.findViewById(R.id.photoView);
         Picasso.with(getContext()).load(R.drawable.food1).resize(600, 400).into(photoView);
 
-        spnFood.getBackground().setColorFilter(ContextCompat.getColor(getContext(),R.color.colorPrimary),PorterDuff.Mode.SRC_ATOP);
+        spnType.getBackground().setColorFilter(ContextCompat.getColor(getContext(),R.color.colorPrimary),PorterDuff.Mode.SRC_ATOP);
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
@@ -137,12 +139,13 @@ public class FragmentAddItemPage extends Fragment{
             }
         };
 
-        adapter.add("Hamburger");
-        adapter.add("Fruit");
-        adapter.add("Softdrink");
-        adapter.add("Other");
+        adapter.add("早餐");
+        adapter.add("午餐");
+        adapter.add("晚餐");
+        adapter.add("點心");
+        adapter.add("宵夜");
 
-        spnFood.setAdapter(adapter);
+        spnType.setAdapter(adapter);
         txtDatePicker.setText(formattedDate);
 //        txtTimePicker.setText(formattedTime);
 
@@ -208,13 +211,13 @@ public class FragmentAddItemPage extends Fragment{
 
 
 
-    private void writeNewDietPost(String userId, String username, String date,
+    private void writeNewDietPost(String userId, String username, String date, String type,
                                   String content,String url,String calories,String memo,Float status) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         mDatabase = FirebaseDatabase.getInstance().getReference();
         String key = mDatabase.child("DietRecoreds").push().getKey();
-        DietRecord post = new DietRecord(userId, username, date,content, url, calories,memo,status);
+        DietRecord post = new DietRecord(userId, username, date,type,content, url, calories,memo,status);
         Map<String, Object> postValues = post.toMap();
         mDatabase.child("DietRecoreds").child(key).setValue(postValues);
 //        Map<String, Object> childUpdates = new HashMap<>();
@@ -228,7 +231,8 @@ public class FragmentAddItemPage extends Fragment{
     public void getValue(){
         String date = txtDatePicker.getText().toString();
 //        String time = txtTimePicker.getText().toString();
-        String food = spnFood.getSelectedItem().toString();
+        String type = spnType.getSelectedItem().toString();
+        String food = etFood.getText().toString();
         String calories = etCal.getText().toString();
         String memo = etMemo.getText().toString();
         Float status = rtbStatus.getRating();
@@ -251,7 +255,7 @@ public class FragmentAddItemPage extends Fragment{
 
         FirebaseUser user = mAuth.getCurrentUser();
 
-        writeNewDietPost(user.getUid(), user.getEmail(), date,food, url,calories,memo,status);
+        writeNewDietPost(user.getUid(), user.getEmail(), date,type,food, url,calories,memo,status);
 
     }
 

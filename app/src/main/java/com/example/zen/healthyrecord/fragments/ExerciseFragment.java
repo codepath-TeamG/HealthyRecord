@@ -105,8 +105,8 @@ public class ExerciseFragment extends ItemFragment{
             public void onItemClick(AdapterView<?> parent,View view,int position,long id) {
                 Intent i = new Intent(getActivity(), DetailsRecordActivity.class);
                 i.putExtra("date", adapter.getItem(position).date);
-                i.putExtra("time", adapter.getItem(position).time);
-                i.putExtra("type", adapter.getItem(position).content);
+                i.putExtra("type", adapter.getItem(position).type);
+                i.putExtra("content", adapter.getItem(position).content);
                 i.putExtra("memo", adapter.getItem(position).memo);
                 i.putExtra("rating", adapter.getItem(position).status);
                 i.putExtra("calories", adapter.getItem(position)

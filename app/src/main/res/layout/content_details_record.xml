@@ -59,7 +59,7 @@
         android:layout_below="@+id/tvTimeLabel"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp"
-        android:text="@string/food"/>
+        android:text="CONTENT"/>
 
     <TextView
         android:id="@+id/tvFoodValue"
@@ -126,23 +126,5 @@
         android:layout_marginTop="20dp"
         android:isIndicator="true"
         android:layout_alignStart="@+id/tvDateValue" />
-
-    <TextView
-        android:id="@+id/tvCaloriesLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/calories"
-        android:paddingLeft="20dp"
-        android:layout_alignBottom="@+id/tvCaloriesValue"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/tvCaloriesValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ratingBarValue"
-        android:paddingTop="20dp"
-        android:text="1,000"
-        android:layout_alignStart="@+id/tvDateValue"/>
 
 </RelativeLayout>

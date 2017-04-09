@@ -40,9 +40,10 @@ public class FragmentAddItemPageSport extends Fragment{
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
     TextView txtDatePicker;
-    TextView txtTimePicker;
     TextView txtFood;
-    public Spinner spnFood;
+    TextView txtType;
+    public Spinner spnType;
+    public EditText etFood;
     public EditText etCal;
     public EditText etMemo;
     public RatingBar rtbStatus;
@@ -82,10 +83,12 @@ public class FragmentAddItemPageSport extends Fragment{
         View v = inflater.inflate(R.layout.fragment_add_item_page, container, false);
 
         txtDatePicker = (TextView)v.findViewById(R.id.txtDatePicker);
-//        txtTimePicker = (TextView)v.findViewById(R.id.txtTimePicker);
-        txtFood = (TextView)v.findViewById(R.id.txtFood);
-        txtFood.setText("EXERCISE");
-        spnFood = (Spinner) v.findViewById(R.id.spnFood);
+        spnType = (Spinner) v.findViewById(R.id.spnType);
+        txtType = (TextView)v.findViewById(R.id.txtType);
+        txtType.setText("TYPE");
+        etFood = (EditText) v.findViewById(R.id.etFood);
+//        etFood.setHint("eg.Run,Yoga,Hiking...");
+//        etFood.setHintTextColor(getResources().getColor(R.color.colorTextSecondary));
         etCal = (EditText) v.findViewById(R.id.etCal);
         etMemo = (EditText) v.findViewById(R.id.etMemo);
         rtbStatus = (RatingBar) v.findViewById(R.id.rtbStatus);
@@ -112,11 +115,10 @@ public class FragmentAddItemPageSport extends Fragment{
             }
         };
 
-        adapter.add("Run");
-        adapter.add("Cycling");
-        adapter.add("Yoga");
-        adapter.add("Other");
-        spnFood.setAdapter(adapter);
+        adapter.add("有氧運動");
+        adapter.add("無氧運動");
+        adapter.add("其他");
+        spnType.setAdapter(adapter);
         txtDatePicker.setText(formattedDate);
 //        txtTimePicker.setText(formattedTime);
 
@@ -150,12 +152,12 @@ public class FragmentAddItemPageSport extends Fragment{
      * >Communicating with Other Fragments</a> for more information.
      */
 
-    private void writeNewDietPost(String userId, String username, String date, String time,
+    private void writeNewDietPost(String userId, String username, String date, String type,
                                   String content,String url,String calories,String memo,Float status) {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         String key = mDatabase.child("SportRecoreds").push().getKey();
-        DietRecord post = new DietRecord(userId, username, date, content, url, calories,memo,status);
+        DietRecord post = new DietRecord(userId, username, date, type, content, url, calories,memo,status);
         Map<String, Object> postValues = post.toMap();
         mDatabase.child("SportRecoreds").child(key).setValue(postValues);
 
@@ -163,8 +165,9 @@ public class FragmentAddItemPageSport extends Fragment{
 
     public void getValue(){
         String date = txtDatePicker.getText().toString();
-        String time = txtTimePicker.getText().toString();
-        String food = spnFood.getSelectedItem().toString();
+//        String time = txtTimePicker.getText().toString();
+        String type = spnType.getSelectedItem().toString();
+        String food = etFood.getText().toString();
         String calories = etCal.getText().toString();
         String memo = etMemo.getText().toString();
         Float status = rtbStatus.getRating();
@@ -178,7 +181,7 @@ public class FragmentAddItemPageSport extends Fragment{
         url =activity.getDownloadSportUrl();
         FirebaseUser user = mAuth.getCurrentUser();
 
-        writeNewDietPost(user.getUid(), user.getEmail(), date,time,food, url,calories,memo,status);
+        writeNewDietPost(user.getUid(), user.getEmail(), date,type,food, url,calories,memo,status);
 
     }
 
