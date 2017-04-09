@@ -201,8 +201,7 @@
             <TextView
                 android:id="@+id/txtDate"
                 android:layout_width="100dp"
-                android:layout_height="10dp"
-                android:layout_weight="0.01"
+                android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:text="@string/date"
                 android:textColor="@color/black"
@@ -215,7 +214,7 @@
                 android:onClick="showDatePickerDialog"
                 android:paddingLeft="10dp"
                 android:textColor="@color/colorTextSecondary"
-                android:textSize="10dp"/>
+                android:textSize="13dp"/>
 
         </LinearLayout>
 
