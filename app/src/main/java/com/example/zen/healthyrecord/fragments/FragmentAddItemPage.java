@@ -110,7 +110,7 @@ public class FragmentAddItemPage extends Fragment{
         View v = inflater.inflate(R.layout.fragment_add_item_page, container, false);
 
         txtDatePicker = (TextView)v.findViewById(R.id.txtDatePicker);
-        txtTimePicker = (TextView)v.findViewById(R.id.txtTimePicker);
+//        txtTimePicker = (TextView)v.findViewById(R.id.txtTimePicker);
         spnFood = (Spinner) v.findViewById(R.id.spnFood);
         etCal = (EditText) v.findViewById(R.id.etCal);
         etMemo = (EditText) v.findViewById(R.id.etMemo);
@@ -144,7 +144,7 @@ public class FragmentAddItemPage extends Fragment{
 
         spnFood.setAdapter(adapter);
         txtDatePicker.setText(formattedDate);
-        txtTimePicker.setText(formattedTime);
+//        txtTimePicker.setText(formattedTime);
 
 
         return v;
@@ -208,13 +208,13 @@ public class FragmentAddItemPage extends Fragment{
 
 
 
-    private void writeNewDietPost(String userId, String username, String date, String time,
+    private void writeNewDietPost(String userId, String username, String date,
                                   String content,String url,String calories,String memo,Float status) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         mDatabase = FirebaseDatabase.getInstance().getReference();
         String key = mDatabase.child("DietRecoreds").push().getKey();
-        DietRecord post = new DietRecord(userId, username, date, time, content, url, calories,memo,status);
+        DietRecord post = new DietRecord(userId, username, date,content, url, calories,memo,status);
         Map<String, Object> postValues = post.toMap();
         mDatabase.child("DietRecoreds").child(key).setValue(postValues);
 //        Map<String, Object> childUpdates = new HashMap<>();
@@ -227,7 +227,7 @@ public class FragmentAddItemPage extends Fragment{
 
     public void getValue(){
         String date = txtDatePicker.getText().toString();
-        String time = txtTimePicker.getText().toString();
+//        String time = txtTimePicker.getText().toString();
         String food = spnFood.getSelectedItem().toString();
         String calories = etCal.getText().toString();
         String memo = etMemo.getText().toString();
@@ -251,7 +251,7 @@ public class FragmentAddItemPage extends Fragment{
 
         FirebaseUser user = mAuth.getCurrentUser();
 
-        writeNewDietPost(user.getUid(), user.getEmail(), date,time,food, url,calories,memo,status);
+        writeNewDietPost(user.getUid(), user.getEmail(), date,food, url,calories,memo,status);
 
     }
 

@@ -82,7 +82,7 @@ public class FragmentAddItemPageSport extends Fragment{
         View v = inflater.inflate(R.layout.fragment_add_item_page, container, false);
 
         txtDatePicker = (TextView)v.findViewById(R.id.txtDatePicker);
-        txtTimePicker = (TextView)v.findViewById(R.id.txtTimePicker);
+//        txtTimePicker = (TextView)v.findViewById(R.id.txtTimePicker);
         txtFood = (TextView)v.findViewById(R.id.txtFood);
         txtFood.setText("EXERCISE");
         spnFood = (Spinner) v.findViewById(R.id.spnFood);
@@ -118,7 +118,7 @@ public class FragmentAddItemPageSport extends Fragment{
         adapter.add("Other");
         spnFood.setAdapter(adapter);
         txtDatePicker.setText(formattedDate);
-        txtTimePicker.setText(formattedTime);
+//        txtTimePicker.setText(formattedTime);
 
         return v;
 
@@ -155,7 +155,7 @@ public class FragmentAddItemPageSport extends Fragment{
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         String key = mDatabase.child("SportRecoreds").push().getKey();
-        DietRecord post = new DietRecord(userId, username, date, time, content, url, calories,memo,status);
+        DietRecord post = new DietRecord(userId, username, date, content, url, calories,memo,status);
         Map<String, Object> postValues = post.toMap();
         mDatabase.child("SportRecoreds").child(key).setValue(postValues);
 

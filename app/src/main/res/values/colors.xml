@@ -8,4 +8,5 @@
     <color name="colorTextPrimary">#FFFFFF</color>
     <color name="colorTextSecondary">#757575</color>
     <color name="colorDivider">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>

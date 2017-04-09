@@ -198,7 +198,7 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-                    downloadUrl =  taskSnapshot.getMetadata().getDownloadUrl();
+//                    downloadUrl =  taskSnapshot.getMetadata().getDownloadUrl();
 //                    SharedPreferences sharedPreferences = getSharedPreferences("photo", 0);
 //                    sharedPreferences.edit()
 //                            .putString("i", downloadUrl.toString()).apply();
@@ -300,8 +300,8 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
         c.set(Calendar.MINUTE, minute);
         SimpleDateFormat tf = new SimpleDateFormat("HH:mm");
         String formattedTime = tf.format(c.getTime());
-        TextView txtTimePicker = (TextView) findViewById(R.id.txtTimePicker);
-        txtTimePicker.setText(formattedTime);
+//        TextView txtTimePicker = (TextView) findViewById(R.id.txtTimePicker);
+//        txtTimePicker.setText(formattedTime);
     }
 
     public void onSaveAction(View v){

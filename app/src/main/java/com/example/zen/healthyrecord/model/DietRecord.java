@@ -27,11 +27,11 @@ public class DietRecord implements Serializable {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
-    public DietRecord(String uid, String author, String date, String time, String content,String url,String calories,String memo,Float status) {
+    public DietRecord(String uid, String author, String date, String content,String url,String calories,String memo,Float status) {
         this.uid = uid;
         this.author = author;
         this.date = date;
-        this.time = time;
+
         this.content = content;
         this.url = url;
         this.calories = calories;
@@ -45,7 +45,7 @@ public class DietRecord implements Serializable {
         result.put("uid", uid);
         result.put("author", author);
         result.put("date", date);
-        result.put("time", time);
+
         result.put("content", content);
         result.put("url",url);
         result.put("calories", calories);
