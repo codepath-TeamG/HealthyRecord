@@ -35,14 +35,18 @@ public class DetailsRecordActivity extends AppCompatActivity {
 
         ivPhoto = (ImageView) findViewById(R.id.photoView);
         tvDateValue = (TextView) findViewById(R.id.tvDateValue);
-        tvTimeValue = (TextView) findViewById(R.id.tvTimeValue);
         tvFoodValue = (TextView) findViewById(R.id.tvFoodValue);
         tvQuantityValue = (TextView) findViewById(R.id.tvQuantValue);
         tvMemoValue = (TextView) findViewById(R.id.tvMemoValue);
         ratingBarValue = (RatingBar) findViewById(R.id.ratingBarValue);
         tvQuantLabel = (TextView) findViewById(R.id.tvQuantLabel);
-        tvTimeLabel = (TextView) findViewById(R.id.tvTimeLabel);
+
         mProgress = (ProgressBar) findViewById(R.id.progressBar);
+
+        tvTimeLabel = (TextView) findViewById(R.id.tvTimeLabel);
+
+//        tvTimeLabel = (TextView) findViewById(R.id.tvTimeLabel);
+
 
 //        DietRecord r = (DietRecord) getIntent().getSerializableExtra("record");
 //        Uri imageURL = Uri.parse(getIntent().getStringExtra("imageURL"));
@@ -83,11 +87,17 @@ public class DetailsRecordActivity extends AppCompatActivity {
 //        }
 
         tvDateValue.setText(getIntent().getStringExtra("date"));
-        tvTimeValue.setText(getIntent().getStringExtra("type"));
+//        tvTimeValue.setText(getIntent().getStringExtra("type"));
         tvFoodValue.setText(getIntent().getStringExtra("content"));
         tvQuantityValue.setText(getIntent().getStringExtra("quantity"));
         tvMemoValue.setText(getIntent().getStringExtra("memo"));
         ratingBarValue.setRating(getIntent().getExtras().getFloat("rating"));
+        tvFoodValue.setText(getIntent().getStringExtra("type"));
+        tvQuantityValue.setText(getIntent().getStringExtra("quantity"));
+        tvMemoValue.setText(getIntent().getStringExtra("memo"));
+        ratingBarValue.setRating(getIntent().getExtras().getFloat("rating"));
+//        tvCaloriesValue.setText(getIntent().getStringExtra("calories"));
+
 
         int pos= getIntent().getExtras().getInt("POS_ID");
 

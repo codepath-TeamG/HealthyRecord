@@ -8,10 +8,172 @@
     android:layout_height="match_parent"
     tools:context="com.example.zen.healthyrecord.LoginActivity">
 
+    <LinearLayout
+        android:id="@+id/LayoutStatus"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvStatusLabel"
+            android:layout_width="100dp"
+            android:layout_height="10dp"
+            android:layout_weight="0.01"
+            android:paddingLeft="10dp"
+            android:text="@string/status"
+            android:textColor="@color/black"
+            android:textSize="10dp"/>
+
+        <RatingBar
+            android:id="@+id/ratingBarValue"
+            android:layout_width="250dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.24"
+            android:isIndicator="false"
+            android:numStars="5"
+            android:theme="@style/RatingBar"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LayoutMemo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/LayoutStatus"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvMemoLabel"
+            android:layout_width="100dp"
+            android:layout_height="15dp"
+            android:layout_weight="0.02"
+            android:paddingLeft="10dp"
+            android:text="@string/memo"
+            android:textColor="@color/black"
+            android:textSize="10dp"/>
+
+        <TextView
+            android:id="@+id/tvMemoValue"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:backgroundTint="@color/colorPrimary"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:paddingLeft="10dp"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="12dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LayoutFood"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_below="@+id/LayoutDate"
+        android:layout_alignEnd="@+id/LayoutDate"
+        android:layout_alignStart="@+id/LayoutDate">
+
+        <TextView
+            android:id="@+id/tvFoodLabel"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="@string/food"
+            android:textColor="@color/black"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/tvFoodValue"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_above="@+id/LayoutQuant"
+            android:layout_alignEnd="@+id/open_camera"
+            android:layout_marginEnd="11dp"
+            android:paddingLeft="10dp"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LayoutQuant"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_above="@+id/LayoutMemo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvQuantLabel"
+            android:layout_width="100dp"
+            android:layout_height="15dp"
+            android:layout_weight="0.00"
+            android:paddingLeft="10dp"
+            android:text="@string/cal"
+            android:textColor="@color/black"
+            android:textSize="10dp"/>
+
+
+        <TextView
+            android:id="@+id/tvQuantValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:backgroundTint="@color/colorPrimary"
+            android:ems="10"
+            android:inputType="number"
+            android:paddingLeft="10dp"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="12dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LayoutDate"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_below="@+id/photoView"
+        android:layout_alignParentEnd="true">
+
+        <TextView
+            android:id="@+id/tvDateLabel"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="@string/date"
+            android:textColor="@color/black"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/tvDateValue"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:layout_weight="0.55"
+            android:paddingLeft="10dp"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="13dp"/>
+
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/photoView"
         android:layout_width="fill_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/top_photo_healthy" />
 
@@ -125,7 +287,10 @@
         android:theme="@style/RatingBar"
         android:layout_marginTop="20dp"
         android:isIndicator="true"
-        android:layout_alignStart="@+id/tvDateValue" />
+        android:layout_alignStart="@+id/tvDateValue"
+        app:srcCompat="@drawable/top_photo_healthy"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
 
     <ProgressBar
         style="?android:attr/progressBarStyle"
