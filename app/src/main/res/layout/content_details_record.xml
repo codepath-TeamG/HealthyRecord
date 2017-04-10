@@ -129,7 +129,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvMemoValue"
         android:theme="@style/RatingBar"
-        android:layout_marginTop="20dp"
+        android:paddingTop="20dp"
         android:isIndicator="true"
         android:layout_alignStart="@+id/tvDateValue" />
 
