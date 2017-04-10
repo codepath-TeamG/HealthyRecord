@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
+        jcenter()
     }
 
     dependencies {
@@ -17,6 +18,7 @@ apply plugin: 'io.fabric'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
+    jcenter()
 }
 
 
@@ -45,7 +47,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.google.firebase:firebase-database:10.2.0'
     compile 'com.google.firebase:firebase-storage:10.2.0'
     compile 'com.firebaseui:firebase-ui:1.2.0'
@@ -69,6 +70,8 @@ dependencies {
     compile 'com.android.support:support-v4:25.2.0'
     compile 'jp.wasabeef:blurry:2.1.1'
     testCompile 'junit:junit:4.12'
+    compile 'jp.wasabeef:picasso-transformations:2.1.2'
+    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
 }
 apply plugin: 'com.google.gms.google-services'
 
