@@ -46,7 +46,7 @@
 
             <RatingBar
                 android:id="@+id/rtbStatus"
-                android:layout_width="250dp"
+                android:layout_width="wrap_content"
                 android:layout_height="10dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.24"

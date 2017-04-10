@@ -27,5 +27,16 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/photoView"/>
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:id="@+id/progressBar"
+        android:layout_above="@+id/rvDetail"
+        android:layout_alignParentStart="true"/>
+
 
 </RelativeLayout>
+
+
+

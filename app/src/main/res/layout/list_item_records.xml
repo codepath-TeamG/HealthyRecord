@@ -10,18 +10,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorAccent"
-        /></RelativeLayout>
+        />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/ivIconRelativelayout"
+        >
+        <ProgressBar
+        style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+        android:id="@+id/progressBar2" />
+
+    </RelativeLayout>
 
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="BreakFast"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_toRightOf="@+id/ivIconRelativelayout"
-        android:layout_margin="5dp"/>
+
 
     <RatingBar
         android:id="@+id/statusBar"
@@ -38,16 +45,10 @@
         android:layout_height="wrap_content"
         android:text="2017/03/05"
         android:layout_alignParentRight="true"
-        android:layout_margin="10dp"/>
-
-    <TextView
-        android:id="@+id/tvMemo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="this is my first meal of breakfast"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/statusBar"
-        android:layout_alignStart="@+id/tvTitle"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp" />
 
     <TextView
         android:id="@+id/tvCalories"
@@ -58,6 +59,25 @@
         android:layout_below="@+id/tvDate"
         android:layout_alignParentRight="true"/>
 
+    <TextView
+        android:id="@+id/tvMemo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="this is my first meal of breakfast"
+        android:layout_alignBottom="@+id/ivIconRelativelayout"
+        android:layout_alignStart="@+id/statusBar" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BreakFast"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/ivIconRelativelayout" />
 
 
 </RelativeLayout>
