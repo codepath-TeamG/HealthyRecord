@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ public class FoodFragment extends ItemFragment {
     Query firebaserecords;
     String mParam1;
     String author;
+    private ProgressBar mProgress;
 
     public static FoodFragment newInstance(String param1) {
         FoodFragment fragment = new FoodFragment();
@@ -67,6 +69,7 @@ public class FoodFragment extends ItemFragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser user = mAuth.getCurrentUser();
 
+
         if ( mParam1 == null){
             author = user.getEmail();
 
@@ -87,6 +90,7 @@ public class FoodFragment extends ItemFragment {
                 TextView tvCalories = (TextView) convertView.findViewById(R.id.tvCalories);
                 RatingBar status = (RatingBar) convertView.findViewById(R.id.statusBar);
                 ImageView imageView = (ImageView) convertView.findViewById(R.id.ivIcon);
+                mProgress = (ProgressBar) convertView.findViewById(R.id.progressBar2);
 
 
                 tvTitle.setText(dietRecord.content);
@@ -121,7 +125,24 @@ public class FoodFragment extends ItemFragment {
 //                        .using(new FirebaseImageLoader())
 //                        .load(dietRecord.url)
 //                        .into(imageView);
-                Picasso.with(getContext()).load(dietRecord.url).resize(75,75).centerCrop().into(imageView);
+//                Picasso.with(getContext()).load(dietRecord.url).resize(75,75).centerCrop().into(imageView);
+
+                mProgress.setVisibility(View.VISIBLE);
+                // Hide progress bar on successful load
+                Picasso.with(getActivity()).load(dietRecord.url).resize(75,75).centerCrop()
+                        .into(imageView, new com.squareup.picasso.Callback() {
+                            @Override
+                            public void onSuccess() {
+                                if (mProgress != null) {
+                                    mProgress.setVisibility(View.GONE);
+                                }
+                            }
+
+                            @Override
+                            public void onError() {
+
+                            }
+                        });
 
             }
         };

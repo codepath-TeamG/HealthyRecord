@@ -11,7 +11,7 @@
     <string name="sport">Exercise</string>
     <string name="calories">CALORIES</string>
 
-    <string name="welcomeString">Welcome to Healthy Records!</string>
+    <string name="welcomeString">Welcome to Healthy Together!</string>
     <string name="usernameHint">User Email</string>
     <string name="passwordHint">Password</string>
     <string name="loginButton">Login</string>

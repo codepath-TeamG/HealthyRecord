@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ public class ExerciseFragment extends ItemFragment{
     Query firebaserecords;
     String mParam1;
     String author;
+    private ProgressBar mProgress;
 
     public static ExerciseFragment newInstance(String param1) {
         ExerciseFragment fragment = new ExerciseFragment();
@@ -76,6 +78,7 @@ public class ExerciseFragment extends ItemFragment{
                 TextView tvCalories = (TextView) convertView.findViewById(R.id.tvCalories);
                 RatingBar status = (RatingBar) convertView.findViewById(R.id.statusBar);
                 ImageView imageView = (ImageView) convertView.findViewById(R.id.ivIcon);
+                mProgress = (ProgressBar) convertView.findViewById(R.id.progressBar2);
 
 
                 tvTitle.setText(dietRecord.content);
@@ -93,7 +96,23 @@ public class ExerciseFragment extends ItemFragment{
 //                }
 
 
-                Picasso.with(getContext()).load(dietRecord.url).resize(75,75).centerCrop().into(imageView);
+//                Picasso.with(getContext()).load(dietRecord.url).resize(75,75).centerCrop().into(imageView);
+                mProgress.setVisibility(View.VISIBLE);
+                // Hide progress bar on successful load
+                Picasso.with(getActivity()).load(dietRecord.url).resize(75,75).centerCrop()
+                        .into(imageView, new com.squareup.picasso.Callback() {
+                            @Override
+                            public void onSuccess() {
+                                if (mProgress != null) {
+                                    mProgress.setVisibility(View.GONE);
+                                }
+                            }
+
+                            @Override
+                            public void onError() {
+
+                            }
+                        });
 
             }
         };

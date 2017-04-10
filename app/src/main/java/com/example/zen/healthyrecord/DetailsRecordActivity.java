@@ -3,7 +3,9 @@ package com.example.zen.healthyrecord;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -22,6 +24,7 @@ public class DetailsRecordActivity extends AppCompatActivity {
     private RatingBar ratingBarValue;
     private String imageLoadURL;
     private TextView tvCaloriesValue;
+    private ProgressBar mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class DetailsRecordActivity extends AppCompatActivity {
         ratingBarValue = (RatingBar) findViewById(R.id.ratingBarValue);
         tvQuantLabel = (TextView) findViewById(R.id.tvQuantLabel);
         tvTimeLabel = (TextView) findViewById(R.id.tvTimeLabel);
+        mProgress = (ProgressBar) findViewById(R.id.progressBar);
 
 //        DietRecord r = (DietRecord) getIntent().getSerializableExtra("record");
 //        Uri imageURL = Uri.parse(getIntent().getStringExtra("imageURL"));
@@ -46,7 +50,26 @@ public class DetailsRecordActivity extends AppCompatActivity {
 //        Log.d("DEBUG",imageURL.toString());
 
         String url = (String) getIntent().getStringExtra("imageURL");
-        Picasso.with(this).load(url).into(ivPhoto);
+//        Picasso.with(this).load(url).placeholder(R.drawable.ic_cancel).into(ivPhoto);
+
+        // Show progress bar
+
+        mProgress.setVisibility(View.VISIBLE);
+        // Hide progress bar on successful load
+        Picasso.with(this).load(url)
+                .into(ivPhoto, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        if (mProgress != null) {
+                            mProgress.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
 
 
 //        SharedPreferences sharedPreferences = getSharedPreferences("record",0);
