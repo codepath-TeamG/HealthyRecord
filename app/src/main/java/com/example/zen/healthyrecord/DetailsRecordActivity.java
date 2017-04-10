@@ -24,6 +24,7 @@ import java.util.List;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
+import static com.example.zen.healthyrecord.R.id.userName;
 import static java.lang.System.load;
 
 
@@ -39,6 +40,7 @@ public class DetailsRecordActivity extends AppCompatActivity {
     String caloriesValue;
     String memoValue;
     String statusValue;
+    private Toolbar toolbar;
 
     private ProgressBar mProgress;
 
@@ -46,8 +48,8 @@ public class DetailsRecordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_details_record );
-        Toolbar toolbar = (Toolbar) findViewById( R.id.toolbar );
-        setSupportActionBar( toolbar );
+        toolbar = (Toolbar) findViewById(R.id.toolbar_homescreen);
+        setSupportActionBar(toolbar);
         mProgress = (ProgressBar) findViewById(R.id.progressBar);
 
         ivPhoto = (ImageView) findViewById(R.id.photoView);
@@ -71,6 +73,7 @@ public class DetailsRecordActivity extends AppCompatActivity {
 
                     }
                 });
+
 
         dateValue = getIntent().getStringExtra("date");
         typeValue= getIntent().getStringExtra("type");
@@ -99,9 +102,11 @@ public class DetailsRecordActivity extends AppCompatActivity {
         int pos= getIntent().getExtras().getInt("POS_ID");
         if (pos == 0){
             details = Detail.getDetails(dateValue, typeValue,contentValue,caloriesValue,memoValue,statusValue);
+            getSupportActionBar().setTitle("Your Food Record");
 
         } else {
             details = Detail.getDetailsExercise(dateValue, typeValue,contentValue,caloriesValue,memoValue,statusValue);
+            getSupportActionBar().setTitle("Your Exercise Record");
         }
         dAdapter = new DetailsAdapter( DetailsRecordActivity.this, details );
 
