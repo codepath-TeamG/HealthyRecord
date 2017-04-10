@@ -11,14 +11,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.zen.healthyrecord.fragments.ExerciseFragment;
 import com.example.zen.healthyrecord.fragments.FoodFragment;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 /*
@@ -31,7 +34,11 @@ public class HomeRecordsActivity extends AppCompatActivity {
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
     private Toolbar toolbar;
+    private ImageView drawerIcon;
+    private String temp;
+    RecordsPageAdapter rAdapter;
     ViewPager vpPager;
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -56,11 +63,31 @@ public class HomeRecordsActivity extends AppCompatActivity {
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabStrip.setViewPager(vpPager);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Brooklyn's Home</font>"));
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        String userName = usernameFromEmail(user.getEmail());
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'></font>"));
+        getSupportActionBar().setTitle(userName.toUpperCase() + " 's Home");
 
+        if (savedInstanceState != null) {
+            temp = savedInstanceState.getString("temp");
+            System.out.println("onCreate: temp = " + temp);
+        }
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("temp", temp);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -86,10 +113,7 @@ public class HomeRecordsActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.nav_first_fragment:
                 //you can replace the Toast message
-                int pos = vpPager.getCurrentItem();
-                Intent i = new Intent(this, AddItemActivity.class);
-                i.putExtra("POS_ID", pos);
-                startActivity(i);
+                Toast.makeText(this,"You are currently at your Homepage",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_second_fragment:
                 //you can replace the Toast message
@@ -100,7 +124,7 @@ public class HomeRecordsActivity extends AppCompatActivity {
                 break;
             case R.id.nav_third_fragment:
                 //you can replace the Toast message
-                Toast.makeText(this,"press 3rd item",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"log out",Toast.LENGTH_SHORT).show();
                 FirebaseAuth.getInstance().signOut();
                 Intent g = new Intent(this, LoginActivity.class);
                 startActivity(g);
@@ -168,6 +192,14 @@ public class HomeRecordsActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             return tabTitle.length;
+        }
+    }
+
+    private String usernameFromEmail(String email) {
+        if (email.contains("@")) {
+            return email.split("@")[0];
+        } else {
+            return email;
         }
     }
 }

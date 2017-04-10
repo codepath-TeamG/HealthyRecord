@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/tvValue"
+        android:layout_marginTop="30dp"
+        android:text="@string/time"
+        android:textColor="@color/colorDarkAccent"
+        android:textSize="13dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tvValue"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/view"
+        android:layout_below="@+id/ivDetailIcon"
+        android:layout_marginTop="2dp"
+        android:text="TextView"
+        android:textSize="35dp"/>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="280dp"
+        android:layout_height="2dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvValue"
+        android:layout_marginTop="5dp"
+        android:background="#e9e9e9"/>
+
+    <ImageView
+        android:id="@+id/ivDetailIcon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/tvLabel"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/ic_event_black_24dp"/>
+
+</RelativeLayout>

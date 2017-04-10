@@ -10,137 +10,31 @@
 
     <ImageView
         android:id="@+id/photoView"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        app:srcCompat="@drawable/top_photo_healthy" />
+        android:layout_width="fill_parent"
+        android:layout_height="220dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#454545"
+        android:elevation="24dp"
+        android:paddingLeft="0.5dp"
+        android:paddingRight="1dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/top_photo_healthy"/>
 
-    <TextView
-        android:id="@+id/tvDateLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_below="@id/photoView"
-        android:text="@string/date"/>
-
-    <TextView
-        android:id="@+id/tvDateValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2017/1/30"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvDetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/photoView"
-        android:layout_toRightOf="@+id/tvDateLabel"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="100dp"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+    <ProgressBar
+        style="?android:attr/progressBarStyle"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:id="@+id/progressBar"
+        android:layout_above="@+id/rvDetail"
+        android:layout_alignParentStart="true"/>
 
-    <TextView
-        android:id="@+id/tvTimeLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/time"
-        android:layout_below="@+id/tvDateLabel"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"/>
-
-    <TextView
-        android:id="@+id/tvTimeValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lunch"
-        android:layout_below="@+id/tvDateValue"
-        android:layout_marginTop="20dp"
-        android:layout_alignStart="@+id/tvDateValue" />
-
-    <TextView
-        android:id="@+id/tvFoodLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTimeLabel"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:text="@string/food"/>
-
-    <TextView
-        android:id="@+id/tvFoodValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTimeValue"
-        android:layout_marginTop="20dp"
-        android:text="Test_Food"
-        android:layout_alignStart="@+id/tvDateValue"/>
-
-    <TextView
-        android:id="@+id/tvQuantLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cal"
-        android:layout_below="@+id/tvFoodLabel"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"/>
-
-    <TextView
-        android:id="@+id/tvQuantValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvFoodValue"
-        android:layout_marginTop="20dp"
-        android:text="1"
-        android:layout_alignStart="@+id/tvDateValue"/>
-
-    <TextView
-        android:id="@+id/tvMemoLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/memo"
-        android:layout_below="@+id/tvQuantLabel"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:lines="2"/>
-
-    <TextView
-        android:id="@+id/tvMemoValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvQuantValue"
-        android:layout_marginTop="20dp"
-        android:text="this is the test text on memo"
-        android:layout_alignStart="@+id/tvDateValue"
-        android:lines="2"/>
-
-    <TextView
-        android:id="@+id/tvStatusLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/status"
-        android:layout_below="@+id/tvMemoLabel"
-        android:paddingTop="20dp"
-        android:paddingLeft="20dp" />
-
-    <RatingBar
-        android:id="@+id/ratingBarValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvMemoValue"
-        android:theme="@style/RatingBar"
-        android:layout_marginTop="20dp"
-        android:layout_alignStart="@+id/tvDateValue" />
-
-    <TextView
-        android:id="@+id/tvCaloriesLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/calories"
-        android:paddingLeft="20dp"
-        android:layout_alignBottom="@+id/tvCaloriesValue"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/tvCaloriesValue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ratingBarValue"
-        android:paddingTop="20dp"
-        android:text="1,000"
-        android:layout_alignStart="@+id/tvDateValue"/>
 
 </RelativeLayout>

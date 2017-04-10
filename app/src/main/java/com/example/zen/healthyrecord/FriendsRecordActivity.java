@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.astuetz.PagerSlidingTabStrip;
 import com.example.zen.healthyrecord.fragments.ExerciseFragment;
 import com.example.zen.healthyrecord.fragments.FoodFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Created by sharonyu on 2017/3/30.
@@ -34,6 +35,7 @@ public class FriendsRecordActivity extends AppCompatActivity{
     RecordsPageAdapter rAdapter;
     ViewPager vpPager;
     public String fName;
+    public String fEmail;
 
 
     @Override
@@ -58,7 +60,11 @@ public class FriendsRecordActivity extends AppCompatActivity{
         tabStrip.setViewPager(vpPager);
 
         fName = getIntent().getStringExtra("friendName");
-        getSupportActionBar().setTitle(fName + " 's Home");
+        fEmail = getIntent().getStringExtra("friendMail");
+
+
+        getSupportActionBar().setTitle(fName.toUpperCase() + " 's Home");
+
 
 
     }
@@ -90,7 +96,7 @@ public class FriendsRecordActivity extends AppCompatActivity{
         switch (item.getItemId()){
             case R.id.nav_first_fragment:
                 //you can replace the Toast message
-                Intent intent = new Intent(this,AddItemActivity.class);
+                Intent intent = new Intent(this,HomeRecordsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;
@@ -101,8 +107,12 @@ public class FriendsRecordActivity extends AppCompatActivity{
                 break;
             case R.id.nav_third_fragment:
                 //you can replace the Toast message
-                Toast.makeText(this,"Log Out",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"log out",Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                Intent g = new Intent(this, LoginActivity.class);
+                startActivity(g);
                 break;
+
         }
     }
 
@@ -127,10 +137,10 @@ public class FriendsRecordActivity extends AppCompatActivity{
         @Override
         public Fragment getItem(int position) {
             if (position == 0) {
-                FoodFragment foodFragment = FoodFragment.newInstance(fName);
+                FoodFragment foodFragment = FoodFragment.newInstance(fEmail);
                 return foodFragment;
             } else {
-                ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(fName);
+                ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(fEmail);
                 return exerciseFragment;
             }
         }
@@ -151,7 +161,7 @@ public class FriendsRecordActivity extends AppCompatActivity{
     public void sendEmail(MenuItem item) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("plain/text");
-        String userMail = getIntent().getStringExtra("friendMail");
+        String userMail[] = {getIntent().getStringExtra("friendMail")};
         intent.putExtra(Intent.EXTRA_EMAIL, userMail);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(Intent.createChooser(intent, ""));

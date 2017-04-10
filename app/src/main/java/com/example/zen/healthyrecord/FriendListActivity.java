@@ -2,12 +2,6 @@ package com.example.zen.healthyrecord;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.zen.healthyrecord.model.User;
 
@@ -26,9 +19,6 @@ public class FriendListActivity extends AppCompatActivity {
     private UserAdapter mAdapter;
     private List<User> contacts;
 
-    private DrawerLayout drawerLayout;
-    private NavigationView nvDrawer;
-    private ActionBarDrawerToggle drawerToggle;
 
 
 
@@ -40,15 +30,6 @@ public class FriendListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.friendToolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Friend List");
-
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
-        setupDrawerContent(nvDrawer);
-
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
-                R.string.drawer_open, R.string.drawer_close);
-
-        drawerLayout.addDrawerListener(drawerToggle);
 
 
 
@@ -81,7 +62,7 @@ public class FriendListActivity extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 String name = contacts.get(position).getName();
                 String mail = contacts.get(position).getmEmail();
-                Toast.makeText(FriendListActivity.this, name + " was clicked!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(FriendListActivity.this, name + " was clicked!", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(FriendListActivity.this, FriendsRecordActivity.class);
                 i.putExtra("friendName",name);
                 i.putExtra("friendMail",mail);
@@ -94,45 +75,7 @@ public class FriendListActivity extends AppCompatActivity {
 
     }
 
-    private void setupDrawerContent(NavigationView nvDrawer) {
-        nvDrawer.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem item) {
-                        selectDrawerItem(item);
-                        return true;
-                    }
-                }
-        );
-    }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        drawerToggle.syncState();
-    }
-
-    private void selectDrawerItem(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.nav_first_fragment:
-                //you can replace the Toast message
-                Intent i = new Intent(this, HomeRecordsActivity.class);
-                startActivity(i);
-                break;
-            case R.id.nav_second_fragment:
-                //you can replace the Toast message
-//                Intent f = new Intent(this, FriendsRecordActivity.class);
-                Intent f = new Intent(this, FriendListActivity.class);
-                startActivity(f);
-                startActivity(f);
-
-                break;
-            case R.id.nav_third_fragment:
-                //you can replace the Toast message
-                Toast.makeText(this,"press 3rd item",Toast.LENGTH_SHORT).show();
-                break;
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -300,8 +300,8 @@ public class AddItemActivity extends AppCompatActivity implements FragmentAddIte
         c.set(Calendar.MINUTE, minute);
         SimpleDateFormat tf = new SimpleDateFormat("HH:mm");
         String formattedTime = tf.format(c.getTime());
-        TextView txtTimePicker = (TextView) findViewById(R.id.txtTimePicker);
-        txtTimePicker.setText(formattedTime);
+//        TextView txtTimePicker = (TextView) findViewById(R.id.txtTimePicker);
+//        txtTimePicker.setText(formattedTime);
     }
 
     public void onSaveAction(View v){
