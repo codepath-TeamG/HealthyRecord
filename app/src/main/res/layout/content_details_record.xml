@@ -175,7 +175,6 @@
         android:layout_width="fill_parent"
         android:layout_height="250dp"
         android:scaleType="centerCrop"
-<<<<<<< Updated upstream
         app:srcCompat="@drawable/top_photo_healthy" />
 
     <TextView
@@ -288,11 +287,9 @@
         android:theme="@style/RatingBar"
         android:layout_marginTop="20dp"
         android:isIndicator="true"
-        android:layout_alignStart="@+id/tvDateValue" />
-=======
+        android:layout_alignStart="@+id/tvDateValue"
         app:srcCompat="@drawable/top_photo_healthy"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"/>
->>>>>>> Stashed changes
 
 </RelativeLayout>

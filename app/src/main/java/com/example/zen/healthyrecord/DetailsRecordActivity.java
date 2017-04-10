@@ -37,7 +37,7 @@ public class DetailsRecordActivity extends AppCompatActivity {
         tvMemoValue = (TextView) findViewById(R.id.tvMemoValue);
         ratingBarValue = (RatingBar) findViewById(R.id.ratingBarValue);
         tvQuantLabel = (TextView) findViewById(R.id.tvQuantLabel);
-        tvTimeLabel = (TextView) findViewById(R.id.tvTimeLabel);
+//        tvTimeLabel = (TextView) findViewById(R.id.tvTimeLabel);
 
 //        DietRecord r = (DietRecord) getIntent().getSerializableExtra("record");
 //        Uri imageURL = Uri.parse(getIntent().getStringExtra("imageURL"));
@@ -59,19 +59,17 @@ public class DetailsRecordActivity extends AppCompatActivity {
 //        }
 
         tvDateValue.setText(getIntent().getStringExtra("date"));
-<<<<<<< Updated upstream
-        tvTimeValue.setText(getIntent().getStringExtra("type"));
+//        tvTimeValue.setText(getIntent().getStringExtra("type"));
         tvFoodValue.setText(getIntent().getStringExtra("content"));
         tvQuantityValue.setText(getIntent().getStringExtra("quantity"));
         tvMemoValue.setText(getIntent().getStringExtra("memo"));
         ratingBarValue.setRating(getIntent().getExtras().getFloat("rating"));
-=======
         tvFoodValue.setText(getIntent().getStringExtra("type"));
         tvQuantityValue.setText(getIntent().getStringExtra("quantity"));
         tvMemoValue.setText(getIntent().getStringExtra("memo"));
         ratingBarValue.setRating(getIntent().getExtras().getFloat("rating"));
 //        tvCaloriesValue.setText(getIntent().getStringExtra("calories"));
->>>>>>> Stashed changes
+
 
         int pos= getIntent().getExtras().getInt("POS_ID");
 
