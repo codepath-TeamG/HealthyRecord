@@ -36,7 +36,6 @@ public class FoodFragment extends ItemFragment {
     Query firebaserecords;
     String mParam1;
     String author;
-    private ProgressBar mProgress;
 
     public static FoodFragment newInstance(String param1) {
         FoodFragment fragment = new FoodFragment();
@@ -84,13 +83,13 @@ public class FoodFragment extends ItemFragment {
             @Override
             protected void populateView(View convertView, DietRecord dietRecord, int position) {
 
-                TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
+                final TextView tvTitle = (TextView) convertView.findViewById(R.id.tvTitle);
                 TextView tvMemo = (TextView) convertView.findViewById(R.id.tvMemo);
                 TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);
                 TextView tvCalories = (TextView) convertView.findViewById(R.id.tvCalories);
                 RatingBar status = (RatingBar) convertView.findViewById(R.id.statusBar);
                 ImageView imageView = (ImageView) convertView.findViewById(R.id.ivIcon);
-                mProgress = (ProgressBar) convertView.findViewById(R.id.progressBar2);
+                final ProgressBar mProgress = (ProgressBar) convertView.findViewById(R.id.progressBar2);
 
 
                 tvTitle.setText(dietRecord.content);
