@@ -76,7 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void SignUp(View view) {
         final String email = etUsername.getText().toString();
-        String password = etPassword.getText().toString();
+        final String password = etPassword.getText().toString();
         mAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -89,20 +89,30 @@ public class SignUpActivity extends AppCompatActivity {
                         if (!task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this, R.string.auth_failed,
                                     Toast.LENGTH_SHORT).show();
+                        } else {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    String userName = usernameFromEmail(email);
+
+                                    writeNewUser(userName,1,"908999",mAuth.getCurrentUser().getUid(),mAuth.getCurrentUser().getEmail());
+
+                                    Toast.makeText(SignUpActivity.this, "sing up successfully",
+                                            Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                                    intent.putExtra("Email",email);
+                                    intent.putExtra("Password",password);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
                         }
-                            String userName = usernameFromEmail(email);
 
-                            writeNewUser(userName,1,"908999",mAuth.getCurrentUser().getUid(),mAuth.getCurrentUser().getEmail());
-
-                            Toast.makeText(SignUpActivity.this, "sing up successfully",
-                                    Toast.LENGTH_SHORT).show();
 
 
 
                     }
                 });
-        Intent data = new Intent();
-        finish();
     }
 
 

@@ -43,7 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
 
-        etUsername.setText("zuzen324@gmail.com");
+
+        etUsername.setText("brooklyn@gmail.com");
         etPassword.setText("123456");
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +80,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
         mAuth.addAuthStateListener(mAuthListener);
+
+        if (getIntent().getStringExtra("Email") != null){
+            etUsername.setText(getIntent().getStringExtra("Email"));
+            etPassword.setText( getIntent().getStringExtra("Password"));
+
+        }
     }
 
     @Override

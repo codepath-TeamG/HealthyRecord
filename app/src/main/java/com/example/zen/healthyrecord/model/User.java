@@ -61,7 +61,7 @@ public class User implements Serializable {
     // Returns a list of contacts
     public static List<User> getContacts() {
         List<User> contacts = new ArrayList<>();
-        contacts.add(new User("Adam", R.drawable.uphoto5, "4153508881","1","adom@gmail.com"));
+        contacts.add(new User("Adam", R.drawable.uphoto5, "4153508881","1","adam@gmail.com"));
         contacts.add(new User("Sarah", R.drawable.uphoto2, "4153508882","2","sarah@gmail.com"));
         contacts.add(new User("Bob", R.drawable.uphoto3, "4153508883","3","bob@gmail.com"));
         contacts.add(new User("John", R.drawable.uphoto4, "4153508884","4","joho@gmail.com"));

@@ -21,6 +21,7 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.example.zen.healthyrecord.fragments.ExerciseFragment;
 import com.example.zen.healthyrecord.fragments.FoodFragment;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 /*
@@ -37,6 +38,7 @@ public class HomeRecordsActivity extends AppCompatActivity {
     private String temp;
     RecordsPageAdapter rAdapter;
     ViewPager vpPager;
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -62,7 +64,12 @@ public class HomeRecordsActivity extends AppCompatActivity {
         tabStrip.setViewPager(vpPager);
 
 //        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Brooklyn's Home</font>"));
+//        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'>Brooklyn's Home</font>"));
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        String userName = usernameFromEmail(user.getEmail());
+        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'></font>"));
+        getSupportActionBar().setTitle(userName.toUpperCase() + " 's Home");
 
         if (savedInstanceState != null) {
             temp = savedInstanceState.getString("temp");
@@ -185,6 +192,14 @@ public class HomeRecordsActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             return tabTitle.length;
+        }
+    }
+
+    private String usernameFromEmail(String email) {
+        if (email.contains("@")) {
+            return email.split("@")[0];
+        } else {
+            return email;
         }
     }
 }

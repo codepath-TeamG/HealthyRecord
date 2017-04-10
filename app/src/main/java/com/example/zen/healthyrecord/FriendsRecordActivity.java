@@ -11,7 +11,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -36,6 +35,7 @@ public class FriendsRecordActivity extends AppCompatActivity{
     RecordsPageAdapter rAdapter;
     ViewPager vpPager;
     public String fName;
+    public String fEmail;
 
 
     @Override
@@ -60,10 +60,10 @@ public class FriendsRecordActivity extends AppCompatActivity{
         tabStrip.setViewPager(vpPager);
 
         fName = getIntent().getStringExtra("friendName");
+        fEmail = getIntent().getStringExtra("friendMail");
 
 
-        getSupportActionBar().setTitle(Html.fromHtml("<font color='#ffffff'></font>"));
-        getSupportActionBar().setTitle(fName + " 's Home");
+        getSupportActionBar().setTitle(fName.toUpperCase() + " 's Home");
 
 
 
@@ -137,10 +137,10 @@ public class FriendsRecordActivity extends AppCompatActivity{
         @Override
         public Fragment getItem(int position) {
             if (position == 0) {
-                FoodFragment foodFragment = FoodFragment.newInstance(fName);
+                FoodFragment foodFragment = FoodFragment.newInstance(fEmail);
                 return foodFragment;
             } else {
-                ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(fName);
+                ExerciseFragment exerciseFragment = ExerciseFragment.newInstance(fEmail);
                 return exerciseFragment;
             }
         }

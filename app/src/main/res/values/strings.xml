@@ -6,13 +6,13 @@
     <string name="cal">CALORIES</string>
     <string name="memo">MEMO</string>
     <string name="status">STATUS</string>
-    <string name="toolbartxt">New Activity</string>
+    <string name="toolbartxt">ADD NEW RECORD</string>
     <string name="food">FOOD</string>
     <string name="sport">Exercise</string>
     <string name="calories">CALORIES</string>
 
     <string name="welcomeString">Welcome to Healthy Records!</string>
-    <string name="usernameHint">User Name</string>
+    <string name="usernameHint">User Email</string>
     <string name="passwordHint">Password</string>
     <string name="loginButton">Login</string>
     <string name="title_activity_home_records">HomeRecordsActivity</string>
