@@ -32,7 +32,6 @@ public class DetailsRecordActivity extends AppCompatActivity {
 
         ivPhoto = (ImageView) findViewById(R.id.photoView);
         tvDateValue = (TextView) findViewById(R.id.tvDateValue);
-        tvTimeValue = (TextView) findViewById(R.id.tvTimeValue);
         tvFoodValue = (TextView) findViewById(R.id.tvFoodValue);
         tvQuantityValue = (TextView) findViewById(R.id.tvQuantValue);
         tvMemoValue = (TextView) findViewById(R.id.tvMemoValue);
@@ -60,11 +59,19 @@ public class DetailsRecordActivity extends AppCompatActivity {
 //        }
 
         tvDateValue.setText(getIntent().getStringExtra("date"));
+<<<<<<< Updated upstream
         tvTimeValue.setText(getIntent().getStringExtra("type"));
         tvFoodValue.setText(getIntent().getStringExtra("content"));
         tvQuantityValue.setText(getIntent().getStringExtra("quantity"));
         tvMemoValue.setText(getIntent().getStringExtra("memo"));
         ratingBarValue.setRating(getIntent().getExtras().getFloat("rating"));
+=======
+        tvFoodValue.setText(getIntent().getStringExtra("type"));
+        tvQuantityValue.setText(getIntent().getStringExtra("quantity"));
+        tvMemoValue.setText(getIntent().getStringExtra("memo"));
+        ratingBarValue.setRating(getIntent().getExtras().getFloat("rating"));
+//        tvCaloriesValue.setText(getIntent().getStringExtra("calories"));
+>>>>>>> Stashed changes
 
         int pos= getIntent().getExtras().getInt("POS_ID");
 
